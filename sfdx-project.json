@@ -5,7 +5,7 @@
       "default": true
     }
   ],
-  "name": "Packt-LWC-Cookbook",
+  "name": "Packt-Salesforce-LWC-Cookbook",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "60.0"
