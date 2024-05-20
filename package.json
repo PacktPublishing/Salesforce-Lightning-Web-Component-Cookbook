@@ -16,6 +16,8 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/eslint-parser": "^7.24.5",
     "@lwc/eslint-plugin-lwc": "^1.8.1",
     "@prettier/plugin-xml": "^3.2.2",
     "@salesforce/eslint-config-lwc": "^3.5.3",
