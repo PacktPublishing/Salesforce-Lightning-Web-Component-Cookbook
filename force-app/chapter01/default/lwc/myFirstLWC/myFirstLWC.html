@@ -1,0 +1,25 @@
+<template>
+    <lightning-card icon-name="standard:education" variant="base">
+        <div slot="title">
+            My First LWC
+        </div>
+        <lightning-button label="Get Date" slot="actions" onclick={updateDate}></lightning-button>
+        <div slot="footer">
+            Press the button to get the date.
+        </div>
+        <div class="slds-var-p-around_medium">
+            Hello World! My name is {userName}!
+            <template if:true={currentDate}>
+                <br/>
+                The date is currently:&nbsp;
+                <lightning-formatted-date-time
+                    value={currentDate}
+                    day="2-digit"
+                    month="2-digit"
+                    year="2-digit"
+                    weekday="long"
+                ></lightning-formatted-date-time>!
+            </template>
+        </div>
+    </lightning-card>
+</template>
