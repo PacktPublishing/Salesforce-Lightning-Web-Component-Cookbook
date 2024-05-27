@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Museum_Office__c</fullName>
+    <description>A custom field for the latitude and longitude of the museum&apos;s main office. This will be utilized throughout the project to build robust Lightning Web Components.</description>
+    <displayLocationInDecimal>true</displayLocationInDecimal>
+    <externalId>false</externalId>
+    <label>Museum Office</label>
+    <required>false</required>
+    <scale>10</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Location</type>
+</CustomField>
