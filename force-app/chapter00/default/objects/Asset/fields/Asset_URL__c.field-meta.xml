@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Asset_URL__c</fullName>
+    <description>The asset&apos;s URL, as provided by The Metropolitan&apos;s Open Access API.</description>
+    <externalId>false</externalId>
+    <label>Asset URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

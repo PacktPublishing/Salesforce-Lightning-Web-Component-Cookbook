@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wikidata_URL__c</fullName>
+    <description>The Wikidata URL for the asset tag, as provided by The Metropolitan&apos;s Open Access API.</description>
+    <externalId>false</externalId>
+    <label>Wikidata URL</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>
