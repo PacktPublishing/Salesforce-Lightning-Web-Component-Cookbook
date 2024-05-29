@@ -10,18 +10,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTestSuite</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTrigger</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
@@ -33,6 +21,7 @@
 		<members>Asset.Classification__c</members>
 		<members>Asset.Culture__c</members>
 		<members>Asset.Department__c</members>
+		<members>Asset.Image__c</members>
 		<members>Asset.Is_Highlight__c</members>
 		<members>Asset.Is_Public_Domain__c</members>
 		<members>Asset.Medium__c</members>
@@ -69,12 +58,24 @@
 		<name>ExternalCredential</name>
 	</types>
 	<types>
+		<members>Asset_Record_Page</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Asset-Asset Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
 		<members>The_Met_Named</members>
 		<name>NamedCredential</name>
+	</types>
+	<types>
+		<members>Named_Credential_Access</members>
+		<name>PermissionSet</name>
 	</types>
 	<types>
 		<members>The_Met</members>
