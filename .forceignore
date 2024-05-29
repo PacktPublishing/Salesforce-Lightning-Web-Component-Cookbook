@@ -10,3 +10,6 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+#Setup Files
+force-app/chapter00/z_DataLoaderFiles
