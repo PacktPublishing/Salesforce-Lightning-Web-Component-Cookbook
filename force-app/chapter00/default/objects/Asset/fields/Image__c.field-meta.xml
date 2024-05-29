@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Image__c</fullName>
+    <description>A formula field that renders the image courtesy of The Metropolitan&apos;s Open Access API.</description>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(Primary_Image_Small__c)),IMAGE(Primary_Image_Small__c, &apos;Image&apos;, 200, 200),&apos;No image returned.&apos;)</formula>
+    <label>Image</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
