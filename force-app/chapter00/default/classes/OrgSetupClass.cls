@@ -5,8 +5,8 @@ public with sharing class OrgSetupClass {
         if(accountId.getSobjectType().getDescribe().getName() != 'Account') {
             System.debug('Please use an Account Id as a parameter for this method.');
             return;
-        } else if(artToImportById.size() < 100) {
-            System.debug('Please use less than 100 Object IDs to avoid hitting limits.');
+        } else if(artToImportById.size() > 99) {
+            System.debug('Please use less than 99 Object IDs to avoid hitting limits.');
             return;
         } else {
             //this is not best practice, so we add the previous check to make sure we aren't going to hit limits
