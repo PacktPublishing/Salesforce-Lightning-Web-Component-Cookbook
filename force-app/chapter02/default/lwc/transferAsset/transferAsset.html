@@ -1,0 +1,42 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card icon-name="utility:transport_heavy_truck" variant="base">
+      <div slot="title">
+          Transfer Asset
+      </div>
+      <lightning-button label="Reset" onclick={resetForm} slot="actions"></lightning-button>
+      <lightning-button label="Transfer" onclick={transferAsset} disabled={transferDisabled} slot="footer"></lightning-button>
+      <div>
+        <lightning-combobox
+          name="transferCountry"
+          class="slds-p-horizontal_medium"
+          label="Country"
+          value={countryValue}
+          placeholder="Select Country..."
+          options={countryOptions}
+          onchange={handleCountryChange}
+        ></lightning-combobox>
+        <template lwc:if={citiesAreLoaded}>
+          <lightning-combobox
+              name="transferCity"
+              class="slds-p-horizontal_medium"
+              label="City"
+              value={cityValue}
+              placeholder="Select City..."
+              options={cityOptions}
+              onchange={handleCityChange}
+          ></lightning-combobox>
+        </template>
+        <template lwc:if={accountData}>
+            <lightning-datatable
+                class="slds-p-horizontal_medium"
+                key-field="accountId"
+                data={accountData}
+                columns={columns}
+                max-row-selection="1"
+                onrowselection={setAccountId}
+            ></lightning-datatable>
+        </template>
+      </div>
+    </lightning-card>
+</template>
