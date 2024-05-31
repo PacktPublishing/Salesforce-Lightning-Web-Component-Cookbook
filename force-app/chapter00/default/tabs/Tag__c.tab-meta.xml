@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>The tab for Tags, as provided by The Metropolitan&apos;s Open Access API.</description>
+    <motif>Custom45: Ticket</motif>
+</CustomTab>
