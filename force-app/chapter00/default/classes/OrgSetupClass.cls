@@ -24,13 +24,13 @@ public with sharing class OrgSetupClass {
         }
     }
 
-    public void addAsset(Integer assetId, Id idParam) {
+    public static void addAsset(Integer assetId, Id idParam) {
         if(isAccountId(idParam)) {
             OrgSetupREST.getAssets(assetId, idParam);
         }
     }
 
-    public Boolean isAccountId(Id idToCheck) {
+    public static Boolean isAccountId(Id idToCheck) {
         if(idToCheck.getSobjectType().getDescribe().getName() != 'Account') {
             throw new SetupException('Please use an AccountId here.');
         }
