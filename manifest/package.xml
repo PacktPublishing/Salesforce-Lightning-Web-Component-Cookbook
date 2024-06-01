@@ -9,10 +9,6 @@
 		<name>ApexComponent</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>AuraDefinitionBundle</name>
-	</types>
-	<types>
 		<members>Account.Museum_Office__c</members>
 		<members>Asset.Accession_Number__c</members>
 		<members>Asset.Accession_Year__c</members>
@@ -32,6 +28,10 @@
 		<members>Asset.Primary_Image__c</members>
 		<members>Asset.Tag__c</members>
 		<members>Asset.Title__c</members>
+		<members>Asset_Residency__c.Asset__c</members>
+		<members>Asset_Residency__c.End_Date__c</members>
+		<members>Asset_Residency__c.Resident_Account__c</members>
+		<members>Asset_Residency__c.Start_Date__c</members>
 		<members>Constituent__c.Constituent_ID__c</members>
 		<members>Constituent__c.Gender__c</members>
 		<members>Constituent__c.Role__c</members>
@@ -43,12 +43,9 @@
 		<name>CustomField</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>CustomMetadata</name>
-	</types>
-	<types>
 		<members>Account</members>
 		<members>Asset</members>
+		<members>Asset_Residency__c</members>
 		<members>Constituent__c</members>
 		<members>Tag__c</members>
 		<name>CustomObject</name>
@@ -62,7 +59,15 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>Account-Account Layout</members>
 		<members>Asset-Asset Layout</members>
+		<members>Asset_Residency__c-Asset Residency Layout</members>
+		<members>Constituent__c-Artist Layout</members>
+		<members>Tag__c-Tag Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
@@ -70,7 +75,7 @@
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
-		<members>The_Met_Named</members>
+		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
@@ -78,12 +83,12 @@
 		<name>PermissionSet</name>
 	</types>
 	<types>
-		<members>The_Met</members>
-		<name>RemoteSiteSetting</name>
+		<members>Admin</members>
+		<name>Profile</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>StaticResource</name>
+		<members>The_Met</members>
+		<name>RemoteSiteSetting</name>
 	</types>
 	<version>60.0</version>
 </Package>
