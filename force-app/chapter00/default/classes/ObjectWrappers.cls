@@ -1,7 +1,7 @@
 public with sharing class ObjectWrappers {
     public class AssetWrapper {
         public String accessionNumber;
-        public Integer accessionYear;
+        public String accessionYear;
         public Boolean isPublicDomain;
         public Id accountId;
         public String title;

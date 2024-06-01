@@ -18,12 +18,12 @@ public with sharing class OrgSetupREST {
         Asset assetToUpsert = new Asset();
 
         if(assetWrapper.constituents != null) {
-            constituentToUpsert.Name = assetWrapper.constituents[0].name;
-            constituentToUpsert.Constituent_Id__c = assetWrapper.constituents[0].constituentID;
-            constituentToUpsert.Gender__c = assetWrapper.constituents[0].gender;
-            constituentToUpsert.Role__c = assetWrapper.constituents[0].role;
-            constituentToUpsert.ULAN_URL__c = assetWrapper.constituents[0].constituentULAN_URL;
-            constituentToUpsert.Wikidata_URL__c = assetWrapper.constituents[0].constituentWikidata_URL;
+            constituentToUpsert.Name = nullCheck(assetWrapper.constituents[0].name);
+            constituentToUpsert.Constituent_Id__c = nullCheck(assetWrapper.constituents[0].constituentID);
+            constituentToUpsert.Gender__c = nullCheck(assetWrapper.constituents[0].gender);
+            constituentToUpsert.Role__c = nullCheck(assetWrapper.constituents[0].role);
+            constituentToUpsert.ULAN_URL__c = nullCheck(assetWrapper.constituents[0].constituentULAN_URL);
+            constituentToUpsert.Wikidata_URL__c = nullCheck(assetWrapper.constituents[0].constituentWikidata_URL);
 
             try{
                 dmlUtil.upsertRecords(new List<Constituent__c>{constituentToUpsert}, 'Constituent_Id__c');
@@ -33,10 +33,10 @@ public with sharing class OrgSetupREST {
         }
 
         if(assetWrapper.tags != null) {
-            tagToUpsert.Name = assetWrapper.tags[0].term;
-            tagToUpsert.AAT__c = assetWrapper.tags[0].AAT_URL.removeStart(AAT_URL_STRING);
-            tagToUpsert.AAT_URL__c = assetWrapper.tags[0].AAT_URL;
-            tagToUpsert.Wikidata_URL__c = assetWrapper.tags[0].Wikidata_URL;
+            tagToUpsert.Name = nullCheck(assetWrapper.tags[0].term);
+            tagToUpsert.AAT__c = nullCheck(assetWrapper.tags[0].AAT_URL).removeStart(AAT_URL_STRING);
+            tagToUpsert.AAT_URL__c = nullCheck(assetWrapper.tags[0].AAT_URL);
+            tagToUpsert.Wikidata_URL__c = nullCheck(assetWrapper.tags[0].Wikidata_URL);
 
             try {
                 dmlUtil.upsertRecords(new List<Tag__c>{tagToUpsert}, 'AAT__c');
@@ -46,7 +46,7 @@ public with sharing class OrgSetupREST {
         }        
 
         assetToUpsert.Accession_Number__c = assetWrapper.accessionNumber;
-        assetToUpsert.Accession_Year__c = assetWrapper.accessionYear;
+        assetToUpsert.Accession_Year__c = assetWrapper.accessionYear == '' ? null : Integer.valueOf(assetWrapper.accessionYear);
         assetToUpsert.Is_Public_Domain__c = assetWrapper.isPublicDomain;
         assetToUpsert.AccountId = accountId;
         assetToUpsert.Name = assetWrapper.title;
@@ -69,5 +69,9 @@ public with sharing class OrgSetupREST {
         } catch (Exception e) {
             System.debug(e.getMessage());
         }
+    }
+
+    public static String nullCheck(String value) {
+        return value == null ? 'Not Provided' : value;
     }
 }
