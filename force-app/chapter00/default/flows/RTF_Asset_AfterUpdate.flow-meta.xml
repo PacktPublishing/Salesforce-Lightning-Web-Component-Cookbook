@@ -23,11 +23,41 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates a new asset residency when an asset is transferred between accounts.</description>
+        <name>Create_New_Asset_Residency</name>
+        <label>Create New Asset Residency</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <inputAssignments>
+            <field>Asset__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resident_Account__c</field>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Start_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Asset_Residency__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordUpdates>
         <name>Update_Latest_Asset_Residency</name>
         <label>Update Latest Asset Residency</label>
         <locationX>176</locationX>
         <locationY>323</locationY>
+        <connector>
+            <targetReference>Create_New_Asset_Residency</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>End_Date__c</field>
