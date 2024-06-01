@@ -10,9 +10,6 @@ public with sharing class OrgSetupREST {
         request.setEndpoint('callout:The_Met_Named/objects/' + objectId);
         request.setMethod('GET');
         HttpResponse response = http.send(request);
-        // If the request is successful, parse the JSON response.
-
-        System.debug(response.getBody());
 
         ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(response.getBody(), ObjectWrappers.AssetWrapper.Class);
 
@@ -46,7 +43,7 @@ public with sharing class OrgSetupREST {
             } catch (Exception e) {
                 System.debug(e.getMessage());
             }
-        }
+        }        
 
         assetToUpsert.Accession_Number__c = assetWrapper.accessionNumber;
         assetToUpsert.Accession_Year__c = assetWrapper.accessionYear;
