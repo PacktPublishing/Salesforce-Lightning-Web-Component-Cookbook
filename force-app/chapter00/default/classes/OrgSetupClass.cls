@@ -1,11 +1,11 @@
 public with sharing class OrgSetupClass {
-    public static List<String> artToImportById;
+    public static List<Integer> artToImportById;
 
     public OrgSetupClass() {
-        artToImportById = new List<String>{'436528', '253348', '436535', '37297', '437449', '438817', '3497', '170430', '47958', '227934'};
+        artToImportById = new List<Integer>{436528, 253348, 436535, 37297, 437449, 438817, 3497, 170430, 47958, 227934};
     }
 
-    public OrgSetupClass(List<String> idsToImport) {
+    public OrgSetupClass(List<Integer> idsToImport) {
         if(idsToImport.size() > 99) {
             throw new SetupException('Please place less than 99 IDs in artToImportById.');
         } else if(idsToImport.size() == 0) {
@@ -18,15 +18,15 @@ public with sharing class OrgSetupClass {
     public void initialSetup(Id idParam) {
         if(isAccountId(idParam)) {
             //this is not best practice, so we add the constructor checks to make sure we aren't going to hit limits
-            for(String str : artToImportById) {
-                OrgSetupREST.getAssets(str, idParam);
+            for(Integer intId : artToImportById) {
+                OrgSetupREST.getAssets(intId, idParam);
             }
         }
     }
 
     public void addAsset(Integer assetId, Id idParam) {
         if(isAccountId(idParam)) {
-            OrgSetupREST.getAssets(String.valueOf(assetId), idParam);
+            OrgSetupREST.getAssets(assetId, idParam);
         }
     }
 
