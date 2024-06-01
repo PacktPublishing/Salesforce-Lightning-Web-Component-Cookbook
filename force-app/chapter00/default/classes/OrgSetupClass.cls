@@ -1,27 +1,41 @@
 public with sharing class OrgSetupClass {
-    public static List<String> artToImportById = new List<String>{'436528', '253348', '436535', '37297', '437449', '438817', '3497', '170430', '47958', '227934'};
+    public static List<String> artToImportById;
 
-    public static void initialSetup(Id accountId) {
-        if(accountId.getSobjectType().getDescribe().getName() != 'Account') {
-            System.debug('Please use an Account Id as a parameter for this method.');
-            return;
-        } else if(artToImportById.size() > 99) {
-            System.debug('Please use less than 99 Object IDs to avoid hitting limits.');
-            return;
+    public OrgSetupClass() {
+        artToImportById = new List<String>{'436528', '253348', '436535', '37297', '437449', '438817', '3497', '170430', '47958', '227934'};
+    }
+
+    public OrgSetupClass(List<String> idsToImport) {
+        if(idsToImport.size() > 99) {
+            throw new SetupException('Please place less than 99 IDs in artToImportById.');
+        } else if(idsToImport.size() == 0) {
+            throw new SetupException('Please place at least 1 ID in artToImportById.');
         } else {
-            //this is not best practice, so we add the previous check to make sure we aren't going to hit limits
+            artToImportById = idsToImport;
+        }
+    }
+
+    public void initialSetup(Id idParam) {
+        if(isAccountId(idParam)) {
+            //this is not best practice, so we add the constructor checks to make sure we aren't going to hit limits
             for(String str : artToImportById) {
-                OrgSetupREST.getAssets(str, accountId);
-            }    
+                OrgSetupREST.getAssets(str, idParam);
+            }
         }
     }
 
-    public static void addAsset(Integer assetId, Id accountId) {
-        if(accountId.getSobjectType().getDescribe().getName() != 'Account') {
-            System.debug('Please use an Account Id as a parameter for this method.');
-            return;
+    public void addAsset(Integer assetId, Id idParam) {
+        if(isAccountId(idParam)) {
+            OrgSetupREST.getAssets(String.valueOf(assetId), idParam);
         }
-
-        OrgSetupREST.getAssets(String.valueOf(assetId), accountId);
     }
+
+    public Boolean isAccountId(Id idToCheck) {
+        if(idToCheck.getSobjectType().getDescribe().getName() != 'Account') {
+            throw new SetupException('Please use an AccountId here.');
+        }
+        return true;
+    }
+
+    public class SetupException extends Exception {}
 }

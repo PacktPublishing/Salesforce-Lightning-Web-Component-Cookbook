@@ -158,6 +158,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>transferAsset</componentName>
+                <identifier>c_transferAsset</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
                     <value>sidebartabs</value>
