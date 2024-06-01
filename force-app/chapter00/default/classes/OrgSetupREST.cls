@@ -70,7 +70,7 @@ public with sharing class OrgSetupREST {
         try{
             dmlUtil.upsertRecords(new List<Asset>{assetToUpsert}, 'Object_ID__c');
         } catch (Exception e) {
-            System.debug(e.getMessage());
+        System.debug(e.getMessage());
         }
     }
 }
