@@ -4,7 +4,7 @@ public with sharing class OrgSetupREST {
     public static Util_DML dmlUtil = new Util_DML();
 
     @future(callout=true)
-    public static void getAssets(String objectId, Id accountId) {
+    public static void getAssets(Integer objectId, Id accountId) {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint('callout:The_Met_Named/objects/' + objectId);
