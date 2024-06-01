@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resident_Account__c</fullName>
+    <description>The account that the asset is residing at.</description>
+    <externalId>false</externalId>
+    <label>Resident Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Asset Residencies</relationshipLabel>
+    <relationshipName>Asset_Residencies</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
