@@ -5,6 +5,7 @@ import returnCities from '@salesforce/apex/TransferAccessInterface.returnCities'
 import returnAccountWrappers from '@salesforce/apex/TransferAccessInterface.returnAccountWrappers';
 import setAssetWrapper from '@salesforce/apex/TransferAccessInterface.setAssetWrapper';
 import { RefreshEvent } from 'lightning/refresh';
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 const columns = [
     { label: 'Account', fieldName: 'accountName' },
@@ -16,6 +17,7 @@ export default class TransferAsset extends LightningElement {
     @api recordId;
     error;
     countryOptions;
+    countryValue;
     cityOptions;
     accountData;
     accountValue;
@@ -39,15 +41,18 @@ export default class TransferAsset extends LightningElement {
     }
 
     resetForm() {
+        this.countryValue = undefined;
         this.cityOptions = null;
         this.accountData = null;
+        this.citiesAreLoaded = false;
+        this.dispatchEvent(new RefreshEvent());
     }
 
     handleCountryChange(event) {
-        let countryValue = event.target.value;
+        this.countryValue = event.target.value;
         this.cityOptions = null;
         this.accountData = null;
-        this.getCities(countryValue);
+        this.getCities(this.countryValue);
     }
 
     handleCityChange(event) {
@@ -64,7 +69,7 @@ export default class TransferAsset extends LightningElement {
         } catch (error) {
             this.error = error;
             this.cityOptions = undefined;
-            console.log(error);
+            this.showNotif('There has been an error!', error.message, 'error');
         }
     }
 
@@ -76,24 +81,31 @@ export default class TransferAsset extends LightningElement {
         } catch(error) {
             this.accountData = undefined;
             this.error = error;
-            console.log(error);
+            this.showNotif('There has been an error!', error.message, 'error');
         }
     }
 
     setAccountId(event) {
         this.accountValue = event.detail.selectedRows[0].accountId;
         this.transferDisabled = false;
-        console.log(this.accountValue);
     }
 
     async transferAsset() {
         try {
             await setAssetWrapper({assetId : this.recordId, accountId : this.accountValue});
             this.resetForm();
-            this.dispatchEvent(new RefreshEvent());
         } catch(error) {
             this.error = error;
-            console.log(error);
+            this.showNotif('There has been an error!', error.message, 'error');
         }
+    }
+
+    showNotif(title, msg, variant) {
+        const evt = new ShowToastEvent({
+          title: title,
+          message: msg,
+          variant: variant,
+        });
+        this.dispatchEvent(evt);
     }
 }
