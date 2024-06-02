@@ -24,7 +24,7 @@ public with sharing class OrgSetupClass {
         }
     }
 
-    public static void addAsset(Integer assetId, Id idParam) {
+    public static void addAsset(Integer assetId, Id acctId) {
         if(isAccountId(idParam)) {
             OrgSetupREST.getAssets(assetId, idParam);
         }
