@@ -1,9 +1,9 @@
-public with sharing class TransferAccessInterface {
+public with sharing class TransferAssetInterface {
     @AuraEnabled(cacheable=true)
     public static String returnCountries(){
         try {
             return JSON.serialize(TransferAssetAccess.getComboboxCountries());
-        } catch (Exception e) {
+        } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -12,16 +12,16 @@ public with sharing class TransferAccessInterface {
     public static String returnCities(String countryName){
         try {
             return JSON.serialize(TransferAssetAccess.getComboboxCities(countryName));
-        } catch (Exception e) {
+        } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
 
     @AuraEnabled
-    public static string returnAccountWrappers(String cityName){
+    public static String returnAccountWrappers(String cityName){
         try {
             return JSON.serialize(TransferAssetAccess.getAccountWrappers(cityName));
-        } catch (Exception e) {
+        } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -33,7 +33,7 @@ public with sharing class TransferAccessInterface {
             wrap.assetId = assetId;
             wrap.accountId = accountId;
             TransferAssetAccess.transferWrap(wrap);
-        } catch (Exception e) {
+        } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
