@@ -15,18 +15,18 @@ public with sharing class OrgSetupClass {
         }
     }
 
-    public void initialSetup(Id idParam) {
-        if(isAccountId(idParam)) {
+    public void initialSetup(Id acctId) {
+        if(isAccountId(acctId)) {
             //this is not best practice, so we add the constructor checks to make sure we aren't going to hit limits
             for(Integer intId : artToImportById) {
-                OrgSetupREST.getAssets(intId, idParam);
+                OrgSetupREST.getAssets(intId, acctId);
             }
         }
     }
 
     public static void addAsset(Integer assetId, Id acctId) {
-        if(isAccountId(idParam)) {
-            OrgSetupREST.getAssets(assetId, idParam);
+        if(isAccountId(acctId)) {
+            OrgSetupREST.getAssets(assetId, acctId);
         }
     }
 
