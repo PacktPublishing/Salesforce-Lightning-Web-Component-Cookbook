@@ -1,0 +1,11 @@
+<template>
+    <lightning-card icon-name="utility:transport_heavy_truck" variant="base">
+        <div slot="title">
+            Asset Residency History
+        </div>
+        <lightning-button label="Refresh" onclick={refreshMap} slot="actions"></lightning-button>
+        <div>
+            <lightning-map map-markers={mapMarkers} list-view="false"> </lightning-map>
+        </div>
+    </lightning-card>
+</template>

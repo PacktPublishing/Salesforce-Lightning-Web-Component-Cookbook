@@ -1,9 +1,9 @@
 /* eslint-disable @lwc/lwc/no-async-await */
-import { LightningElement, api, wire, track } from 'lwc';
-import returnCountries from '@salesforce/apex/TransferAccessInterface.returnCountries';
-import returnCities from '@salesforce/apex/TransferAccessInterface.returnCities';
-import returnAccountWrappers from '@salesforce/apex/TransferAccessInterface.returnAccountWrappers';
-import setAssetWrapper from '@salesforce/apex/TransferAccessInterface.setAssetWrapper';
+import { LightningElement, api, wire } from 'lwc';
+import returnCountries from '@salesforce/apex/TransferAssetInterface.returnCountries';
+import returnCities from '@salesforce/apex/TransferAssetInterface.returnCities';
+import returnAccountWrappers from '@salesforce/apex/TransferAssetInterface.returnAccountWrappers';
+import setAssetWrapper from '@salesforce/apex/TransferAssetInterface.setAssetWrapper';
 import { RefreshEvent } from 'lightning/refresh';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
@@ -36,7 +36,7 @@ export default class TransferAsset extends LightningElement {
         } else if (error) {
             this.error = error;
             this.countryOptions = undefined;
-            console.log(error);
+            this.showNotif('There has been an error!', error.message, 'error');
         }
     }
 
