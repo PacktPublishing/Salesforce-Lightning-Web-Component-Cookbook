@@ -38,7 +38,7 @@ export default class TransferAsset extends LightningElement {
         }
     }
 
-    refreshForm() {
+    handleRefresh() {
         this.countryValue = undefined;
         this.cityOptions = undefined;
         this.accountData = undefined;
