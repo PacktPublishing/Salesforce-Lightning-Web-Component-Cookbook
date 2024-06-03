@@ -87,7 +87,7 @@ export default class TransferAsset extends LightningElement {
         this.transferDisabled = false;
     }
 
-    async transferAsset() {
+    async handleTransfer() {
         try {
             await setAssetWrapper({assetId : this.recordId, accountId : this.accountValue});
             this.refreshForm();

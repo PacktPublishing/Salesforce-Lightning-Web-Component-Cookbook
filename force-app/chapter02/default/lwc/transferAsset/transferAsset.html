@@ -5,7 +5,7 @@
           Transfer Asset
       </div>
       <lightning-button label="Refresh" onclick={handleRefresh} slot="actions"></lightning-button>
-      <lightning-button label="Transfer" onclick={transferAsset} disabled={transferDisabled} slot="footer"></lightning-button>
+      <lightning-button label="Transfer" onclick={handleTransfer} disabled={transferDisabled} slot="footer"></lightning-button>
       <div>
         <lightning-combobox
           name="transferCountry"
