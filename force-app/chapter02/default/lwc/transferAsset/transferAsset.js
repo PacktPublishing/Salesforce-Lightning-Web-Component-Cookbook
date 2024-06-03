@@ -90,7 +90,7 @@ export default class TransferAsset extends LightningElement {
     async handleTransfer() {
         try {
             await setAssetWrapper({assetId : this.recordId, accountId : this.accountValue});
-            this.refreshForm();
+            this.handleRefresh();
         } catch(error) {
             this.error = error;
             this.showNotif('There has been an error!', error.message, 'error');
