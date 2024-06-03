@@ -31,8 +31,6 @@ export default class TransferAsset extends LightningElement {
         if (data) {
             this.countryOptions = JSON.parse(data);
             this.error = undefined;
-
-            console.log(this.countryOptions);
         } else if (error) {
             this.error = error;
             this.countryOptions = undefined;
