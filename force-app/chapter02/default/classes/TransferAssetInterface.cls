@@ -32,7 +32,7 @@ public with sharing class TransferAssetInterface {
             TransferAssetAccess.AssetWrapper wrap = new TransferAssetAccess.AssetWrapper();
             wrap.assetId = assetId;
             wrap.accountId = accountId;
-            TransferAssetAccess.transferWrap(wrap);
+            TransferAssetAccess.transferAssetWrapper(wrap);
         } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

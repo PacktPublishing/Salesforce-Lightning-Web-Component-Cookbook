@@ -9,7 +9,7 @@ public without sharing class TransferAssetDatabase {
     }
     
     public static List<Account> getAccountsByCity(String selectedCity) {
-        return [SELECT Id, Name, BillingStreet, BillingCity, BillingState, BillingCountry FROM Account WHERE BillingCity = :selectedCity];
+        return [SELECT Id, Name, BillingCity, BillingState FROM Account WHERE BillingCity = :selectedCity];
     }
 
     public static void updateAsset(Asset ast) {

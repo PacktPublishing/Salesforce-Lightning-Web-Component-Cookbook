@@ -32,7 +32,7 @@ public with sharing class TransferAssetAccess {
         return accountWrappers;
     }
 
-    public static void transferWrap(AssetWrapper wrap) {
+    public static void transferAssetWrapper(AssetWrapper wrap) {
         Asset ast = new Asset(Id = wrap.assetId, AccountId = wrap.accountId);
         
         TransferAssetDatabase.updateAsset(ast);
