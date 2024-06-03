@@ -21,15 +21,13 @@ public with sharing class TransferAssetAccess {
     }
 
     public static List<AccountWrapper> getAccountWrappers(String selectedCity) {
-        List<AccountWrapper> accountWrappers = new List<AccountWrapper>();
+        List<AccountWrapper> accounts = new List<AccountWrapper>();
 
         for(Account acc : TransferAssetDatabase.getAccountsByCity(selectedCity)) {
-            AccountWrapper wrap = new AccountWrapper(acc);
-
-            accountWrappers.add(wrap);
+            accounts.add(new AccountWrapper(acc));
         }
 
-        return accountWrappers;
+        return accounts;
     }
 
     public static void transferAssetWrapper(AssetWrapper wrap) {
