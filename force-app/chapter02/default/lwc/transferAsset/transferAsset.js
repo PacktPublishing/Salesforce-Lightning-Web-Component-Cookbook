@@ -19,6 +19,7 @@ export default class TransferAsset extends LightningElement {
     countryOptions;
     countryValue;
     cityOptions;
+    cityValue;
     accountData;
     accountValue;
     columns = columns;
@@ -53,8 +54,8 @@ export default class TransferAsset extends LightningElement {
     }
 
     handleCityChange(event) {
-        let cityValue = event.target.value;
-        this.getAccounts(cityValue);
+        this.cityValue = event.target.value;
+        this.getAccounts(this.cityValue);
     }
     
     async getCities(countryValue) {
