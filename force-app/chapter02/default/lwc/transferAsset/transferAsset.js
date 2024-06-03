@@ -2,7 +2,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import returnCountries from '@salesforce/apex/TransferAssetInterface.returnCountries';
 import returnCities from '@salesforce/apex/TransferAssetInterface.returnCities';
-import returnAccountWrappers from '@salesforce/apex/TransferAssetInterface.returnAccountWrappers';
+import returnAccounts from '@salesforce/apex/TransferAssetInterface.returnAccounts';
 import setAssetWrapper from '@salesforce/apex/TransferAssetInterface.setAssetWrapper';
 import { RefreshEvent } from 'lightning/refresh';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -71,7 +71,7 @@ export default class TransferAsset extends LightningElement {
 
     async getAccounts(cityValue) {
         try {
-            const accounts = await returnAccountWrappers({cityName : cityValue});
+            const accounts = await returnAccounts({cityName : cityValue});
             this.accountData = JSON.parse(accounts);
             this.error = undefined;
         } catch(error) {
