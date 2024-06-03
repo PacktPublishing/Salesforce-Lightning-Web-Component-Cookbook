@@ -22,7 +22,6 @@ export default class TransferAsset extends LightningElement {
     accountData;
     accountValue;
     columns = columns;
-    citiesAreLoaded = false;
     transferDisabled = true;
 
     
@@ -63,7 +62,6 @@ export default class TransferAsset extends LightningElement {
             const cities = await returnCities({countryName : countryValue});
             this.cityOptions = JSON.parse(cities);
             this.error = undefined;
-            this.citiesAreLoaded = true;
         } catch (error) {
             this.error = error;
             this.cityOptions = undefined;

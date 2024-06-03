@@ -16,7 +16,7 @@
           options={countryOptions}
           onchange={handleCountryChange}
         ></lightning-combobox>
-        <template lwc:if={citiesAreLoaded}>
+        <template lwc:if={cityOptions}>
           <lightning-combobox
               name="transferCity"
               class="slds-p-horizontal_medium"
