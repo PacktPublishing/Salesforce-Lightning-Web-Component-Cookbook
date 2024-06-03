@@ -5,7 +5,7 @@ import returnCities from '@salesforce/apex/TransferAssetInterface.returnCities';
 import returnAccountWrappers from '@salesforce/apex/TransferAssetInterface.returnAccountWrappers';
 import setAssetWrapper from '@salesforce/apex/TransferAssetInterface.setAssetWrapper';
 import { RefreshEvent } from 'lightning/refresh';
-import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const columns = [
     { label: 'Account', fieldName: 'accountName' },
@@ -40,7 +40,7 @@ export default class TransferAsset extends LightningElement {
         }
     }
 
-    resetForm() {
+    refreshForm() {
         this.countryValue = undefined;
         this.cityOptions = null;
         this.accountData = null;
@@ -93,7 +93,7 @@ export default class TransferAsset extends LightningElement {
     async transferAsset() {
         try {
             await setAssetWrapper({assetId : this.recordId, accountId : this.accountValue});
-            this.resetForm();
+            this.refreshForm();
         } catch(error) {
             this.error = error;
             this.showNotif('There has been an error!', error.message, 'error');
