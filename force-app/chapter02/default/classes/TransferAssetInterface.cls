@@ -18,7 +18,7 @@ public with sharing class TransferAssetInterface {
     }
 
     @AuraEnabled
-    public static String returnAccountWrappers(String cityName){
+    public static String returnAccounts(String cityName){
         try {
             return JSON.serialize(TransferAssetAccess.getAccountWrappers(cityName));
         } catch(Exception e) {
@@ -29,10 +29,7 @@ public with sharing class TransferAssetInterface {
     @AuraEnabled
     public static void setAssetWrapper(String assetId, String accountId){
         try {
-            TransferAssetAccess.AssetWrapper wrap = new TransferAssetAccess.AssetWrapper();
-            wrap.assetId = assetId;
-            wrap.accountId = accountId;
-            TransferAssetAccess.transferAssetWrapper(wrap);
+            TransferAssetAccess.transferAssetWrapper(new TransferAssetAccess.AssetWrapper(assetId, accountId));
         } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

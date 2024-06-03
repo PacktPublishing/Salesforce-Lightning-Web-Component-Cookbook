@@ -63,5 +63,10 @@ public with sharing class TransferAssetAccess {
     public class assetWrapper {
         public String assetId;
         public String accountId;
+
+        public assetWrapper(String assetId, String accountId) {
+            this.assetId = assetId;
+            this.accountId = accountId;
+        }
     }
 }
