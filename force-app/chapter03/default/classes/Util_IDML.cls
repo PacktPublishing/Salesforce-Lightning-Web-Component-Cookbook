@@ -1,4 +1,4 @@
-public interface Util_DMLInterface {
+public interface Util_IDML {
     List<Database.SaveResult> insertRecords(List<SObject> recordsToInsert);
     List<Database.SaveResult> updateRecords(List<SObject> recordsToUpdate);
     List<Database.UpsertResult> upsertRecords(List<SObject> recordsToUpsert, String externalIdField);
