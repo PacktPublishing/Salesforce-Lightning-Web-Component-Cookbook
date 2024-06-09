@@ -1,101 +1,175 @@
-@isTest
-public with sharing class Util_DMLTest {
-    private class DMLStub extends Util_DML {}
+@IsTest
+public class Util_DMLTest {
 
     @IsTest
-    static void insertRecords(){
-        Account acct = new Account(Name = 'Insertion Account');
+    static void insertRecords() {
+        Util_DML dml = new Util_DML();
 
-        DMLStub stub = new DMLStub();
+        Account acct = new Account(Name = 'Account');
 
         Test.startTest();
-            List<Database.SaveResult> srList = stub.insertRecords(new List<Account>{acct});
+            List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acct});
         Test.stopTest();
 
-        Assert.areNotEqual(null, acct.Id);
+        Assert.areNotEqual(null, srList[0].getId(), 'Verify that the ID of the inserted account is not null.');
     }
 
     @IsTest
-    static void updateRecords(){
-        Account acct = new Account(Name = 'Updating Account');
-        insert acct;
+    static void insertMockRecords() {
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
 
-        acct.Name = 'Updated Account';
-
-        DMLStub stub = new DMLStub();
+        Account acct = new Account(Name = 'Account');
 
         Test.startTest();
-            List<Database.SaveResult> srList = stub.updateRecords(new List<Account>{acct});
+            List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
         Test.stopTest();
 
-        Assert.areNotEqual(null, acct.Id);
+        Assert.areNotEqual(null, srList[0].getId(), 'Verify that the ID of the inserted account is not null.');
+    }
 
-        List<Account> rehydratedAccounts = [SELECT Id, Name FROM Account WHERE Name = 'Updated Account'];
+    @IsTest
+    static void updateRecords() {
+        Util_DML dml = new Util_DML();
 
-        Assert.areEqual(1, rehydratedAccounts.size());
-        Assert.areEqual(acct.Id, rehydratedAccounts[0].Id);
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acct});
+
+        Test.startTest();
+            List<Database.SaveResult> updSrList = dml.updateRecords(new List<Account>{new Account(Id = srList[0].getId(), Name = 'Updated Account')});
+        Test.stopTest();
+
+        Assert.areEqual(srList[0].getId(), updSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the updated account.');
+    }
+
+    @IsTest
+    static void updateMockRecords() {
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
+
+        Test.startTest();
+            List<Database.SaveResult> updSrList = mockDML.updateRecords(new List<Account>{new Account(Id = srList[0].getId(), Name = 'Updated Account')});
+        Test.stopTest();
+
+        Assert.areEqual(srList[0].getId(), updSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the updated account.');
     }
 
     @IsTest
     static void upsertRecords(){
-        Account acct = new Account(Name = 'Upsertion Account');
+        Util_DML dml = new Util_DML();
 
-        DMLStub stub = new DMLStub();
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acct});
 
         Test.startTest();
-            List<Database.UpsertResult> urList = stub.upsertRecords(new List<Account>{acct}, 'Id');
+            List<Database.UpsertResult> upsSrList = dml.upsertRecords(new List<Account>{new Account(Id = srList[0].getId(), Name = 'Updated Account')}, 'Id');
         Test.stopTest();
 
-        Assert.areNotEqual(null, acct.Id);
+        Assert.areEqual(srList[0].getId(), upsSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the upserted account.');
+    }
+    
+    @IsTest
+    static void upsertMockRecords(){
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
+
+        Test.startTest();
+            List<Database.UpsertResult> upsSrList = mockDML.upsertRecords(new List<Account>{new Account(Id = srList[0].getId(), Name = 'Updated Account')}, 'Id');
+        Test.stopTest();
+
+        Assert.areEqual(srList[0].getId(), upsSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the upserted account.');
     }
 
     @IsTest
     static void deleteRecords(){
-        Account acct = new Account(Name = 'Deletion Account');
+        Util_DML dml = new Util_DML();
 
-        insert acct;
-
-        DMLStub stub = new DMLStub();
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acct});
 
         Test.startTest();
-            List<Database.SaveResult> srList = stub.deleteRecords(new List<Account>{acct});
+            List<Database.SaveResult> delSrList = dml.deleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
         Test.stopTest();
 
-        Assert.areEqual(1, srList.size());
+        Assert.areEqual(srList[0].getId(), delSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the deleted account.');
+    }
+
+    @IsTest
+    static void deleteMockRecords(){
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
+
+        Test.startTest();
+            List<Database.SaveResult> delSrList = mockDML.deleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
+        Test.stopTest();
+
+        Assert.areEqual(srList[0].getId(), delSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the deleted account.');
     }
 
     @IsTest
     static void undeleteRecords(){
-        Account acct = new Account(Name = 'Deletion Account');
+        Util_DML dml = new Util_DML();
 
-        insert acct;
-        delete acct;
-
-        DMLStub stub = new DMLStub();
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acct});
+        List<Database.SaveResult> delSrList = dml.deleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
 
         Test.startTest();
-            List<Database.SaveResult> srList = stub.undeleteRecords(new List<Account>{acct});
+            List<Database.SaveResult> undelSrList = dml.undeleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
         Test.stopTest();
 
-        Assert.areEqual(1, srList.size());
+        Assert.areEqual(srList[0].getId(), undelSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the undeleted account.');
+    }
+
+    @IsTest
+    static void undeleteMockRecords(){
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+
+        Account acct = new Account(Name = 'Account');
+        List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
+        List<Database.SaveResult> delSrList = mockDML.deleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
+
+        Test.startTest();
+            List<Database.SaveResult> undelSrList = mockDML.undeleteRecords(new List<Account>{new Account(Id = srList[0].getId())});
+        Test.stopTest();
+
+        Assert.areEqual(srList[0].getId(), undelSrList[0].getId(), 'Verify that the ID of the inserted account matches the ID of the undeleted account.');
     }
 
     @IsTest
     static void mergeRecords(){
-        Account acctOne = new Account(Name = 'Merge Account 1');
-        insert acctOne;
+        Util_DML dml = new Util_DML();
 
-        Account acctTwo = new Account(Name = 'Merge Account 2');
-        insert acctTwo;
+        Account acctToMerge = new Account(Name = 'Account To Merge');
+        Account acctIsDuplicate = new Account(Name = 'Account Is Duplicate');
 
-        DMLStub stub = new DMLStub();
+        List<Database.SaveResult> srList = dml.insertRecords(new List<Account>{acctToMerge, acctIsDuplicate});
 
         Test.startTest();
-            Database.MergeResult mr = stub.mergeRecords(acctOne, acctTwo);
+            Database.MergeResult mr = dml.mergeRecords(acctToMerge, acctIsDuplicate);
         Test.stopTest();
 
-        List<Account> rehydratedAccounts = [SELECT Id, Name FROM Account WHERE Name LIKE 'Merge Account%'];
+        Assert.areEqual(acctToMerge.Id, mr.getId(), 'Verify that the ID of the account to merge is the account that survived.');
+    }
 
-        Assert.areEqual(1, rehydratedAccounts.size());
+    @IsTest
+    static void mergeMockRecords(){
+        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+
+        Account acctToMerge = new Account(Name = 'Account To Merge');
+        Account acctIsDuplicate = new Account(Name = 'Account Is Duplicate');
+
+        List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acctToMerge, acctIsDuplicate});
+
+        Test.startTest();
+            Database.MergeResult mr = mockDML.mergeRecords(acctToMerge, acctIsDuplicate);
+        Test.stopTest();
+
+        Assert.areEqual(acctToMerge.Id, mr.getId(), 'Verify that the ID of the account to merge is the account that survived.');
     }
 }

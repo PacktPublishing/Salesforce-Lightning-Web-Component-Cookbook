@@ -1,27 +1,15 @@
 public with sharing class Util_MockIDGenerator {
-    public SObjectType mockedSObjType {get; private set;}
-
-    public Util_MockIDGenerator(SObjectType sObjType) {
-        this.mockedSObjType = sObjType;
-    }
-
-    public Util_MockIDGenerator(SObject sObj) {
-        this.mockedSObjType = sObj.getSObjectType();
-    }
+	private static Integer idsGenerated = 0;
 
     public static Id getMockId(SObject sObj) {
         return getMockId(sObj.getSObjectType());
     }
 
     public static Id getMockId(SObjectType sObjType) {
+        idsGenerated++;
         String keyPrefix = sObjType.getDescribe().getKeyPrefix();
+        String idsGenStr = String.valueOf(idsGenerated);
 
-        String idToReturn = keyPrefix;
-
-        for(Integer ii = 0; ii < 15; ii++) {
-            idToReturn += Math.round(Math.random() * 9);
-        }
-
-        return idToReturn;
+        return Id.valueOf(keyPrefix + idsGenStr.leftPad(13-idsGenStr.length(), '0'));
     }
 }
