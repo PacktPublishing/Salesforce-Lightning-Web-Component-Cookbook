@@ -9,6 +9,7 @@ public class Util_DMLMockProvider implements System.StubProvider {
                     Account acctForInsert = new Account(Name = 'Account For Insert');
 
                     result acctSRone= new Result(true, Util_MockIdGenerator.getMockId(acctForInsert));
+
                     List<Database.SaveResult> srList = new List<Database.SaveResult>{ (Database.SaveResult) JSON.deserialize(JSON.serialize(acctSRone), Database.SaveResult.class)};
                     return srList;
                 }
@@ -31,6 +32,7 @@ public class Util_DMLMockProvider implements System.StubProvider {
                 when 'deleteRecords' {
                     List<Account> accountsInParams = (List<Account>) listOfArgs[0];
                     Account acctToDelete = accountsInParams[0];
+
                     result acctSRone = new Result(true, acctToDelete.Id);
         
                     List<Database.SaveResult> srList = new List<Database.SaveResult>{ (Database.SaveResult) JSON.deserialize(JSON.serialize(acctSRone), Database.SaveResult.class)};
