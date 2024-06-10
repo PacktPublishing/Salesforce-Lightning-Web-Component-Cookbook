@@ -16,7 +16,7 @@ public class Util_DMLTest {
 
     @IsTest
     static void insertMockRecords() {
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acct = new Account(Name = 'Account');
 
@@ -43,7 +43,7 @@ public class Util_DMLTest {
 
     @IsTest
     static void updateMockRecords() {
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acct = new Account(Name = 'Account');
         List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
@@ -71,7 +71,7 @@ public class Util_DMLTest {
     
     @IsTest
     static void upsertMockRecords(){
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acct = new Account(Name = 'Account');
         List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
@@ -99,7 +99,7 @@ public class Util_DMLTest {
 
     @IsTest
     static void deleteMockRecords(){
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acct = new Account(Name = 'Account');
         List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
@@ -128,7 +128,7 @@ public class Util_DMLTest {
 
     @IsTest
     static void undeleteMockRecords(){
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acct = new Account(Name = 'Account');
         List<Database.SaveResult> srList = mockDML.insertRecords(new List<Account>{acct});
@@ -159,7 +159,7 @@ public class Util_DMLTest {
 
     @IsTest
     static void mergeMockRecords(){
-        Util_DML mockDML = (Util_DML)Util_Mocker.createDMLMock(Util_DML.class);
+        Util_DML mockDML = (Util_DML)Util_Mocker.createMock(Util_DML.class);
 
         Account acctToMerge = new Account(Name = 'Account To Merge');
         Account acctIsDuplicate = new Account(Name = 'Account Is Duplicate');
