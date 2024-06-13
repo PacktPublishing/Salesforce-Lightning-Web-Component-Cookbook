@@ -17,7 +17,9 @@ public with sharing class AccountSelectorMockProvider implements System.StubProv
                             'Phone' => '555-555-5555',
                             'BillingCity' => 'Denver',
                             'BillingState' => 'Colorado',
-                            'BillingCountry' => 'USA'
+                            'BillingCountry' => 'USA',
+                            'Museum_Office__latitude__s' => 37.790197,
+                            'Museum_Office__longitude__s' => -122.396879
                         };
 
                         accountMaps.add(accountMap);

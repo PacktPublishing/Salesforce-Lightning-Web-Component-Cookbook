@@ -1,4 +1,3 @@
-@IsTest
 public with sharing class Util_Mocker {
     public static Object createMock(Type typeToMock) {
         switch on String.valueOf(typeToMock) {

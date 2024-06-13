@@ -2,14 +2,16 @@
 public with sharing class AccountTest {
     @IsTest
     static void testServiceWrapperReturn() {
-        List<Account> acctsToReturn = new List<Account>();
-        for(Integer ii = 0; ii<10; ii++) {
+        List<Account> acctsToInsert = new List<Account>();
+        for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
             acct.AnnualRevenue = ii * 100000;
-            acctsToReturn.add(acct);
+            acct.Museum_Office__Latitude__s = 37.790197;
+            acct.Museum_Office__Longitude__s = -122.396879;
+            acctsToInsert.add(acct);
         }
 
-        insert acctsToReturn;
+        insert acctsToInsert;
 
         Test.startTest();
             String resultString = AccountService.returnAccountWrapperList();
@@ -23,9 +25,11 @@ public with sharing class AccountTest {
     @IsTest
     static void testSelectortopTenAccounts() {
         List<Account> acctsToReturn = new List<Account>();
-        for(Integer ii = 0; ii<10; ii++) {
+        for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
             acct.AnnualRevenue = ii * 100000;
+            acct.Museum_Office__Latitude__s = 37.790197;
+            acct.Museum_Office__Longitude__s = -122.396879;
             acctsToReturn.add(acct);
         }
 
