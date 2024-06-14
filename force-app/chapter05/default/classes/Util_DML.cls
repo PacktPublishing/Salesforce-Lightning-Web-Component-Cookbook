@@ -1,4 +1,4 @@
-public virtual class Util_DML implements Util_IDML{
+public virtual class Util_DML {
     public List<Database.SaveResult> insertRecords(List<SObject> recordsToInsert) {
         List<Database.SaveResult> srList = Database.insert(recordsToInsert, false);
 

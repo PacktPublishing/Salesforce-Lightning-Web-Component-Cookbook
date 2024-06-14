@@ -1,4 +1,4 @@
-public virtual class Util_Query implements Util_IQuery {
+public virtual class Util_Query {
     public List<SObject> query(String queryString) {
         return Database.query(String.escapeSingleQuotes(queryString));
     }
