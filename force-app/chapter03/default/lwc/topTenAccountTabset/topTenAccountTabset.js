@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import returnAccountWrapperList from '@salesforce/apex/AccountService.returnAccountWrapperList';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
