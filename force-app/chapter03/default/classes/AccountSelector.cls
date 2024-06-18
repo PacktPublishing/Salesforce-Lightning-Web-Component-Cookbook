@@ -5,6 +5,11 @@ public inherited sharing class AccountSelector {
 
     public List<AccountWrapper> topTenAccountsByRevenue() {
         List<Account> queryResult = (List<Account>) queryUtil.query(TOP_TEN_ACCOUNTS_QUERY);
+
+        if(queryResult.size() == 0) {
+            return null;
+        }
+
         List<AccountWrapper> queriedWrappers = new List<AccountWrapper>();
 
         for(Account acct : queryResult) {

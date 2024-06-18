@@ -4,18 +4,20 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class TopTenAccountTabset extends LightningElement {
     accounts;
-    _wiredAccounts;
 
     @wire(returnAccountWrapperList)
-    wiredAccounts(result) {
-        this._wiredAccounts = result;
-        if (result.data) {
-            this.accounts = JSON.parse(result.data);
+    wiredAccounts({error, data}) {
+        if (data) {
+            this.accounts = JSON.parse(data);
             this.error = undefined;
-        } else if(result.error) {
-            this.error = result.error;
+        } else if(error) {
+            this.error = error;
             this.accounts = undefined;
             this.showNotif('There has been an error!', this.error, 'error');
+        } else {
+            this.error = undefined;
+            this.accounts = undefined;
+            this.showNotif('Please complete Chapter 1 org setup!', 'You have no accounts with geolocations to query, which is why you are seeing this notification. Please review Chapter 1.', 'warning');
         }
     }
 
