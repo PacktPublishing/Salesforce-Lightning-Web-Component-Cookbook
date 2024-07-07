@@ -1,35 +1,33 @@
 <template>
-    <template if:false={accounts}>
-        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
-    </template>
-    <template if:true={accounts}>
+    <template lwc:if={accounts}>
         <lightning-card>
-            <div>
-                <lightning-tabset active-tab-value={topAccount} variant="standard">
-                    <template for:each={accounts} for:item="account">
-                        <lightning-record-view-form record-id={account.Id} object-api-name="Account" key={account.Id}>
-                            <lightning-tab label={account.Name} value={account.Id}>
-                                <div class="slds-grid slds-gutters slds-p-horizontal_medium">
-                                    <div class="slds-col slds-size_1-of-6 ">
-                                        <lightning-output-field field-name="Name"></lightning-output-field>
-                                        <lightning-output-field field-name="Phone"></lightning-output-field>
-                                        <lightning-output-field field-name="BillingAddress"></lightning-output-field>
-                                        <lightning-output-field field-name="Museum_Office__c"></lightning-output-field>
-                                        <lightning-output-field field-name="AnnualRevenue"></lightning-output-field>
-                                    </div>
-                                    <div class="slds-col slds-size_1-of-3">
-                                        <div class="slds-text-heading_large">{account.Name}</div>
-                                        <lightning-map title={account.Name} map-markers={account.markers} markers-title={account.Name}></lightning-map>
-                                    </div>
-                                    <div class="slds-col slds-size_1-of-2">
-                                    <!-- Chapter 6 Code Here -->
-                                    </div>
+            <lightning-tabset active-tab-value={topAccount} variant="standard">
+                <template for:each={accounts} for:item="account">
+                    <lightning-record-view-form record-id={account.Id} object-api-name="Account" key={account.Id}>
+                        <lightning-tab label={account.Name} value={account.Id}>
+                            <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+                                <div class="slds-col slds-size_1-of-6 ">
+                                    <lightning-output-field field-name="Name"></lightning-output-field>
+                                    <lightning-output-field field-name="Phone"></lightning-output-field>
+                                    <lightning-output-field field-name="BillingAddress"></lightning-output-field>
+                                    <lightning-output-field field-name="Museum_Office__c"></lightning-output-field>
+                                    <lightning-output-field field-name="AnnualRevenue"></lightning-output-field>
                                 </div>
-                            </lightning-tab>
-                        </lightning-record-view-form>
-                    </template>
-                </lightning-tabset>
-            </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-text-heading_large">{account.Name}</div>
+                                    <lightning-map title={account.Name} map-markers={account.markers} markers-title={account.Name}></lightning-map>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                <!-- Chapter 6 Code Here -->
+                                </div>
+                            </div>
+                        </lightning-tab>
+                    </lightning-record-view-form>
+                </template>
+            </lightning-tabset>
         </lightning-card>
+    </template>
+    <template lwc:else>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
     </template>
 </template>

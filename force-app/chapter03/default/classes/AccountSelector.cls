@@ -4,7 +4,7 @@ public inherited sharing class AccountSelector {
     private static final String TOP_TEN_ACCOUNTS_QUERY = 'SELECT Id, Name, Phone, BillingCity, BillingState, BillingCountry, Museum_Office__latitude__s, Museum_Office__longitude__s, AnnualRevenue FROM Account WHERE Museum_Office__latitude__s != null ORDER BY AnnualRevenue DESC NULLS LAST LIMIT 10';
 
     public List<AccountWrapper> topTenAccountsByRevenue() {
-        List<Account> queryResult = (List<Account>) queryUtil.query(TOP_TEN_ACCOUNTS_QUERY);
+        List<Account> queryResult = (List<Account>) queryUtil.query(TOP_TEN_ACCOUNTS_QUERY, AccessLevel.SYSTEM_MODE);
 
         if(queryResult.size() == 0) {
             return null;

@@ -7,7 +7,7 @@ public class Util_QueryTest {
         String queryString = 'SELECT Id, Name FROM Account';
 
         Test.startTest();
-            List<SObject> sobjList = mockQuery.query(queryString);
+            List<SObject> sobjList = mockQuery.query(queryString, AccessLevel.SYSTEM_MODE);
         Test.stopTest();
 
         Assert.areNotEqual(0, sobjList.size(), 'Verify that the size of the list of sObjects returned is not equal to zero.');
@@ -23,7 +23,7 @@ public class Util_QueryTest {
         String queryString = 'SELECT Id, Name FROM Account';
 
         Test.startTest();
-            List<SObject> sobjList = queryUtil.query(queryString);
+            List<SObject> sobjList = queryUtil.query(queryString, AccessLevel.SYSTEM_MODE);
         Test.stopTest();
 
         Assert.areNotEqual(0, sobjList.size(), 'Verify that the size of the list of sObjects returned is not equal to zero.');
@@ -73,7 +73,7 @@ public class Util_QueryTest {
         String searchString = 'FIND {Test*} IN ALL FIELDS Returning Account(Id, Name)';
 
         Test.startTest();
-            List<List<SObject>> sobjList = mockQuery.search(searchString);
+            List<List<SObject>> sobjList = mockQuery.search(searchString, AccessLevel.SYSTEM_MODE);
         Test.stopTest();
 
         Assert.areNotEqual(0, sobjList.size(), 'Verify that the size of the list of sObjects returned is not equal to zero.');
@@ -90,7 +90,7 @@ public class Util_QueryTest {
         String searchString = 'FIND {Test*} IN ALL FIELDS Returning Account(Id, Name)';
 
         Test.startTest();
-            List<List<SObject>> sobjList = queryUtil.search(searchString);
+            List<List<SObject>> sobjList = queryUtil.search(searchString, AccessLevel.SYSTEM_MODE);
         Test.stopTest();
 
         Assert.areNotEqual(0, sobjList.size(), 'Verify that the size of the list of sObjects returned is not equal to zero.');

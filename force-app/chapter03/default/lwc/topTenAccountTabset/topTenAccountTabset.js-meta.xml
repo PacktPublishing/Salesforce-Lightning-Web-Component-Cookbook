@@ -3,6 +3,7 @@
     <apiVersion>60.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>
+        <target>lightning__AppPage</target>
         <target>lightning__Tab</target>
     </targets>
 </LightningComponentBundle>
