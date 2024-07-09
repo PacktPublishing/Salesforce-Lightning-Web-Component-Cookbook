@@ -1,0 +1,46 @@
+<template>
+    <lightning-card icon-name="utility:new" variant="base">
+        <div slot="title">
+            Select Assets
+        </div>
+        <div slot="actions">
+            <lightning-button 
+                class="slds-p-right_xx-small"
+                variant="success"
+                label="Save"
+                disabled={buttonsDisabled}
+                onclick={handleSave} 
+            ></lightning-button>
+            <lightning-button 
+                variant="brand-outline"
+                label="Reset" 
+                disabled={buttonsDisabled}
+                onclick={handleReset}
+            ></lightning-button>
+        </div>
+        <div>
+            <template lwc:if={assetsLoaded}>
+                <lightning-dual-listbox name="assets"
+                    label="Select Assets to Import"
+                    source-label="Available"
+                    selected-label="Selected"
+                    field-level-help="Select assets to import."
+                    disabled={listDisabled}
+                    options={options}
+                    value={selectedAssets}
+                    onchange={handleChange}
+                ></lightning-dual-listbox>
+            </template>
+            <template lwc:elseif={isNull}>
+                Please enter another search term! The term "{searchTerm}" yielded no results.
+            </template>
+            <template lwc:else>
+                <lightning-spinner 
+                    alternative-text="Loading" 
+                    size="large"
+                    variant="base"
+                ></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>

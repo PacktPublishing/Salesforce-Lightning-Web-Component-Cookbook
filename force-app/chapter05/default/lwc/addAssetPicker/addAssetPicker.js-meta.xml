@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" label="Account Record Id" type="String" role="inputOnly" />
+            <property name="searchTerm" label="Search Term" type="String" role="inputOnly" />
+            <property name="departmentId" label="Department Id" type="Integer" role="inputOnly" />
+            <property name="selectedAssets" label="Selected Asset Ids" type="Integer[]" role="outputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
