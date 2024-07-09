@@ -4,10 +4,11 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class TopTenAccountTabset extends LightningElement {
     accounts;
+    error;
 
     @wire(returnAccountWrapperList)
     wiredAccounts({error, data}) {
-        if (data) {
+        if(data) {
             this.accounts = JSON.parse(data);
             this.error = undefined;
         } else if(error) {
