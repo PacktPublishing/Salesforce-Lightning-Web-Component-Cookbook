@@ -1,67 +1,39 @@
-public with sharing class AssetRetrievalDatabase {
-
-    private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
-    public static Util_DML dmlUtil = new Util_DML();
-
-    public static DepartmentsWrapper getDepartments() {
-        Http http = new Http();
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:The_Met_Named/departments');
-        request.setMethod('GET');
-        HttpResponse response = http.send(request);
-
-        if(response.getStatusCode() == 200) {
-            DepartmentsWrapper departmentsWrap = (DepartmentsWrapper) JSON.deserialize(response.getBody(), DepartmentsWrapper.Class);
-
-            return departmentsWrap;
-        }
-        return null;
-    }
-
-    public static List<ObjectWrappers.AssetWrapper> searchByTerm(String searchTerm, Integer departmentId) {
-        Http http = new Http();
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:The_Met_Named/search?q=' + String.escapeSingleQuotes(searchTerm) + '&departmentId=' + departmentId);
-        request.setMethod('GET');
-        HttpResponse response = http.send(request);
-
-        if(response.getStatusCode() == 200) {
-            SearchWrapper searchWrap = (SearchWrapper) JSON.deserialize(response.getBody(), SearchWrapper.Class);
-
-            List<ObjectWrappers.AssetWrapper> assetWrapperList = new List<ObjectWrappers.AssetWrapper>();
+public with sharing class AddAssetService {
     
-            if(searchWrap.objectIDs != null) {
-                for(Integer objId : searchWrap.objectIDs) {
-                    assetWrapperList.add(getSearchedAssetInfo(objId));
-                }
-        
-                return assetWrapperList;
+    private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
+    private AddAssetAccess assetAccess = new AddAssetAccess();
+
+    public DepartmentsWrapper getDepartmentWrappers() {
+        return (DepartmentsWrapper) JSON.deserialize(assetAccess.getDepartments(), DepartmentsWrapper.Class);
+    }
+
+    public List<ObjectWrappers.AssetWrapper> getSearchedAssets(String searchTerm, Integer departmentId) {
+        SearchWrapper searchWrap = (SearchWrapper) JSON.deserialize(assetAccess.searchByTerm(searchTerm, departmentId), SearchWrapper.Class);
+
+        List<ObjectWrappers.AssetWrapper> assetWrapperList = new List<ObjectWrappers.AssetWrapper>();
+
+        if(searchWrap.objectIDs != null) {
+            for(Integer objId : searchWrap.objectIDs) {
+                ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(assetAccess.getSearchedAssetInfo(objId), ObjectWrappers.AssetWrapper.Class);
+                assetWrapperList.add(assetWrapper);
             }
+    
+            return assetWrapperList;
         }
+
         return null;
     }
 
-    public static ObjectWrappers.AssetWrapper getSearchedAssetInfo(Integer objectId) {
-        Http http = new Http();
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:The_Met_Named/objects/' + objectId);
-        request.setMethod('GET');
-        HttpResponse response = http.send(request);
+    public ObjectWrappers.AssetWrapper getSearchedAssetWrapper(Integer objectId) {
+        ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(assetAccess.getSearchedAssetInfo(objectId), ObjectWrappers.AssetWrapper.Class);
 
-        if(response.getStatusCode() == 200) {
-            ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(response.getBody(), ObjectWrappers.AssetWrapper.Class);
-
-            return assetWrapper;
-        }
-        return null;
+        return assetWrapper;
     }
 
-    public static Map<Integer, String> upsertAssets(List<ObjectWrappers.AssetWrapper> assetWrappers, Id accountId) {
+    public Map<Integer, String> upsertAssets(List<ObjectWrappers.AssetWrapper> assetWrappers, Id accountId) {
         List<Asset> assetsToUpsert = new List<Asset>();
         List<Constituent__c> constituentsToUpsert = new List<Constituent__c>();
         List<Tag__c> tagsToUpsert = new List<Tag__c>();
-        
-        Map<Integer, String> assetInfoMap = new Map<Integer, String>();
 
         for(ObjectWrappers.AssetWrapper assetWrapper : assetWrappers) {
             Constituent__c constituentToUpsert = new Constituent__c();
@@ -111,46 +83,18 @@ public with sharing class AssetRetrievalDatabase {
         }
 
         if(constituentsToUpsert.size() > 0) {
-            try{
-                dmlUtil.upsertRecords(constituentsToUpsert, 'Constituent_Id__c');
-            } catch (Exception e) {
-                throw new AuraHandledException(e.getMessage());
-            }    
+            assetAccess.upsertConstituents(constituentsToUpsert);
         }
 
         if(tagsToUpsert.size() > 0) {
-            try {
-                dmlUtil.upsertRecords(tagsToUpsert, 'AAT__c');
-            } catch (Exception e) {
-                throw new AuraHandledException(e.getMessage());
-            }
+            assetAccess.upsertTags(tagsToUpsert);
         }
 
         if(assetsToUpsert.size() > 0) {
-            try{
-                List<Database.upsertResult> upsertResults = dmlUtil.upsertRecords(assetsToUpsert, 'Object_ID__c');
-
-                List<Id> idList = new List<Id>();
-
-                for(Database.upsertResult ur : upsertResults) {
-                    if(ur.isCreated() && ur.isSuccess()) {
-                        idList.add(ur.getId());
-                    }
-                }
-
-                if(idList.size() > 0) {
-                    for(Asset ast : [SELECT Id, Name, Object_ID__c FROM Asset WHERE Id IN :idList]) {
-                        assetInfoMap.put(Integer.valueOf(ast.Object_ID__c), ast.Name);
-                    }
-                } else {
-                    return null;
-                }
-            } catch (Exception e) {
-                //error processing
-            }
+            return assetAccess.upsertAssets(assetsToUpsert);
         }
-
-        return assetInfoMap;
+        
+        return null;
     }
 
     public static String nullCheck(String value) {

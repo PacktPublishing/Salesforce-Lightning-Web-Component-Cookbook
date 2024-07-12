@@ -1,7 +1,9 @@
 public with sharing class AccountService {
 
+    private AccountSelector accountSelect = new AccountSelector();
+
     public List<AccountWrapper> getTopAccountWrappers() {
-        List<Account> queryResult = new AccountSelector().topTenAccountsByRevenue();
+        List<Account> queryResult = accountSelect.topTenAccountsByRevenue();
 
         List<AccountWrapper> queriedWrappers = new List<AccountWrapper>();
 

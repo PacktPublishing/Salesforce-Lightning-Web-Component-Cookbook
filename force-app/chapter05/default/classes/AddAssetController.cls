@@ -1,10 +1,10 @@
-public with sharing class AssetRetrievalInterface {
+public with sharing class AddAssetController {
     public static final String REGEXP = '[^a-zA-Z]';
     public static final String REPLACE = '';
 
 
     @AuraEnabled(cacheable=true)
-    public static String getDepartmentsWrapper(){
+    public static String returnDepartmentsWrapper(){
         try {
             AssetRetrievalDatabase.DepartmentsWrapper retrievedDepartments = AssetRetrievalDatabase.getDepartments();
 

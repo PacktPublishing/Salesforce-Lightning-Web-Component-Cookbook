@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import getDepartmentsWrapper from '@salesforce/apex/AssetRetrievalInterface.getDepartmentsWrapper';
+import returnDepartmentsWrapper from '@salesforce/apex/AddAssetController.returnDepartmentsWrapper';
 import Utilities from 'c/notifUtils';
 let utility;
 
@@ -19,7 +19,7 @@ export default class AddAssetToAccount extends LightningElement {
 
     async loadDepartments() {
         try {
-            const data = await getDepartmentsWrapper();
+            const data = await returnDepartmentsWrapper();
 
             if (data) {
                 let temp = JSON.parse(data);
