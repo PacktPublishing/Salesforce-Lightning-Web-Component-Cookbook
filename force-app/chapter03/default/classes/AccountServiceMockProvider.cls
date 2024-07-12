@@ -1,10 +1,10 @@
 @IsTest
-public with sharing class AccountSelectorMockProvider implements System.StubProvider {    
+public with sharing class AccountServiceMockProvider implements System.StubProvider {    
     public Object handleMethodCall(Object stubbedObject, String stubbedMethodName, 
         Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames, 
         List<Object> listOfArgs) {
             switch on stubbedMethodName {
-                when 'topTenAccountsByRevenue' {
+                when 'getTopAccountWrappers' {
                     List<Map<String, Object>> accountMaps = new List<Map<String, Object>>();
 
                     for(Integer ii = 9; ii > -1; ii--) {
@@ -24,10 +24,10 @@ public with sharing class AccountSelectorMockProvider implements System.StubProv
 
                         accountMaps.add(accountMap);
                     }
-                    List<AccountSelector.AccountWrapper> wrappedAccounts = new List<AccountSelector.AccountWrapper>();
+                    List<AccountService.AccountWrapper> wrappedAccounts = new List<AccountService.AccountWrapper>();
                     List<Account> acctsToWrap = (List<Account>) Test.createStubQueryRows(Account.getSObjectType(), accountMaps);
                     for (Account acct : acctsToWrap) {
-                        wrappedAccounts.add(new AccountSelector.AccountWrapper(acct));
+                        wrappedAccounts.add(new AccountService.AccountWrapper(acct));
                     }
 
                     return wrappedAccounts;

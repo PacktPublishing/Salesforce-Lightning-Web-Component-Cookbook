@@ -1,72 +1,18 @@
-public with sharing class TransferAssetAccess {
+public without sharing class TransferAssetAccess {
     
-    public static List<LocaleWrapper> getComboboxCountries() {
-        List<LocaleWrapper> countries = new List<LocaleWrapper>();
+    public static List<AggregateResult> getCountries() {
+        return [SELECT COUNT(Id), BillingCountry FROM Account GROUP BY BillingCountry ORDER BY BillingCountry NULLS FIRST];
+    }
 
-        for(AggregateResult ar : TransferAssetDatabase.getCountries()) {
-            countries.add(new LocaleWrapper(String.valueOf(ar.get('BillingCountry'))));
-        }
-
-        return countries;
+    public static List<AggregateResult> getCities(String selectedCountry) {
+        return [SELECT COUNT(Id), BillingCity FROM Account WHERE BillingCountry = :selectedCountry GROUP BY BillingCity ORDER BY BillingCity NULLS FIRST];
     }
     
-    public static List<LocaleWrapper> getComboboxCities(String countryName) {
-        List<LocaleWrapper> cities = new List<LocaleWrapper>();
-
-        for(AggregateResult ar : TransferAssetDatabase.getCities(countryName)) {
-            cities.add(new LocaleWrapper(String.valueOf(ar.get('BillingCity'))));
-        }
-
-        return cities;
+    public static List<Account> getAccountsByCity(String selectedCity) {
+        return [SELECT Id, Name, BillingCity, BillingState FROM Account WHERE BillingCity = :selectedCity];
     }
 
-    public static List<AccountWrapper> getAccountWrappers(String selectedCity) {
-        List<AccountWrapper> accounts = new List<AccountWrapper>();
-
-        for(Account acc : TransferAssetDatabase.getAccountsByCity(selectedCity)) {
-            accounts.add(new AccountWrapper(acc));
-        }
-
-        return accounts;
-    }
-
-    public static void transferAssetWrapper(AssetWrapper wrap) {
-        Asset ast = new Asset(Id = wrap.assetId, AccountId = wrap.accountId);
-        
-        TransferAssetDatabase.updateAsset(ast);
-    }
-
-    public class LocaleWrapper {
-        @AuraEnabled public String label;
-        @AuraEnabled public String value;
-
-        public LocaleWrapper(String locale) {
-            this.label = locale == null ? 'No Locale Specified' : locale;
-            this.value = locale;
-        }
-    }
-
-    public class AccountWrapper {
-        @AuraEnabled public String accountId;
-        @AuraEnabled public String accountName;
-        @AuraEnabled public String accountCity;
-        @AuraEnabled public String accountState;
-
-        public AccountWrapper(Account acc) {
-            this.accountId = acc.Id;
-            this.accountName = acc.Name;
-            this.accountCity = acc.BillingCity;
-            this.accountState = acc.BillingState;
-        }
-    }
-
-    public class assetWrapper {
-        public String assetId;
-        public String accountId;
-
-        public assetWrapper(String assetId, String accountId) {
-            this.assetId = assetId;
-            this.accountId = accountId;
-        }
+    public static void updateAsset(Asset ast) {
+        update ast;
     }
 }

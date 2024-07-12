@@ -1,9 +1,9 @@
 /* eslint-disable @lwc/lwc/no-async-await */
 import { LightningElement, api, wire } from 'lwc';
-import returnCountries from '@salesforce/apex/TransferAssetInterface.returnCountries';
-import returnCities from '@salesforce/apex/TransferAssetInterface.returnCities';
-import returnAccounts from '@salesforce/apex/TransferAssetInterface.returnAccounts';
-import setAssetWrapper from '@salesforce/apex/TransferAssetInterface.setAssetWrapper';
+import returnCountries from '@salesforce/apex/TransferAssetPresentation.returnCountries';
+import returnCities from '@salesforce/apex/TransferAssetPresentation.returnCities';
+import returnAccounts from '@salesforce/apex/TransferAssetPresentation.returnAccounts';
+import setAssetWrapper from '@salesforce/apex/TransferAssetPresentation.setAssetWrapper';
 import { RefreshEvent } from 'lightning/refresh';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 

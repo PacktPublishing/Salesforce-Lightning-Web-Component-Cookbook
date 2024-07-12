@@ -14,7 +14,7 @@ public with sharing class AccountTest {
         insert acctsToInsert;
 
         Test.startTest();
-            String resultString = AccountService.returnAccountWrapperList();
+            String resultString = TopAccountsController.returnAccountWrapperList();
         Test.stopTest();
 
         for(Integer jj = 0; jj < 10; jj++) {
@@ -36,7 +36,7 @@ public with sharing class AccountTest {
         insert acctsToReturn;
 
         Test.startTest();
-            List<AccountSelector.AccountWrapper> resultWrappers = new AccountSelector().topTenAccountsByRevenue();
+            List<AccountService.AccountWrapper> resultWrappers = new AccountService().getTopAccountWrappers();
         Test.stopTest();
 
         for(Integer jj = 0; jj < 10; jj++) {
@@ -46,11 +46,13 @@ public with sharing class AccountTest {
 
     @IsTest
     static void testMockedSelectortopTenAccounts() {
-        AccountSelector mockSelector = (AccountSelector)Util_Mocker.createMock(AccountSelector.class);
+        AccountService mockService = (AccountService)Util_Mocker.createMock(AccountService.class);
 
         Test.startTest();
-            List<AccountSelector.AccountWrapper> resultWrappers = mockSelector.topTenAccountsByRevenue();
+            List<AccountService.AccountWrapper> resultWrappers = mockService.getTopAccountWrappers();
         Test.stopTest();
+
+        System.debug(resultWrappers);
 
         for(Integer jj = 0; jj < 10; jj++) {
             Assert.isTrue(resultWrappers[jj].Name == 'Account ' + (9 - jj), 'Verify that the resultString contains each of the inserted accounts, and that they are sorted in the correct order. Account ' + jj);

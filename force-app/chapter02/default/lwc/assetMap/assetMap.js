@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
-import getMapMarkers from '@salesforce/apex/AssetMapInterface.getMapMarkers';
+import getMapMarkers from '@salesforce/apex/AssetMapPresentation.getMapMarkers';
 import{ refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 

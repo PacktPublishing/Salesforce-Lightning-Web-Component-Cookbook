@@ -7,8 +7,8 @@ public with sharing class Util_Mocker {
             when 'Util_Query' {
                 return Test.createStub(typeToMock, new Util_QueryMockProvider());
             }
-            when 'AccountSelector' {
-                return Test.createStub(typeToMock, new AccountSelectorMockProvider());
+            when 'AccountService' {
+                return Test.createStub(typeToMock, new AccountServiceMockProvider());
             }
             when else {
                 return null;
