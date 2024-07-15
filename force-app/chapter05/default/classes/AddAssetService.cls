@@ -1,20 +1,22 @@
 public with sharing class AddAssetService {
     
     private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
-    private AddAssetAccess assetAccess = new AddAssetAccess();
+    private Assets assets = new Assets();
+    private Constituents constituents = new Constituents();
+    private Tags tags = new Tags();
 
     public DepartmentsWrapper getDepartmentWrappers() {
-        return (DepartmentsWrapper) JSON.deserialize(assetAccess.getDepartments(), DepartmentsWrapper.Class);
+        return (DepartmentsWrapper) JSON.deserialize(AddAssetAPI.getDepartments(), DepartmentsWrapper.Class);
     }
 
     public List<ObjectWrappers.AssetWrapper> getSearchedAssets(String searchTerm, Integer departmentId) {
-        SearchWrapper searchWrap = (SearchWrapper) JSON.deserialize(assetAccess.searchByTerm(searchTerm, departmentId), SearchWrapper.Class);
+        SearchWrapper searchWrap = (SearchWrapper) JSON.deserialize(AddAssetAPI.searchByTerm(searchTerm, departmentId), SearchWrapper.Class);
 
         List<ObjectWrappers.AssetWrapper> assetWrapperList = new List<ObjectWrappers.AssetWrapper>();
 
         if(searchWrap.objectIDs != null) {
             for(Integer objId : searchWrap.objectIDs) {
-                ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(assetAccess.getSearchedAssetInfo(objId), ObjectWrappers.AssetWrapper.Class);
+                ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(AddAssetAPI.getSearchedAssetInfo(objId), ObjectWrappers.AssetWrapper.Class);
                 assetWrapperList.add(assetWrapper);
             }
     
@@ -25,7 +27,7 @@ public with sharing class AddAssetService {
     }
 
     public ObjectWrappers.AssetWrapper getSearchedAssetWrapper(Integer objectId) {
-        ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(assetAccess.getSearchedAssetInfo(objectId), ObjectWrappers.AssetWrapper.Class);
+        ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(AddAssetAPI.getSearchedAssetInfo(objectId), ObjectWrappers.AssetWrapper.Class);
 
         return assetWrapper;
     }
@@ -83,15 +85,15 @@ public with sharing class AddAssetService {
         }
 
         if(constituentsToUpsert.size() > 0) {
-            assetAccess.upsertConstituents(constituentsToUpsert);
+            constituents.upsertConstituents(constituentsToUpsert);
         }
 
         if(tagsToUpsert.size() > 0) {
-            assetAccess.upsertTags(tagsToUpsert);
+            tags.upsertTags(tagsToUpsert);
         }
 
         if(assetsToUpsert.size() > 0) {
-            return assetAccess.upsertAssets(assetsToUpsert);
+            return assets.upsertAssets(assetsToUpsert);
         }
         
         return null;
