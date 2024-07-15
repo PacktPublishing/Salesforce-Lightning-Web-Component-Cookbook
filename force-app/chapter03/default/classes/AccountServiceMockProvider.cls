@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class AccountServiceMockProvider implements System.StubProvider {    
+public with sharing class AccountServiceMockProvider implements System.StubProvider {
     public Object handleMethodCall(Object stubbedObject, String stubbedMethodName, 
         Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames, 
         List<Object> listOfArgs) {
@@ -9,9 +9,12 @@ public with sharing class AccountServiceMockProvider implements System.StubProvi
 
                     for(Integer ii = 9; ii > -1; ii--) {
                         Account acct = new Account(Name = 'Account ' + ii);
+
+                        Id mockedId = Util_MockIDGenerator.getMockId(acct);
                         Decimal annualRev = ii * 100000;
 
                         Map<String, Object> accountMap = new Map<String, Object> {
+                            'Id' => mockedId,
                             'Name' => acct.Name,
                             'AnnualRevenue' => annualRev,
                             'Phone' => '555-555-5555',
@@ -24,8 +27,9 @@ public with sharing class AccountServiceMockProvider implements System.StubProvi
 
                         accountMaps.add(accountMap);
                     }
-                    List<AccountService.AccountWrapper> wrappedAccounts = new List<AccountService.AccountWrapper>();
                     List<Account> acctsToWrap = (List<Account>) Test.createStubQueryRows(Account.getSObjectType(), accountMaps);
+                    List<AccountService.AccountWrapper> wrappedAccounts = new List<AccountService.AccountWrapper>();
+                    
                     for (Account acct : acctsToWrap) {
                         wrappedAccounts.add(new AccountService.AccountWrapper(acct));
                     }
