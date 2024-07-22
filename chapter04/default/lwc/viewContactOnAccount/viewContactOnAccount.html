@@ -1,0 +1,26 @@
+<template>
+    <lightning-card icon-name="standard:contact" variant="base">
+        <div slot="title">
+            View Contact
+        </div>
+        <div slot="actions">
+            <lightning-button 
+                variant="brand-outline"
+                label="Edit" 
+                onclick={handleEdit} 
+            ></lightning-button>
+        </div>
+        <div>
+            <!-- Card Body  -->
+            <template for:each={displayContacts} for:item="contact">
+                <div class="slds-var-p-horizontal_medium slds-border_top" key={contact.Id}>
+                    <lightning-record-view-form record-id={contact.Id} object-api-name="Contact" key={contact.Id}>
+                        <lightning-output-field field-name="Name"></lightning-output-field>
+                        <lightning-output-field field-name="Title"></lightning-output-field>
+                        <lightning-output-field field-name="Phone"></lightning-output-field>
+                    </lightning-record-view-form>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
