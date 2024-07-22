@@ -1,0 +1,31 @@
+<template>
+    <lightning-card icon-name="standard:contact" variant="base">
+        <div slot="title">
+            Edit Contacts
+        </div>
+        <div slot="footer">
+            <lightning-button 
+            variant="brand"
+            label="Done" 
+            onclick={handleDone} 
+        ></lightning-button>
+        </div>
+        <div>
+            <!-- Card Body  -->
+            <template for:each={contactsToEdit} for:item="contact">
+                <div class="slds-var-p-horizontal_medium slds-border_top" key={contact.Id}>
+                    <lightning-record-edit-form record-id={contact.Id} object-api-name={contactObject} onsuccess={handleSave}>
+                        <lightning-input-field data-id={contact.Id} field-name={salutationField} name={salutationField}></lightning-input-field>
+                        <lightning-input-field data-id={contact.Id} field-name={firstNameField} name={firstNameField}></lightning-input-field>
+                        <lightning-input-field data-id={contact.Id} field-name={lastNameField} name={lastNameField}></lightning-input-field>
+                        <lightning-input-field data-id={contact.Id} field-name={titleField} name={titleField}></lightning-input-field>
+                        <lightning-input-field data-id={contact.Id} field-name={phoneField} name={phoneField}></lightning-input-field>
+                        <div class="slds-var-p-bottom_medium slds-var-p-top_x-small slds-align_absolute-center">
+                            <lightning-button variant="brand" type="submit" name="save" label="Save Contact" disabled={contact.isSaved}></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
