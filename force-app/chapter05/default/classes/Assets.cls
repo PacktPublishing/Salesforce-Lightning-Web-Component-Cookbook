@@ -1,5 +1,5 @@
 public with sharing class Assets extends Util_DML {
-    public Map<Integer, String> upsertAssetsAndReturnInfoMap(List<Asset> assetsToUpsert) {
+    public Map<Integer, String> upsertAssets(List<Asset> assetsToUpsert) {
         Map<Integer, String> assetInfoMap = new Map<Integer, String>();
 
         try{

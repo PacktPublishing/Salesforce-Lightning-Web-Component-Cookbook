@@ -32,7 +32,7 @@ public with sharing class AddAssetService {
         return assetWrapper;
     }
 
-    public Map<Integer, String> upsertAssetsAndReturnInfoMap(List<ObjectWrappers.AssetWrapper> assetWrappers, Id accountId) {
+    public Map<Integer, String> upsertAssets(List<ObjectWrappers.AssetWrapper> assetWrappers, Id accountId) {
         List<Asset> assetsToUpsert = new List<Asset>();
         List<Constituent__c> constituentsToUpsert = new List<Constituent__c>();
         List<Tag__c> tagsToUpsert = new List<Tag__c>();
@@ -93,7 +93,7 @@ public with sharing class AddAssetService {
         }
 
         if(assetsToUpsert.size() > 0) {
-            return assets.upsertAssetsAndReturnInfoMap(assetsToUpsert);
+            return assets.upsertAssets(assetsToUpsert);
         }
         
         return null;
