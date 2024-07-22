@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
-import searchAssetWrappers from '@salesforce/apex/AssetRetrievalInterface.searchAssetWrappers';
-import saveAssetWrappers from '@salesforce/apex/AssetRetrievalInterface.saveAssetWrappers';
+import searchAssetWrappers from '@salesforce/apex/AddAssetController.searchAssetWrappers';
+import saveAssetWrappers from '@salesforce/apex/AddAssetController.saveAssetWrappers';
 import Utilities from 'c/notifUtils';
 let utility;
 
