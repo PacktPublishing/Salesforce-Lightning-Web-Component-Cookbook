@@ -30,18 +30,16 @@ export default class AddAssetToAccount extends LightningElement {
                     departments.push(tmpClone);
                 }
     
-                departments.sort((a, b) => a.label - b.label);
+                departments.sort((a, b) => (a.label - b.label) ? 1 : -1);
     
-                this.options = JSON.parse(JSON.stringify(departments));
-                this.error = undefined;
+                this.options = departments;
             }
             
             this.departmentsLoaded = true;
         }
         catch(error) {
-            this.error = error;
-            this.accounts = undefined;
-            utility.showNotif('There has been an error!', this.error, 'error');
+            this.options = undefined;
+            utility.showNotif('There has been an error!', error, 'error');
         }
     }
 

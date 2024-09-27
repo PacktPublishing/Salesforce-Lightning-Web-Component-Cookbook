@@ -27,9 +27,7 @@ public with sharing class AddAssetService {
     }
 
     public ObjectWrappers.AssetWrapper getSearchedAssetWrapper(Integer objectId) {
-        ObjectWrappers.AssetWrapper assetWrapper = (ObjectWrappers.AssetWrapper) JSON.deserialize(AddAssetAPI.getSearchedAssetInfo(objectId), ObjectWrappers.AssetWrapper.Class);
-
-        return assetWrapper;
+        return (ObjectWrappers.AssetWrapper) JSON.deserialize(AddAssetAPI.getSearchedAssetInfo(objectId), ObjectWrappers.AssetWrapper.Class);
     }
 
     public Map<Integer, String> upsertAssetsAndReturnInfoMap(List<ObjectWrappers.AssetWrapper> assetWrappers, Id accountId) {

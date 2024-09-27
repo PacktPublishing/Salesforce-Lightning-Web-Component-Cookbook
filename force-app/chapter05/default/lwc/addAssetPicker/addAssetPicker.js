@@ -8,10 +8,9 @@ export default class AddAssetPicker extends LightningElement {
     @api recordId;
     @api searchTerm;
     @api departmentId;
-    @api searchResultsJSON;
+    @api selectedAssets;
     searchResults = [];
-    @api selectedAssets = [];
-    options = [];
+    options;
     isLoaded = false;
     isNull = false;
     savePressed = false;
@@ -19,7 +18,7 @@ export default class AddAssetPicker extends LightningElement {
 
     connectedCallback() {
         utility = new Utilities(this);
-        this.sendSearch();
+        this.sendSearchFetchAPI();
     }
 
     get assetsLoaded() {
@@ -30,31 +29,83 @@ export default class AddAssetPicker extends LightningElement {
         return this.savePressed;
     }
 
-    async sendSearch() {
+    async sendSearchApex() {
         try {
-            const data = await searchAssetWrappers( {search : this.searchTerm, departmentId : this.departmentId} );
-            this.searchResultsJSON = data;
+            const searchResultsJSON = await searchAssetWrappers( {search : this.searchTerm, departmentId : this.departmentId} );
 
-            if(this.searchResultsJSON == null) {
+            if(searchResultsJSON == null) {
                 this.isNull = true;
             } else {
-                let temp = JSON.parse(data);
+                let searchResults = JSON.parse(searchResultsJSON);
                 
-                for(let tmp of temp) {
-                    let tmpClone = {...tmp, label:tmp.title, value:tmp.objectId};
-                    this.searchResults.push(tmpClone);
+                for(let sr of searchResults) {
+                    let srClone = {label:sr.title, value:sr.objectId};
+                    this.searchResults.push(srClone);
                 }
 
-                this.searchResults.sort((a, b) => a.label - b.label);
+                this.searchResults.sort((a, b) => (a.label - b.label) ? 1 : -1);
 
-                this.options = JSON.parse(JSON.stringify(this.searchResults));
+                this.options = this.searchResults;
             }
         } catch(error) {
-            this.error = error;
             this.options = undefined;
-            utility.showNotif('There has been an error!', this.error, 'error');
+            utility.showNotif('There has been an error!', error, 'error');
         }
         this.isLoaded = true;
+    }
+
+    async sendSearchFetchAPI() {
+        try {
+            const sendSearchFetch = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=' + JSON.stringify(this.searchTerm).slice(1, -1) + '&departmentId=' + this.departmentId);
+
+            let sendSearchResponse = await sendSearchFetch.json();
+
+            if(sendSearchResponse.objectIDs == null) {
+                this.isNull = true;
+            } else {
+                this.searchResults = await this.searchObjects(sendSearchResponse.objectIDs);
+
+                this.searchResults.sort((a, b) => (a.label - b.label) ? 1 : -1);
+
+                this.options = this.searchResults;
+
+                this.isLoaded = true;
+            }
+        } catch(error) {
+            this.options = undefined;
+            utility.showNotif('There has been an error!', 'There has been an error in the Send Search function.', 'error');
+        }
+    }
+
+    async searchObjects(objectIds) {
+        try{
+            let objectsToReturn = [];
+
+            for(let objectId of objectIds) {
+                let getObjectResponse = await this.getObject(objectId);
+
+                objectsToReturn.push(getObjectResponse);
+            }
+
+            return objectsToReturn;
+        } catch(error) {
+            utility.showNotif('There has been an error!', 'There has been an error in the Search Objects function.', 'error');
+        }
+    }
+
+    async getObject(objectId) {
+        try{
+            const getObjectFetch = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + objectId);
+
+            let objectResponse = await getObjectFetch.json();
+            
+            let objectResponseClone = {label:objectResponse.title, value:objectResponse.objectID.toString()};
+
+            return objectResponseClone;
+
+        } catch(error) {
+            utility.showNotif('There has been an error!', 'There has been an error in the Get Object function.', 'error');
+        }
     }
 
     async handleSave() {
@@ -63,18 +114,14 @@ export default class AddAssetPicker extends LightningElement {
 
         let recordsToSave = this.searchResults.filter(asset => this.selectedAssets.includes(asset.objectId));
         let jsonToParse = JSON.stringify(recordsToSave);
-        console.log(JSON.stringify(recordsToSave));
 
         try {
             const saveResult = await saveAssetWrappers({ jsonToParse : jsonToParse, accountId : this.recordId});
-
-            console.log('saveResult' + JSON.stringify(saveResult));
 
             let savedMessage = '', unsavedMessage = '';
             let unsavedRecords;
 
             if(saveResult) {
-                console.log('option one!');
                 let propertyList = Object.getOwnPropertyNames(saveResult);
 
                 for(let property of propertyList) {
@@ -83,12 +130,10 @@ export default class AddAssetPicker extends LightningElement {
 
                 utility.showNotif('You have successfully inserted the following record(s):', savedMessage, 'success');
 
-                unsavedRecords = recordsToSave.filter(unsavedAsset => !propertyList.includes(unsavedAsset.objectId));  
-                console.log('unsavedRecords ' + JSON.stringify(unsavedRecords));
+                unsavedRecords = recordsToSave.filter(unsavedAsset => !propertyList.includes(unsavedAsset.objectId));
             }
 
             if(unsavedRecords && unsavedRecords.length != 0) {
-                console.log('option two!');
                 for(let record of unsavedRecords) {
                     unsavedMessage += record.title + ', item number ' + record.objectId + '.\n';
                 }
@@ -97,7 +142,6 @@ export default class AddAssetPicker extends LightningElement {
             }
 
             if(!saveResult && !unsavedRecords) {
-                console.log('option three!');
                 for(let duplicate of recordsToSave) {
                     unsavedMessage += duplicate.title + ', item number ' + duplicate.objectId + '.\n';
                 }
@@ -105,8 +149,7 @@ export default class AddAssetPicker extends LightningElement {
                 utility.showNotif('The following duplicate records were not saved: ', unsavedMessage, 'info');
             }
         } catch(error) {
-            this.error = error;
-            utility.showNotif('There has been an error!', this.error, 'error');
+            utility.showNotif('There has been an error!', error, 'error');
         }
     }
 

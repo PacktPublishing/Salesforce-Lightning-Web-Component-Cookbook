@@ -17,7 +17,7 @@ public with sharing class AddAssetController {
     public static String searchAssetWrappers(String search, Integer departmentId) {
         try {
             String searchTerm = search.replaceAll(REGEXP, REPLACE);
-            List<ObjectWrappers.AssetWrapper> searchResults = new AddAssetService().getSearchedAssets(String.escapeSingleQuotes(searchTerm), departmentId);
+            List<ObjectWrappers.AssetWrapper> searchResults = new AddAssetService().getSearchedAssets(searchTerm, departmentId);
 
             return searchResults == null ? null : JSON.serialize(searchResults);
         } catch (Exception e) {
