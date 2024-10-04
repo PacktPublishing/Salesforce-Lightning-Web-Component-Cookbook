@@ -63,7 +63,7 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Add_Asset_To_Account</members>
 		<name>Flow</name>
 	</types>
 	<types>
@@ -93,6 +93,10 @@
 	<types>
 		<members>The_Met</members>
 		<name>RemoteSiteSetting</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>StaticResource</name>
 	</types>
 	<version>60.0</version>
 </Package>
