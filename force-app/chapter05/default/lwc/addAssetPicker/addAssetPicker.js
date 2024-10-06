@@ -54,27 +54,33 @@ export default class AddAssetPicker extends LightningElement {
         this.isLoaded = true;
     }
 
-    async sendSearchFetchAPI() {
-        try {
-            const sendSearchFetch = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=' + JSON.stringify(this.searchTerm).slice(1, -1) + '&departmentId=' + this.departmentId);
-
-            let sendSearchResponse = await sendSearchFetch.json();
-
-            if(sendSearchResponse.objectIDs == null) {
-                this.isNull = true;
-            } else {
-                this.searchResults = await this.searchObjects(sendSearchResponse.objectIDs);
+    sendSearchFetchAPI() {
+        fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=' + JSON.stringify(this.searchTerm).slice(1, -1) + '&departmentId=' + this.departmentId)
+            .then(sendSearchFetch => {
+                return sendSearchFetch.json();
+            })
+            .then(sendSearchResponse => {
+                if(sendSearchResponse.objectIDs == null) {
+                    this.isNull = true;
+                    throw new Error('breakChain');
+                } else {
+                    return this.searchObjects(sendSearchResponse.objectIDs);
+                }
+            })
+            .then(searchResults => {
+                this.searchResults = searchResults;
 
                 this.searchResults.sort((a, b) => (a.label - b.label) ? 1 : -1);
-
+    
                 this.options = this.searchResults;
 
                 this.isLoaded = true;
-            }
-        } catch(error) {
-            this.options = undefined;
-            utility.showNotif('There has been an error!', 'There has been an error in the Send Search function.', 'error');
-        }
+            })
+            .catch(error => {
+                if(error.message !== 'breakChain') {
+                    utility.showNotif('There has been an error!', error.message, 'error');
+                }
+            });
     }
 
     async searchObjects(objectIds) {
@@ -149,6 +155,7 @@ export default class AddAssetPicker extends LightningElement {
                 utility.showNotif('The following duplicate records were not saved: ', unsavedMessage, 'info');
             }
         } catch(error) {
+            error = error;
             utility.showNotif('There has been an error!', error, 'error');
         }
     }
