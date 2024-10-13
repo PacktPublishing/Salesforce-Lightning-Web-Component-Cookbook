@@ -18,7 +18,7 @@ export default class AddAssetPicker extends LightningElement {
 
     connectedCallback() {
         utility = new Utilities(this);
-        this.sendSearchFetchAPI();
+        this.sendSearchApex();
     }
 
     get assetsLoaded() {
@@ -39,7 +39,7 @@ export default class AddAssetPicker extends LightningElement {
                 let searchResults = JSON.parse(searchResultsJSON);
                 
                 for(let sr of searchResults) {
-                    let srClone = {label:sr.title, value:sr.objectId};
+                    let srClone = {...sr, label:sr.title, value:sr.objectId};
                     this.searchResults.push(srClone);
                 }
 
@@ -60,20 +60,12 @@ export default class AddAssetPicker extends LightningElement {
                 return sendSearchFetch.json();
             })
             .then(sendSearchResponse => {
-                if(sendSearchResponse.objectIDs == null) {
-                    this.isNull = true;
-                    throw new Error('breakChain');
-                } else {
-                    return this.searchObjects(sendSearchResponse.objectIDs);
-                }
+                return this.searchObjects(sendSearchResponse.objectIDs);
             })
             .then(searchResults => {
                 this.searchResults = searchResults;
-
                 this.searchResults.sort((a, b) => (a.label - b.label) ? 1 : -1);
-    
                 this.options = this.searchResults;
-
                 this.isLoaded = true;
             })
             .catch(error => {
@@ -83,80 +75,68 @@ export default class AddAssetPicker extends LightningElement {
             });
     }
 
-    async searchObjects(objectIds) {
-        try{
-            let objectsToReturn = [];
-
-            for(let objectId of objectIds) {
-                let getObjectResponse = await this.getObject(objectId);
-
-                objectsToReturn.push(getObjectResponse);
-            }
-
-            return objectsToReturn;
-        } catch(error) {
-            utility.showNotif('There has been an error!', 'There has been an error in the Search Objects function.', 'error');
-        }
+    searchObjects(objectIds) {
+        return Promise.all(objectIds.map(objectId => {
+            let object = this.getObject(objectId)
+                .then(returnedObject => {
+                    return returnedObject;
+                })
+                .catch(error => {
+                    utility.showNotif('There has been an error in searchObjects!', error.message, 'error');
+                });
+            return object;
+        }));
     }
 
-    async getObject(objectId) {
-        try{
-            const getObjectFetch = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + objectId);
-
-            let objectResponse = await getObjectFetch.json();
-            
-            let objectResponseClone = {label:objectResponse.title, value:objectResponse.objectID.toString()};
-
-            return objectResponseClone;
-
-        } catch(error) {
-            utility.showNotif('There has been an error!', 'There has been an error in the Get Object function.', 'error');
-        }
+    getObject(objectId) {
+        return fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + objectId)
+            .then(objectFetch => {
+                return objectFetch.json();
+            })
+            .then(objectJSON => {
+                let objectClone = {...objectJSON, label:objectJSON.title, value:objectJSON.objectID.toString()};
+                return objectClone;
+            })
+            .catch(error => {
+                    utility.showNotif('There has been an error in getObject!!', error.message, 'error');
+            });
     }
 
     async handleSave() {
         this.savePressed = true;
         this.buttonsDisabled = true;
 
-        let recordsToSave = this.searchResults.filter(asset => this.selectedAssets.includes(asset.objectId));
+        let recordsToSave = this.searchResults.filter(asset => this.selectedAssets.includes(asset.value));
+
         let jsonToParse = JSON.stringify(recordsToSave);
 
         try {
-            const saveResult = await saveAssetWrappers({ jsonToParse : jsonToParse, accountId : this.recordId});
+            const savedRecords = await saveAssetWrappers({ jsonToParse : jsonToParse, accountId : this.recordId});
+            let savedMessage = '';
+            let unsavedMessage = '';
+            let duplicateRecords = [];
 
-            let savedMessage = '', unsavedMessage = '';
-            let unsavedRecords;
-
-            if(saveResult) {
-                let propertyList = Object.getOwnPropertyNames(saveResult);
+            if(savedRecords == null) {
+                duplicateRecords = recordsToSave;
+            } else {
+                let propertyList = Object.getOwnPropertyNames(savedRecords);
 
                 for(let property of propertyList) {
-                    savedMessage += saveResult[property] + ', item number ' + property + '.\n';
+                    savedMessage += savedRecords[property] + ', item number ' + property + '.\n';
                 }
+
+                duplicateRecords = recordsToSave.filter(record => !propertyList.includes(record.objectId));
 
                 utility.showNotif('You have successfully inserted the following record(s):', savedMessage, 'success');
-
-                unsavedRecords = recordsToSave.filter(unsavedAsset => !propertyList.includes(unsavedAsset.objectId));
             }
 
-            if(unsavedRecords && unsavedRecords.length != 0) {
-                for(let record of unsavedRecords) {
-                    unsavedMessage += record.title + ', item number ' + record.objectId + '.\n';
-                }
-    
-                utility.showNotif('The following duplicate record(s) were not saved: ', unsavedMessage, 'info');
+            for(let record of duplicateRecords) {
+                unsavedMessage += record.label + ', item number ' + record.value + '.\n';
             }
 
-            if(!saveResult && !unsavedRecords) {
-                for(let duplicate of recordsToSave) {
-                    unsavedMessage += duplicate.title + ', item number ' + duplicate.objectId + '.\n';
-                }
-
-                utility.showNotif('The following duplicate records were not saved: ', unsavedMessage, 'info');
-            }
+            utility.showNotif('The following duplicate record(s) were not saved: ', unsavedMessage, 'info');
         } catch(error) {
-            error = error;
-            utility.showNotif('There has been an error!', error, 'error');
+            utility.showNotif('There has been an error!', error.message, 'error');
         }
     }
 
