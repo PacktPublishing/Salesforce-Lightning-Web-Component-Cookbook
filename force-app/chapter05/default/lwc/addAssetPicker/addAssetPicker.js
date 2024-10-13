@@ -60,6 +60,9 @@ export default class AddAssetPicker extends LightningElement {
                 return sendSearchFetch.json();
             })
             .then(sendSearchResponse => {
+                if(sendSearchResponse.objectIDs == null) {
+                    throw new Error('breakChain');
+                }
                 return this.searchObjects(sendSearchResponse.objectIDs);
             })
             .then(searchResults => {
