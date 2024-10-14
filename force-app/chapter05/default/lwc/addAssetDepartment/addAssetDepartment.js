@@ -3,7 +3,7 @@ import returnDepartmentsWrapper from '@salesforce/apex/AddAssetController.return
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class AddAssetToAccount extends LightningElement {
+export default class AddAssetDepartment extends LightningElement {
     @api departmentId;
     departmentsLoaded = false;
     options = [];

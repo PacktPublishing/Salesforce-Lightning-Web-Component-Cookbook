@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>An action button to open a screen flow that allows a user to search for and add asset(s) to an account.</description>
+    <flowDefinition>Add_Asset_To_Account</flowDefinition>
+    <label>Add Assets</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

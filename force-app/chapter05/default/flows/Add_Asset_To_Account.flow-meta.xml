@@ -37,7 +37,7 @@
         </connector>
         <fields>
             <name>addAssetScreen</name>
-            <extensionName>c:addAssetToAccount</extensionName>
+            <extensionName>c:addAssetDepartment</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
