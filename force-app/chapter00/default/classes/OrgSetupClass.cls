@@ -15,12 +15,11 @@ public with sharing class OrgSetupClass {
         }
     }
 
-    public void initialSetup(Id acctId) {
-        if(isAccountId(acctId)) {
-            //this is not best practice, so we add the constructor checks to make sure we aren't going to hit limits
-            for(Integer intId : artToImportById) {
-                OrgSetupREST.getAssets(intId, acctId);
-            }
+    public void initialSetup() {
+        Id acctId = [SELECT Id FROM Account WHERE Name = 'Velit Eget Limited' LIMIT 1].Id;
+        //this is not best practice, so we add the constructor checks to make sure we aren't going to hit limits
+        for(Integer intId : artToImportById) {
+            OrgSetupREST.getAssets(intId, acctId);
         }
     }
 

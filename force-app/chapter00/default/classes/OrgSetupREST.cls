@@ -37,13 +37,16 @@ public with sharing class OrgSetupREST {
             tagToUpsert.AAT__c = nullCheck(assetWrapper.tags[0].AAT_URL).removeStart(AAT_URL_STRING);
             tagToUpsert.AAT_URL__c = nullCheck(assetWrapper.tags[0].AAT_URL);
             tagToUpsert.Wikidata_URL__c = nullCheck(assetWrapper.tags[0].Wikidata_URL);
-
-            try {
-                dmlUtil.upsertRecords(new List<Tag__c>{tagToUpsert}, 'AAT__c');
-            } catch (Exception e) {
-                System.debug(e.getMessage());
-            }
-        }        
+        } else {
+            tagToUpsert.Name = 'No Tag Given';
+            tagToUpsert.AAT__c = '99999';
+        }
+        
+        try {
+            dmlUtil.upsertRecords(new List<Tag__c>{tagToUpsert}, 'AAT__c');
+        } catch (Exception e) {
+            System.debug(e.getMessage());
+        }
 
         assetToUpsert.Accession_Number__c = assetWrapper.accessionNumber;
         assetToUpsert.Accession_Year__c = assetWrapper.accessionYear == '' ? null : Integer.valueOf(assetWrapper.accessionYear);

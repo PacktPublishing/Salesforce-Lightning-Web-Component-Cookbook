@@ -19,12 +19,17 @@
                                 <lightning-map title={account.Name} map-markers={account.markers} markers-title={account.Name}></lightning-map>
                             </div>
                             <div class="slds-col slds-size_1-of-2">
-                            <!-- Chapter 6 Code Here -->
+                                <!-- Chapter 4 Code Here -->
+                                    <c-assets-by-tag account-id={account.Id}></c-assets-by-tag>
+                                <!-- Chapter 4 Code Here -->
                             </div>
                         </div>
                     </lightning-tab>
                 </template>
             </lightning-tabset>
+            <!-- Chapter 6 Code Here -->
+            
+            <!-- Chapter 6 Code Here -->
         </lightning-card>
     </template>
     <template lwc:else>

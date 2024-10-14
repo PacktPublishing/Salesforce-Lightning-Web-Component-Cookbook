@@ -61,7 +61,7 @@ export default class AddAssetPicker extends LightningElement {
             })
             .then(sendSearchResponse => {
                 if(sendSearchResponse.objectIDs == null) {
-                    throw new Error('breakChain');
+                    Promise.resolve(this.isNull = true);
                 }
                 return this.searchObjects(sendSearchResponse.objectIDs);
             })
@@ -72,9 +72,7 @@ export default class AddAssetPicker extends LightningElement {
                 this.isLoaded = true;
             })
             .catch(error => {
-                if(error.message !== 'breakChain') {
-                    utility.showNotif('There has been an error!', error.message, 'error');
-                }
+                utility.showNotif('There has been an error!', error.message, 'error');
             });
     }
 

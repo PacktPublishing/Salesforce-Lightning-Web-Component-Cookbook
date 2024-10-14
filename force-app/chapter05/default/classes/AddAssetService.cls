@@ -58,6 +58,11 @@ public with sharing class AddAssetService {
                 tagToUpsert.Wikidata_URL__c = nullCheck(assetWrapper.tags[0].Wikidata_URL);
 
                 tagsToUpsert.add(tagToUpsert);
+            } else {
+                tagToUpsert.Name = 'No Tag Given';
+                tagToUpsert.AAT__c = '99999';
+    
+                tagsToUpsert.add(tagToUpsert);
             }
 
             assetToUpsert.Accession_Number__c = assetWrapper.accessionNumber;
