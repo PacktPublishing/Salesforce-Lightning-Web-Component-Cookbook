@@ -1,9 +1,9 @@
-public with sharing class TransferAssetBusinessLogic {
+public with sharing class TransferAssetService {
     
     public static List<LocaleWrapper> getComboboxCountries() {
         List<LocaleWrapper> countries = new List<LocaleWrapper>();
 
-        for(AggregateResult ar : TransferAssetAccess.getCountries()) {
+        for(AggregateResult ar : TransferAssetPersistence.getCountries()) {
             countries.add(new LocaleWrapper(String.valueOf(ar.get('BillingCountry'))));
         }
 
@@ -13,7 +13,7 @@ public with sharing class TransferAssetBusinessLogic {
     public static List<LocaleWrapper> getComboboxCities(String countryName) {
         List<LocaleWrapper> cities = new List<LocaleWrapper>();
 
-        for(AggregateResult ar : TransferAssetAccess.getCities(countryName)) {
+        for(AggregateResult ar : TransferAssetPersistence.getCities(countryName)) {
             cities.add(new LocaleWrapper(String.valueOf(ar.get('BillingCity'))));
         }
 
@@ -23,7 +23,7 @@ public with sharing class TransferAssetBusinessLogic {
     public static List<AccountWrapper> getAccountWrappers(String selectedCity) {
         List<AccountWrapper> accounts = new List<AccountWrapper>();
 
-        for(Account acc : TransferAssetAccess.getAccountsByCity(selectedCity)) {
+        for(Account acc : TransferAssetPersistence.getAccountsByCity(selectedCity)) {
             accounts.add(new AccountWrapper(acc));
         }
 
@@ -33,7 +33,7 @@ public with sharing class TransferAssetBusinessLogic {
     public static void transferAssetWrapper(AssetWrapper wrap) {
         Asset ast = new Asset(Id = wrap.assetId, AccountId = wrap.accountId);
         
-        TransferAssetAccess.updateAsset(ast);
+        TransferAssetPersistence.updateAsset(ast);
     }
 
     public class LocaleWrapper {

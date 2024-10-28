@@ -1,7 +1,7 @@
-public with sharing class AssetMapBusinessLogic {
+public with sharing class AssetMapService {
     public static List<LocationWrapper> getLocationWrappers(Id assetId) {
         List<LocationWrapper> mapMarkers = new List<LocationWrapper>();
-        List<Asset_Residency__c> residencyList = AssetMapAccess.getResidencies(assetId);
+        List<Asset_Residency__c> residencyList = AssetMapPersistence.getResidencies(assetId);
 
         for(Asset_Residency__c residency : residencyList) {
             mapMarkers.add(new LocationWrapper(residency));

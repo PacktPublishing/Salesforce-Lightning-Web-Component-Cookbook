@@ -29,11 +29,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AssetMapAccess</apexClass>
+        <apexClass>AssetMapPersistence</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AssetMapBusinessLogic</apexClass>
+        <apexClass>AssetMapService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -89,11 +89,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TransferAssetAccess</apexClass>
+        <apexClass>TransferAssetPersistence</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TransferAssetBusinessLogic</apexClass>
+        <apexClass>TransferAssetService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

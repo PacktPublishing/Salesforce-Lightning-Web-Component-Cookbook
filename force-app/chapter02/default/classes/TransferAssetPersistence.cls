@@ -1,4 +1,4 @@
-public without sharing class TransferAssetAccess {
+public without sharing class TransferAssetPersistence {
     
     public static List<AggregateResult> getCountries() {
         return [SELECT COUNT(Id), BillingCountry FROM Account GROUP BY BillingCountry ORDER BY BillingCountry NULLS FIRST];
