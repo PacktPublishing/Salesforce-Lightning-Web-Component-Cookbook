@@ -1,45 +1,91 @@
 {
-  "name": "salesforce-app",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Salesforce App",
+  "name": "@lwc/eslint-plugin-lwc",
+  "version": "1.8.2",
+  "license": "MIT",
+  "description": "Official ESLint rules for LWC",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "lwc",
+    "salesforce"
+  ],
+  "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint force-app/**/default/lwc",
-    "test": "npm run test:unit",
-    "test:unit": "sfdx-lwc-jest",
-    "test:unit:watch": "sfdx-lwc-jest --watch",
-    "test:unit:debug": "sfdx-lwc-jest --debug",
-    "test:unit:coverage": "sfdx-lwc-jest --coverage",
-    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "postinstall": "husky install",
-    "precommit": "lint-staged"
+    "prepare": "husky || true",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
+    "format:check": "prettier --check --ignore-path .gitignore \"**/*.{js,md}\"",
+    "lint": "eslint force-app/**/default/lwc/**/*.js",
+    "test": "nyc mocha",
+    "release:version": "npm version",
+    "release:publish": "npm publish --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.5",
-    "@babel/eslint-parser": "^7.24.5",
-    "@eslint/js": "^9.3.0",
-    "@lwc/eslint-plugin-lwc": "^1.8.1",
-    "@prettier/plugin-xml": "^3.2.2",
-    "@salesforce/eslint-config-lwc": "^3.5.3",
-    "@salesforce/eslint-plugin-aura": "^2.0.0",
+    "@babel/core": "^7.24.4",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.6",
+    "@lwc/eslint-plugin-lwc": "^1.8.2",
+    "@salesforce/eslint-config-lwc": "^3.6.0",
     "@salesforce/eslint-plugin-lightning": "^1.0.0",
-    "@salesforce/sfdx-lwc-jest": "^3.1.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.9.0",
-    "globals": "^15.3.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "prettier": "^3.1.0",
-    "prettier-plugin-apex": "^2.0.1"
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.8.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "mocha": "^10.4.0",
+    "nyc": "^15.1.0",
+    "prettier": "^3.2.5",
+    "semver": "^7.6.0"
   },
+  "dependencies": {
+    "globals": "^13.24.0",
+    "minimatch": "^9.0.4"
+  },
+  "peerDependencies": {
+    "@babel/eslint-parser": "^7",
+    "eslint": "^7 || ^8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salesforce/eslint-plugin-lwc.git"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "volta": {
+    "node": "20.12.2",
+    "yarn": "1.22.22"
+  },
+  "files": [
+    "lib"
+  ],
   "lint-staged": {
-    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
-      "prettier --write"
-    ],
-    "**/{aura,lwc}/**/*.js": [
+    "*.js": [
       "eslint"
+    ],
+    "*.{js,md}": [
+      "prettier --write"
     ]
+  },
+  "mocha": {
+    "recursive": true,
+    "reporter": "dot",
+    "slow": 150
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 93,
+    "statements": 93,
+    "functions": 88,
+    "reporter": [
+      "html",
+      "text"
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

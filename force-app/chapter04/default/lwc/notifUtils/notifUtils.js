@@ -19,5 +19,5 @@ export default class NotifUtils {
             variant: variant
         });
         mainObject.dispatchEvent(evt);
-    };
+    }
 }

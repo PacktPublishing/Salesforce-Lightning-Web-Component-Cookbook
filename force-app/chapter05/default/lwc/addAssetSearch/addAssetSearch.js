@@ -1,9 +1,13 @@
 import { LightningElement, api } from 'lwc';
 
 export default class AddAssetSearch extends LightningElement {
-    @api searchTerm;    
+    termToSearch;
+
+    @api get searchTerm() {
+        return this.termToSearch;
+    }
 
     handleChange(event) {
-        this.searchTerm = event.detail.value;
+        this.termToSearch = event.detail.value;
     }
 }

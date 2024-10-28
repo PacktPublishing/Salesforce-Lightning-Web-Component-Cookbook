@@ -31,10 +31,10 @@ export default class EditContactOnAccount extends LightningElement {
     }
 
     handleSave(event) {
-        let contactId = new String(event.detail.id);
+        let contactId = event.detail.id;
         
         try{
-            let contactIndex = this.contactsToEdit.findIndex((contact) => contact.Id == contactId);
+            let contactIndex = this.contactsToEdit.findIndex((contact) => contact.Id === contactId);
             this.contactsToEdit[contactIndex].isSaved = true;
 
             let inputFields = this.template.querySelectorAll('lightning-input-field[data-id="' + contactId + '"]');

@@ -4,12 +4,16 @@ import Utilities from 'c/notifUtils';
 let utility;
 
 export default class AddAssetDepartment extends LightningElement {
-    @api departmentId;
+    selectedDepartment;
     departmentsLoaded = false;
     options = [];
 
+    @api get departmentId() {
+        return this.selectedDepartment;
+    }
+    
     get resetDisabled() {
-        return this.departmentId == undefined;
+        return this.departmentId === undefined;
     }
 
     connectedCallback() {
@@ -44,10 +48,10 @@ export default class AddAssetDepartment extends LightningElement {
     }
 
     handleDeptSelect(event) {
-        this.departmentId = +event.detail.value;
+        this.selectedDepartment = +event.detail.value;
     }
 
     handleReset() {
-        this.departmentId = undefined;
+        this.selectedDepartment = undefined;
     }
 }

@@ -8,7 +8,7 @@ export default class AddAssetPicker extends LightningElement {
     @api recordId;
     @api searchTerm;
     @api departmentId;
-    @api selectedAssets;
+    assetsToReturn;
     searchResults = [];
     options;
     isLoaded = false;
@@ -16,13 +16,18 @@ export default class AddAssetPicker extends LightningElement {
     savePressed = false;
     buttonsDisabled = true;
 
+
+    @api get selectedAssets() {
+        return this.assetsToReturn;
+    }
+
     connectedCallback() {
         utility = new Utilities(this);
         this.sendSearchApex();
     }
 
     get assetsLoaded() {
-        return this.isLoaded && this.isNull != true;
+        return this.isLoaded && this.isNull !== true;
     }
 
     get listDisabled() {
@@ -107,7 +112,7 @@ export default class AddAssetPicker extends LightningElement {
         this.savePressed = true;
         this.buttonsDisabled = true;
 
-        let recordsToSave = this.searchResults.filter(asset => this.selectedAssets.includes(asset.value));
+        let recordsToSave = this.searchResults.filter(asset => this.assetsToReturn.includes(asset.value));
 
         let jsonToParse = JSON.stringify(recordsToSave);
 
@@ -142,8 +147,8 @@ export default class AddAssetPicker extends LightningElement {
     }
 
     handleChange(event) {
-        this.selectedAssets = event.detail.value;
-        if(this.selectedAssets == false || this.selectedAssets == []) {
+        this.assetsToReturn = event.detail.value;
+        if(this.assetsToReturn === false || this.assetsToReturn === []) {
             this.buttonsDisabled = true;
         } else {
             this.buttonsDisabled = false;
@@ -151,7 +156,7 @@ export default class AddAssetPicker extends LightningElement {
     }
 
     handleReset() {
-        this.selectedAssets = undefined;
+        this.assetsToReturn = undefined;
         this.buttonsDisabled = true;
     }
 }
