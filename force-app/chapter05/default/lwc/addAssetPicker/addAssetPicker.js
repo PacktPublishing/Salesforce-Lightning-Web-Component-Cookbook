@@ -48,7 +48,10 @@ export default class AddAssetPicker extends LightningElement {
                     this.searchResults.push(srClone);
                 }
 
-                this.searchResults.sort((a, b) => {return (a.label - b.label) ? 1 : -1});
+                this.searchResults.sort((a, b) => {
+                        return (a.label - b.label) ? 1 : -1;
+                    }
+                );
 
                 this.options = this.searchResults;
             }
@@ -72,7 +75,11 @@ export default class AddAssetPicker extends LightningElement {
             })
             .then(searchResults => {
                 this.searchResults = searchResults;
-                this.searchResults.sort((a, b) => {return (a.label - b.label) ? 1 : -1});
+                this.searchResults.sort((a, b) => {
+                        return (a.label - b.label) ? 1 : -1;
+                    }
+                );
+                
                 this.options = this.searchResults;
                 this.isLoaded = true;
             })

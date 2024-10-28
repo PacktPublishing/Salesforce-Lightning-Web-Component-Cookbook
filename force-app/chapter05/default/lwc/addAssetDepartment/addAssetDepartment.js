@@ -34,7 +34,10 @@ export default class AddAssetDepartment extends LightningElement {
                     departments.push(tmpClone);
                 }
     
-                departments.sort((a, b) => {return (a.label - b.label) ? 1 : -1});
+                departments.sort((a, b) => {
+                        return (a.label - b.label) ? 1 : -1;
+                    }
+                );
     
                 this.options = departments;
             }
