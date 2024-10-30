@@ -143,11 +143,13 @@ export default class AddAssetPicker extends LightningElement {
                 utility.showNotif('You have successfully inserted the following record(s):', savedMessage, 'success');
             }
 
-            for(let record of duplicateRecords) {
-                unsavedMessage += record.label + ', item number ' + record.value + '.\n';
+            if(duplicateRecords.length > 0) {
+                for(let record of duplicateRecords) {
+                    unsavedMessage += record.label + ', item number ' + record.value + '.\n';
+                }
+    
+                utility.showNotif('The following duplicate record(s) were not saved: ', unsavedMessage, 'info');    
             }
-
-            utility.showNotif('The following duplicate record(s) were not saved: ', unsavedMessage, 'info');
         } catch(error) {
             utility.showNotif('There has been an error!', error.message, 'error');
         }
