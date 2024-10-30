@@ -157,7 +157,7 @@ export default class AddAssetPicker extends LightningElement {
 
     handleChange(event) {
         this.assetsToReturn = event.detail.value;
-        if(this.assetsToReturn === false || this.assetsToReturn === []) {
+        if(this.assetsToReturn === false || this.assetsToReturn == []) {
             this.buttonsDisabled = true;
         } else {
             this.buttonsDisabled = false;
