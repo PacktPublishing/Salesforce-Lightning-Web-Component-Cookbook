@@ -35,6 +35,9 @@ public with sharing class AddAssetService {
         List<Constituent__c> constituentsToUpsert = new List<Constituent__c>();
         List<Tag__c> tagsToUpsert = new List<Tag__c>();
 
+        Map<String, String> assetIdToConstituentIdMap = new Map<String, String>();
+        Map<String, String> assetIdToTagIdMap = new Map<String, String>();
+
         for(ObjectWrappers.AssetWrapper assetWrapper : assetWrappers) {
             Constituent__c constituentToUpsert = new Constituent__c();
             Tag__c tagToUpsert = new Tag__c();
@@ -81,8 +84,9 @@ public with sharing class AddAssetService {
             assetToUpsert.Period__c = assetWrapper.period;
             assetToUpsert.Primary_Image__c = assetWrapper.primaryImage;
             assetToUpsert.Primary_Image_Small__c = assetWrapper.primaryImageSmall;
-            assetToUpsert.Primary_Constituent__c = constituentToUpsert.Id;
-            assetToUpsert.Tag__c = tagToUpsert.Id;
+
+            assetIdToConstituentIdMap.put(assetToUpsert.Object_ID__c, constituentToUpsert.Constituent_Id__c);
+            assetIdToTagIdMap.put(assetToUpsert.Object_ID__c, tagToUpsert.AAT__c);
 
             assetsToUpsert.add(assetToUpsert);
         }
@@ -93,6 +97,31 @@ public with sharing class AddAssetService {
 
         if(tagsToUpsert.size() > 0) {
             tags.upsertTags(tagsToUpsert);
+        }
+
+
+        List<String> constituentIdsToRehydrate = assetIdToConstituentIdMap.values();
+        List<Constituent__c> rehydratedConstituents = [SELECT Id, Constituent_Id__c FROM Constituent__c WHERE Constituent_Id__c IN :constituentIdsToRehydrate];
+        Map<String, Id> constituentIdWithIdMap = new Map<String, Id>();
+
+        for(Constituent__c cnst : rehydratedConstituents) {
+            constituentIdWithIdMap.put(cnst.Constituent_Id__c, cnst.Id);
+        }
+
+        List<String> tagIdsToRehydrate = assetIdToTagIdMap.values();
+        List<Tag__c> rehydratedTags = [SELECT Id, AAT__c FROM Tag__c WHERE AAT__c IN :tagIdsToRehydrate];
+        Map<String, Id> tagIdWithIdMap = new Map<String, Id>();
+
+        for(Tag__c tag : rehydratedTags) {
+            tagIdWithIdMap.put(tag.AAT__c, tag.Id);
+        }
+
+        for(Asset ast : assetsToUpsert) {
+            String assetConstituent = assetIdToConstituentIdMap.get(ast.Object_ID__c);
+            String assetTag = assetIdToTagIdMap.get(ast.Object_ID__c);
+
+            ast.Primary_Constituent__c = constituentIdWithIdMap.get(assetConstituent);
+            ast.Tag__c = tagIdWithIdMap.get(assetTag);
         }
 
         if(assetsToUpsert.size() > 0) {
