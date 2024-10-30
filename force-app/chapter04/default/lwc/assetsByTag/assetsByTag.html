@@ -1,7 +1,12 @@
 <template>
-    <lightning-spinner 
-      alternative-text="Loading..." 
-      size="large"
-      variant="base"
-    ></lightning-spinner>
+   <template lwc:if={isLoaded}>
+      <!-- cool stuff coming here! -->
+   </template>
+   <template lwc:else>
+      <lightning-spinner 
+         alternative-text="Loading..." 
+         size="large"
+         variant="base"
+      ></lightning-spinner>
+   </template>
 </template>

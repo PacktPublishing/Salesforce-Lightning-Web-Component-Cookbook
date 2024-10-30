@@ -3,33 +3,29 @@ public with sharing class AssetsByTagService {
         return new TagSelector().tagsWithAssetsByAccount(accountId, lim, offset);
     }
 
-    public List<TagWrapperCh04> getTagsWithAssetsWrappersByAccount(Id accountId, Integer lim, Integer offset){
+    public List<AssetWrapperCh04> getTagsWithAssetsWrappersByAccount(Id accountId, Integer lim, Integer offset){
         List<Tag__c> tagList = new TagSelector().tagsWithAssetsByAccount(accountId, lim, offset);
-        List<TagWrapperCh04> wrapperList = new List<TagWrapperCh04>();
+        List<AssetWrapperCh04> assetWrapperList = new List<AssetWrapperCh04>();
 
         for(Tag__c tag : tagList) {
             TagWrapperCh04 wrappedTag = new TagWrapperCh04(tag);
 
-            wrapperList.add(wrappedTag);
+            assetWrapperList.addAll(wrappedTag.assets);
         }
 
-        return wrapperList;
+        return assetWrapperList;
     }
 
     public class TagWrapperCh04 {
-        @AuraEnabled public String tagId;
-        @AuraEnabled public String tagName;
         @AuraEnabled public List<AssetWrapperCh04> assets;
 
         public TagWrapperCh04(Tag__c tagToWrap) {
-            this.tagId = tagToWrap.Id;
-            this.tagName = tagToWrap.Name;
             this.assets = new List<AssetWrapperCh04>();
 
             for(Asset ast : tagToWrap.Assets__r) {
                 AssetWrapperCh04 assetWrapper = new AssetWrapperCh04(ast);
-                assetWrapper.tagId = this.tagId;
-                assetWrapper.tagName = this.tagName;
+                assetWrapper.tagId = tagToWrap.Id;
+                assetWrapper.tagName = tagToWrap.Name;
                 this.assets.add(assetWrapper);
             }
         }

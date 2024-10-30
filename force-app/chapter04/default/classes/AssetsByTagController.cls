@@ -10,7 +10,7 @@ public with sharing class AssetsByTagController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<AssetsByTagService.TagWrapperCh04> returnTagsWithAssetsWrappersByAccount(String accountIdString, Integer lim, Integer offset){
+    public static List<AssetsByTagService.AssetWrapperCh04> returnTagsWithAssetsWrappersByAccount(String accountIdString, Integer lim, Integer offset){
         try {
             Id accountId = Id.valueOf(accountIdString);
             return new AssetsByTagService().getTagsWithAssetsWrappersByAccount(accountId, lim, offset);
