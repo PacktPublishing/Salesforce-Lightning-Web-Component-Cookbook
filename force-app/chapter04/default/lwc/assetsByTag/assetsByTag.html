@@ -1,6 +1,10 @@
 <template>
    <template lwc:if={isLoaded}>
-      <!-- cool stuff coming here! -->
+      <lightning-tree-grid
+         columns={gridColumns}
+         data={gridData}
+         key-field="tagId"
+      ></lightning-tree-grid>
    </template>
    <template lwc:else>
       <lightning-spinner 

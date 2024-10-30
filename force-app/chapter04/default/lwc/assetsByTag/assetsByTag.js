@@ -1,6 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import returnTagsWithAssetsByAccount from '@salesforce/apex/AssetsByTagController.returnTagsWithAssetsByAccount';
 import returnTagsWithAssetsWrappersByAccount from '@salesforce/apex/AssetsByTagController.returnTagsWithAssetsWrappersByAccount';
+import { COLUMNS_DEFINITION } from './assetsByTagColumns';
 import Utilities from 'c/notifUtils';
 let utility;
 
@@ -12,6 +13,11 @@ export default class AssetsByTag extends LightningElement {
     _tagsWithAssetsResult;
     _tagsWithAssetsPromiseResult;
     _tagsWithAssetsWrappersResult;
+
+    gridColumns = COLUMNS_DEFINITION;
+    get gridData() {
+        return this._tagsWithAssetsWrappersResult;
+    }
 
     get isLoaded() {
         return JSON.stringify(this._tagsWithAssetsResult) == JSON.stringify(this._tagsWithAssetsPromiseResult)

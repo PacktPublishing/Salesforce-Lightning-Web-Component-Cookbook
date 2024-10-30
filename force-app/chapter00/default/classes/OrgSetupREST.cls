@@ -41,9 +41,13 @@ public with sharing class OrgSetupREST {
             tagToUpsert.Name = 'No Tag Given';
             tagToUpsert.AAT__c = '99999';
         }
-        
+
+        Id upsertedTagId;
+
         try {
-            dmlUtil.upsertRecords(new List<Tag__c>{tagToUpsert}, 'AAT__c');
+            Database.UpsertResult ur = dmlUtil.upsertRecords(new List<Tag__c>{tagToUpsert}, 'AAT__c')[0];
+
+            upsertedTagId = ur.getId();
         } catch (Exception e) {
             System.debug(e.getMessage());
         }
@@ -65,7 +69,7 @@ public with sharing class OrgSetupREST {
         assetToUpsert.Primary_Image__c = assetWrapper.primaryImage;
         assetToUpsert.Primary_Image_Small__c = assetWrapper.primaryImageSmall;
         assetToUpsert.Primary_Constituent__c = constituentToUpsert.Id;
-        assetToUpsert.Tag__c = tagToUpsert.Id;
+        assetToUpsert.Tag__c = upsertedTagId;
 
         try{
             dmlUtil.upsertRecords(new List<Asset>{assetToUpsert}, 'Object_ID__c');

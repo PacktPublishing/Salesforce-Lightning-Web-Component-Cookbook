@@ -35,7 +35,7 @@ export default class AddAssetDepartment extends LightningElement {
                 }
     
                 departments.sort((a, b) => {
-                        return (a.label - b.label) ? 1 : -1;
+                        return (a.value - b.value) ? 1 : -1;
                     }
                 );
     
