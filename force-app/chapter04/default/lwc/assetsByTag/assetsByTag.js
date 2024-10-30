@@ -15,9 +15,7 @@ export default class AssetsByTag extends LightningElement {
     _tagsWithAssetsWrappersResult;
 
     gridColumns = COLUMNS_DEFINITION;
-    get gridData() {
-        return this._tagsWithAssetsWrappersResult;
-    }
+    gridData;
 
     get isLoaded() {
         return JSON.stringify(this._tagsWithAssetsResult) == JSON.stringify(this._tagsWithAssetsPromiseResult)
@@ -35,9 +33,10 @@ export default class AssetsByTag extends LightningElement {
     async getTagsWithAssets() {
         try{
             const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId, lim: this.limit, offset: this.offset });
-            console.log(JSON.stringify(tagsWithAssets));
 
             this._tagsWithAssetsResult = this.dataFlattener(tagsWithAssets);
+
+            this.treeGridFormatter(this._tagsWithAssetsResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssets!', error.message, 'error');
         }
@@ -47,6 +46,9 @@ export default class AssetsByTag extends LightningElement {
         returnTagsWithAssetsByAccount({ accountIdString : this.accountId, lim: this.limit, offset: this.offset })
             .then(tagsWithAssets => {
                 this._tagsWithAssetsPromiseResult = this.dataFlattener(tagsWithAssets);
+
+                this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
+
             })
             .catch(error => {
                 utility.showNotif('There has been an error in getTagsWithAssetsPromise!', error.message, 'error');
@@ -57,7 +59,6 @@ export default class AssetsByTag extends LightningElement {
         let flattenedData = [];
 
         for(let tag of dataToFlatten) {
-            console.log(tag);
             if(tag.Assets__r) {
                 let flattenedAssets = tag.Assets__r.map((asset) => {
                     return ({
@@ -77,7 +78,7 @@ export default class AssetsByTag extends LightningElement {
         }
 
         flattenedData.sort((a, b) => {
-                return (a.assetName - b.assetName) ? 1 : -1;
+                return (a.assetName > b.assetName) ? 1 : -1;
             }
         );
 
@@ -91,13 +92,48 @@ export default class AssetsByTag extends LightningElement {
             let wrappersToSort = [...tagsWithAssetWrappers];
 
             let sortedWrappers = wrappersToSort.sort((a, b) => {
-                    return (a.assetName - b.assetName) ? 1 : -1;
+                    return (a.assetName > b.assetName) ? 1 : -1;
                 }
             );
 
             this._tagsWithAssetsWrappersResult = sortedWrappers;
+
+            this.treeGridFormatter(this._tagsWithAssetsWrappersResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssetsWrappers!', error.message, 'error');
         }
+    }
+
+    treeGridFormatter(dataToFormat) {
+        let tagArray = []
+        for(let asset of dataToFormat) {
+            let tagObject = {
+                "tagName" : asset.tagName,
+                "assetName" : '',
+                "assetObjectId" : '',
+                "assetIsPublicDomain" : '',
+                "_children" : []
+            }
+
+            if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) == undefined) {
+                tagArray.push(tagObject)
+            }
+            
+            tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName))._children.push(asset);
+        }
+
+        tagArray.sort((a, b) => {
+                return (a.tagName > b.tagName) ? 1 : -1;
+            }
+        );
+
+        for(let tag of tagArray) {
+            tag._children.sort((a, b) => {
+                    return (a.assetName > b.assetName) ? 1 : -1;
+                }
+            );
+        }
+
+        this.gridData = tagArray;
     }
 }

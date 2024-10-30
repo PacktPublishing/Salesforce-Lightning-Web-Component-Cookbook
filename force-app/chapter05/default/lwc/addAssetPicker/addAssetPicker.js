@@ -49,7 +49,7 @@ export default class AddAssetPicker extends LightningElement {
                 }
 
                 this.searchResults.sort((a, b) => {
-                        return (a.label - b.label) ? 1 : -1;
+                        return (a.label > b.label) ? 1 : -1;
                     }
                 );
 
@@ -76,7 +76,7 @@ export default class AddAssetPicker extends LightningElement {
             .then(searchResults => {
                 this.searchResults = searchResults;
                 this.searchResults.sort((a, b) => {
-                        return (a.label - b.label) ? 1 : -1;
+                        return (a.label > b.label) ? 1 : -1;
                     }
                 );
                 
