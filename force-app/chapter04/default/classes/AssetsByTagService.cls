@@ -1,10 +1,10 @@
 public with sharing class AssetsByTagService {
-    public List<Tag__c> getTagsWithAssetsByAccount(Id accountId, Integer lim, Integer offset){
-        return new TagSelector().tagsWithAssetsByAccount(accountId, lim, offset);
+    public List<Tag__c> getTagsWithAssetsByAccount(Id accountId){
+        return new TagSelector().tagsWithAssetsByAccount(accountId);
     }
 
-    public List<AssetWrapperCh04> getTagsWithAssetsWrappersByAccount(Id accountId, Integer lim, Integer offset){
-        List<Tag__c> tagList = new TagSelector().tagsWithAssetsByAccount(accountId, lim, offset);
+    public List<AssetWrapperCh04> getTagsWithAssetsWrappersByAccount(Id accountId){
+        List<Tag__c> tagList = new TagSelector().tagsWithAssetsByAccount(accountId);
         List<AssetWrapperCh04> assetWrapperList = new List<AssetWrapperCh04>();
 
         for(Tag__c tag : tagList) {

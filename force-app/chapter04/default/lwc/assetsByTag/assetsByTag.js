@@ -32,7 +32,7 @@ export default class AssetsByTag extends LightningElement {
 
     async getTagsWithAssets() {
         try{
-            const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId, lim: this.limit, offset: this.offset });
+            const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId });
 
             this._tagsWithAssetsResult = this.dataFlattener(tagsWithAssets);
 
@@ -43,7 +43,7 @@ export default class AssetsByTag extends LightningElement {
     }
 
     getTagsWithAssetsPromise() {
-        returnTagsWithAssetsByAccount({ accountIdString : this.accountId, lim: this.limit, offset: this.offset })
+        returnTagsWithAssetsByAccount({ accountIdString : this.accountId })
             .then(tagsWithAssets => {
                 this._tagsWithAssetsPromiseResult = this.dataFlattener(tagsWithAssets);
 
@@ -87,7 +87,7 @@ export default class AssetsByTag extends LightningElement {
 
     async getTagsWithAssetsWrappers() {
         try{
-            const tagsWithAssetWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId, lim: this.limit, offset: this.offset });
+            const tagsWithAssetWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId });
 
             let wrappersToSort = [...tagsWithAssetWrappers];
 
