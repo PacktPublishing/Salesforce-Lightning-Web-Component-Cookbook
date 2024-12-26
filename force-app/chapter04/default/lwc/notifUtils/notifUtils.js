@@ -5,7 +5,6 @@ import customCSS from '@salesforce/resourceUrl/toastCSS';
 let mainObject;
 
 export default class NotifUtils {
-    isCSSLoaded = false;
 
     constructor(superMain) {
         mainObject = superMain;
