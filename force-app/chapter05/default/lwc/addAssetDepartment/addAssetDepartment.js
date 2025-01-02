@@ -46,7 +46,7 @@ export default class AddAssetDepartment extends LightningElement {
         }
         catch(error) {
             this.options = undefined;
-            utility.showNotif('There has been an error!', error, 'error');
+            utility.showNotif('There has been an error loading departments!', error, 'error');
         }
     }
 

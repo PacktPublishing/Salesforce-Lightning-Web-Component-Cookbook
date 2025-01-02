@@ -57,7 +57,7 @@ export default class AddAssetPicker extends LightningElement {
             }
         } catch(error) {
             this.options = undefined;
-            utility.showNotif('There has been an error!', error, 'error');
+            utility.showNotif('There has been an error in sendSearchApex!', error, 'error');
         }
         this.isLoaded = true;
     }
@@ -84,7 +84,7 @@ export default class AddAssetPicker extends LightningElement {
                 this.isLoaded = true;
             })
             .catch(error => {
-                utility.showNotif('There has been an error!', error.message, 'error');
+                utility.showNotif('There has been an error in sendSearchFetchAPI!', error.message, 'error');
             });
     }
 
@@ -111,7 +111,7 @@ export default class AddAssetPicker extends LightningElement {
                 return objectClone;
             })
             .catch(error => {
-                    utility.showNotif('There has been an error in getObject!!', error.message, 'error');
+                    utility.showNotif('There has been an error in getObject!', error.message, 'error');
             });
     }
 
@@ -151,7 +151,7 @@ export default class AddAssetPicker extends LightningElement {
                 utility.showNotif('The following duplicate record(s) were not saved: ', unsavedMessage, 'info');    
             }
         } catch(error) {
-            utility.showNotif('There has been an error!', error.message, 'error');
+            utility.showNotif('There has been an error in handleSave!', error.message, 'error');
         }
     }
 
