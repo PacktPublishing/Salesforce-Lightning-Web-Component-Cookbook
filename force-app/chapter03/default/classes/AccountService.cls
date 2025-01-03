@@ -5,6 +5,10 @@ public with sharing class AccountService {
     public List<AccountWrapper> getTopAccountWrappers() {
         List<Account> queryResult = accountSelect.topTenAccountsByRevenue();
 
+        if(queryResult == null) {
+            return null;
+        }
+
         List<AccountWrapper> queriedWrappers = new List<AccountWrapper>();
 
         for(Account acct : queryResult) {

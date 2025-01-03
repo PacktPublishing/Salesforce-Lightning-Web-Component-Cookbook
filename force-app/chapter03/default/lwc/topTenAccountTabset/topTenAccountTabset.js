@@ -16,7 +16,7 @@ export default class TopTenAccountTabset extends LightningElement {
         } else if(result.error) {
             this.error = result.error;
             this.accounts = undefined;
-            this.showNotif('There has been an error!', this.error, 'error');
+            this.showNotif('There has been an error loading accounts!', this.error, 'error');
         } else {
             this.error = undefined;
             this.accounts = undefined;
