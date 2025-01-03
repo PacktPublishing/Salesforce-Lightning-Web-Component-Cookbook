@@ -1,19 +1,20 @@
 import { LightningElement, api, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
 import returnContactsPerAccount from '@salesforce/apex/ViewContactController.returnContactsPerAccount';
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class ViewEditContactsFlattened extends NavigationMixin(LightningElement) {
-    @api recordId;
+export default class ViewEditContactsFlattened extends LightningElement {
+    @api accountId;
     contactsToView;
     _wiredContacts;
+    selectedContact = '';
+    addEventInactive = true;
 
     connectedCallback() {
         utility = new Utilities(this);
     }
 
-    @wire(returnContactsPerAccount, {accountIdString : '$recordId'})
+    @wire(returnContactsPerAccount, {accountIdString : '$accountId'})
     wiredContacts(result) {
         this._wiredContacts = result;
         if (result.data) {
@@ -24,14 +25,16 @@ export default class ViewEditContactsFlattened extends NavigationMixin(Lightning
         }
     }
 
-    refreshPage() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: this.recordId,
-                objectApiName: 'Account',
-                actionName: 'view'
-            }
-        });
+    triggerFlow(event) {
+        this.addEventInactive = event.target.addEventInactive;
+    }
+
+    setContactToSelected(event) {
+        this.selectedContact = event.detail.setContactTo;
+    }
+
+    resetShell(event) {
+        this.addEventInactive = event.detail.addEventInactive;
+        utility.showNotif('Your event has been inserted successfully!', event.detail.outputVariables[0].value, 'success');
     }
 }

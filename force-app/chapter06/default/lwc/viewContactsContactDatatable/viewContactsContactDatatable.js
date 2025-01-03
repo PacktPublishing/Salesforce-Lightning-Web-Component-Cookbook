@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class ViewContactsContactDatatable extends LightningElement {
     contactColumnsDatatable = [
@@ -7,9 +7,19 @@ export default class ViewContactsContactDatatable extends LightningElement {
         { label: 'Title', fieldName: 'Title' }
     ];
 
-    selectedContact = '';
+    @api contactsToView;
 
     handleContactSelect(event) {
-        this.selectedContact = event.detail.selectedRows[0].Id;
+        let updatedSelectedContact = event.detail.selectedRows[0].Id;
+
+        const selectContactEvent = new CustomEvent('selectcontact', {
+            bubbles : false,
+            composed : false,
+            detail: {
+                selectedContact : updatedSelectedContact
+            }
+        });
+
+        this.dispatchEvent(selectContactEvent);
     }
 }

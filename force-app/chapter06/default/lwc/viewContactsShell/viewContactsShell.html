@@ -1,10 +1,8 @@
 <template>
     <template lwc:if={addEventInactive}>
-        <c-view-contacts-lightning-card>
-        </c-view-contacts-lightning-card>
+        <c-view-contacts-lightning-card contacts-to-view={contactsToView} onsetcontact={setContactToSelected} onaddevent={triggerFlow}></c-view-contacts-lightning-card>
     </template>
     <template lwc:else>
-        <c-view-contacts-lightning-flow>
-        </c-view-contacts-lightning-flow>
+        <c-view-contacts-lightning-flow account-id={accountId} contact-id={selectedContact} onresetshell={resetShell}></c-view-contacts-lightning-flow>
     </template>
 </template>
