@@ -4,7 +4,9 @@ export default class ViewContactsContactDatatable extends LightningElement {
     contactColumnsDatatable = [
         { label: 'First Name', fieldName: 'FirstName' },
         { label: 'Last Name', fieldName: 'LastName' },
-        { label: 'Title', fieldName: 'Title' }
+        { label: 'Title', fieldName: 'Title' },
+        { label: 'Email', fieldName: 'Email' },
+        { label: 'Phone', fieldName: 'Phone' }
     ];
 
     @api contactsToView;
