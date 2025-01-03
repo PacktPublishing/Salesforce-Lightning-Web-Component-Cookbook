@@ -4,16 +4,16 @@
             <div slot="title">
                 View Contacts
             </div>
-            <div slot="footer">
-                <template lwc:if={selectedContact}>
-                    <lightning-button 
-                        class="slds-var-p-horizontal_medium"
-                        variant="brand"
-                        label="Add Event"
-                        onclick={handleAddEvent}
-                    ></lightning-button>
-                </template>
-            </div>
+            <template lwc:if={selectedContact}>
+                <div slot="footer">
+                        <lightning-button 
+                            class="slds-var-p-horizontal_medium"
+                            variant="brand"
+                            label="Add Event"
+                            onclick={handleAddEvent}
+                        ></lightning-button>
+                </div>
+            </template>
             <div class="slds-var-p-horizontal_medium">
                 <lightning-datatable
                     key-field="Id"

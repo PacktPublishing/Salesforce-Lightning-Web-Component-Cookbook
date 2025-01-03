@@ -1,0 +1,17 @@
+<template>
+    <lightning-card icon-name="standard:contact" variant="base">
+        <div slot="title">
+            View Contacts
+        </div>
+        <template lwc:if={selectedContact}>
+            <div slot="footer">
+                <c-view-contacts-add-event-button>
+                </c-view-contacts-add-event-button>
+            </div>
+        </template>
+        <div class="slds-var-p-horizontal_medium">
+            <c-view-contacts-contact-datatable>
+            </c-view-contacts-contact-datatable>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<template>
+    <lightning-datatable
+        key-field="Id"
+        data={contactsToView}
+        columns={contactColumnsDatatable}
+        onrowselection={handleContactSelect}
+        max-row-selection="1"
+    ></lightning-datatable>
+</template>
