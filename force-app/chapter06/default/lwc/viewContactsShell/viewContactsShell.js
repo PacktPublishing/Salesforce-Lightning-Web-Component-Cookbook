@@ -35,6 +35,6 @@ export default class ViewEditContactsFlattened extends LightningElement {
 
     resetShell(event) {
         this.addEventInactive = event.detail.addEventInactive;
-        utility.showNotif('Your event has been inserted successfully!', event.detail.outputVariables[0].value, 'success');
+        utility.showNotif('Your event has been inserted successfully!', event.detail.outputVariables, 'success');
     }
 }
