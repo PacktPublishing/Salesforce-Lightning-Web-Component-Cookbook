@@ -136,8 +136,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>viewContactsFlattened</componentName>
-                <identifier>c_viewContactsFlattened</identifier>
+                <componentName>flattenedViewContacts</componentName>
+                <identifier>c_flattenedViewContacts</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
