@@ -15,7 +15,7 @@ export default class ViewContactsContactDatatable extends LightningElement {
         let updatedSelectedContact = event.detail.selectedRows[0].Id;
 
         const selectContactEvent = new CustomEvent('selectcontact', {
-            bubbles : false,
+            bubbles : true,
             composed : false,
             detail: {
                 selectedContact : updatedSelectedContact
