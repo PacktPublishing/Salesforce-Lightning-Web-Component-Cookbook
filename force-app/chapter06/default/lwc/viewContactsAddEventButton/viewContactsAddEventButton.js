@@ -7,7 +7,7 @@ export default class ViewContactsAddEventButton extends LightningElement {
         const addEventEvent = new CustomEvent('addevent', {
             bubbles : true,
             composed : true,
-            target: {
+            detail: {
                 addEventInactive : updateAddEventInactive
             }
         });

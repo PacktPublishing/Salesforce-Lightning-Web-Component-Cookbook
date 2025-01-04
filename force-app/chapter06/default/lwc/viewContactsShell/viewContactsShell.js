@@ -26,7 +26,7 @@ export default class ViewEditContactsFlattened extends LightningElement {
     }
 
     triggerFlow(event) {
-        this.addEventInactive = event.target.addEventInactive;
+        this.addEventInactive = event.detail.addEventInactive;
     }
 
     setContactToSelected(event) {
