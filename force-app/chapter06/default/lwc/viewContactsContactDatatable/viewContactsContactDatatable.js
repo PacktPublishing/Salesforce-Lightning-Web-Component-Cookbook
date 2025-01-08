@@ -23,5 +23,15 @@ export default class ViewContactsContactDatatable extends LightningElement {
         });
 
         this.dispatchEvent(selectContactEvent);
+
+        const changeDivEvent =  new CustomEvent('changediv', {
+            bubbles : true,
+            composed : false,
+            detail: {
+                newClass : 'slds-var-p-horizontal_medium slds-box slds-theme_warning'
+            }
+        });
+
+        this.dispatchEvent(changeDivEvent);
     }
 }

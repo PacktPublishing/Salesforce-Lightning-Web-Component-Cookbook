@@ -8,7 +8,7 @@
                 <c-view-contacts-add-event-button></c-view-contacts-add-event-button>
             </div>
         </template>
-        <div class="slds-var-p-horizontal_medium">
+        <div lwc:ref="bodyDiv" class="slds-var-p-horizontal_medium" onchangediv={changeBodyDivClass}>
             <c-view-contacts-contact-datatable contacts-to-view={contactsToView} onselectcontact={handleSelectContact}></c-view-contacts-contact-datatable>
         </div>
     </lightning-card>

@@ -1,20 +1,26 @@
 <template>
     <template lwc:if={addEventInactive}>
+        <!-- c-view-contacts-lightning-card -->
+        <!-- shadow root -->
         <lightning-card icon-name="standard:contact" variant="base">
             <div slot="title">
                 View Contacts
             </div>
             <template lwc:if={selectedContact}>
                 <div slot="actions">
-                        <lightning-button 
-                            class="slds-var-p-horizontal_medium"
-                            variant="brand"
-                            label="Add Event"
-                            onclick={handleAddEvent}
-                        ></lightning-button>
+                    <!-- c-view-contacts-add-event-button -->
+                    <!-- shadow root -->
+                    <lightning-button 
+                        class="slds-var-p-horizontal_medium"
+                        variant="brand"
+                        label="Add Event"
+                        onclick={handleAddEvent}
+                    ></lightning-button>
                 </div>
             </template>
             <div class="slds-var-p-horizontal_medium">
+                <!-- c-view-contacts-contact-datatable -->
+                <!-- shadow root -->
                 <lightning-datatable
                     key-field="Id"
                     data={contactsToView}
@@ -26,6 +32,8 @@
         </lightning-card>
     </template>
     <template lwc:else>
+        <!-- c-view-contacts-lightning-flow -->
+        <!-- shadow root -->
         <lightning-flow
             flow-api-name='Create_Event_For_Contact_From_LWC'
             flow-input-variables={flowInputVariables}
