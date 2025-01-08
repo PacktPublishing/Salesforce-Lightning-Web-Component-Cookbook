@@ -4,10 +4,6 @@ export default class ViewContactsLightningCard extends LightningElement {
     @api contactsToView;
     contactIsSelected = false;
 
-    get contactIsSelected() {
-        this.selectedContact != '';
-    }
-
     handleSelectContact(event) {
         let contactId = event.detail.selectedContact;
         this.contactIsSelected = true;
