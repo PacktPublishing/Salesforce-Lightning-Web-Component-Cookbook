@@ -1,0 +1,46 @@
+<template>
+    <template lwc:if={assetsForDatatable}>
+        <lightning-card icon-name="utility:brush" variant="base">
+            <div slot="title">
+                Assets
+            </div>
+            <div>
+                <!-- Card Body  -->
+                <div class="carousel">
+                    <lightning-carousel scroll-duration="5" disable-auto-scroll>
+                        <template for:each={scrollingAssets} for:item="asset">
+                            <lightning-carousel-image
+                                class="carouselImage"
+                                key={asset.Id}
+                                src={asset.Primary_Image_Small__c}
+                                header={asset.Name}
+                                description={asset.Description}
+                                alternative-text={asset.Name}
+                                href="javascript:void(0);"
+                                aria-disabled="true"
+                            ></lightning-carousel-image>
+                        </template>
+                    </lightning-carousel>
+                </div>
+                <div class="datatable">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={assetsForDatatable}
+                        columns={assetColumns}
+                        selected-rows={preselectedRows}
+                        max-row-selection="1"
+                        onrowselection={updateCarousel}
+                        is-loading={isLoading}
+                    ></lightning-datatable> 
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+    <template lwc:else>
+        <lightning-spinner 
+            alternative-text="Loading" 
+            size="xx-small"
+            variant="base"
+        ></lightning-spinner>
+    </template>
+</template>
