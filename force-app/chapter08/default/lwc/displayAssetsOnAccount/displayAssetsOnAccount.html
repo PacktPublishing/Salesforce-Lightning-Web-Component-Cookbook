@@ -30,7 +30,8 @@
                         selected-rows={preselectedRows}
                         max-row-selection="1"
                         onrowselection={updateCarousel}
-                        is-loading={isLoading}
+                        enable-infinite-loading
+                        onloadmore={loadMoreAssets}
                     ></lightning-datatable> 
                 </div>
             </div>
