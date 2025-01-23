@@ -20,3 +20,16 @@ export const WIDE_COLUMNS_DEFINITION = [
         label: 'Public Domain?'
     }
 ];
+
+export const NARROW_COLUMNS_DEFINITION = [
+    {
+        type: 'text',
+        fieldName: 'Name',
+        label: 'Name'
+    },
+    {
+        type: 'text',
+        fieldName: 'Is_Public_Domain__c',
+        label: 'Public Domain?'
+    }
+];

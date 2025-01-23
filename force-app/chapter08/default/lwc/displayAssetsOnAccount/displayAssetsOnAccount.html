@@ -1,6 +1,6 @@
 <template>
     <template lwc:if={assetsForDatatable}>
-        <lightning-card icon-name="utility:brush" variant="base">
+        <lightning-card class="displayAssetComp" icon-name="utility:brush" variant="base">
             <div slot="title">
                 Assets
             </div>
@@ -24,6 +24,7 @@
                 </div>
                 <div class="datatable">
                     <lightning-datatable
+                        class="slds-p-horizontal_medium"
                         key-field="Id"
                         data={assetsForDatatable}
                         columns={assetColumns}
