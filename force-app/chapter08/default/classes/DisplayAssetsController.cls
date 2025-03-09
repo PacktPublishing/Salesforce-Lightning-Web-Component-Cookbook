@@ -11,7 +11,11 @@ public with sharing class DisplayAssetsController {
 
     @AuraEnabled(cacheable=true)
     public static Integer returnAssetCount(String accountIdString) {
-        Id accountId = Id.valueOf(accountIdString);
-        return new DisplayAssetsService().getAssetCount(accountId);
+        try {
+            Id accountId = Id.valueOf(accountIdString);
+            return new DisplayAssetsService().getAssetCount(accountId);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 }
