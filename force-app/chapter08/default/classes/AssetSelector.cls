@@ -8,9 +8,7 @@ public with sharing class AssetSelector extends Util_Query {
             'offset' => offset
         };
 
-        List<Asset> queryResult = (List<Asset>) queryWithBinds(assetsByAccount, bindMap, AccessLevel.SYSTEM_MODE);
-        
-        return queryResult;
+        return (List<Asset>) queryWithBinds(assetsByAccount, bindMap, AccessLevel.SYSTEM_MODE);
     }
 
     public Integer countAssets(Id accountId) {
