@@ -6,29 +6,27 @@
             </div>
             <div class="slds-p-bottom_medium">
                 <!-- Card Body  -->
-                <div class="carousel">
-                    <lightning-carousel scroll-duration="5" disable-auto-scroll>
-                        <template for:each={scrollingAssets} for:item="asset">
-                            <lightning-carousel-image
-                                class="carouselImage"
-                                key={asset.Id}
-                                src={asset.Primary_Image_Small__c}
-                                header={asset.Name}
-                                description={asset.Description}
-                                alternative-text={asset.Name}
-                                href="javascript:void(0);"
-                                aria-disabled="true"
-                            ></lightning-carousel-image>
-                        </template>
-                    </lightning-carousel>
-                </div>
+                <template lwc:if={selectedAsset}>
+                    <div class="carousel">
+                        <lightning-carousel-image
+                            class="carouselImage"
+                            src={selectedAsset.Primary_Image_Small__c}
+                            header={selectedAsset.Name}
+                            description={selectedAsset.Description}
+                            alternative-text={selectedAsset.Name}
+                            href={selectedAsset.Asset_URL_c}
+                            onclick={handleOpenAssetPage}
+                            aria-disabled="true"
+                        ></lightning-carousel-image>
+                    </div>
+                </template>
                 <div class="datatable">
                     <lightning-datatable
                         class="slds-p-horizontal_medium"
                         key-field="Id"
                         data={assetsForDatatable}
                         columns={assetColumns}
-                        selected-rows={preselectedRows}
+                        selected-rows={selectedRows}
                         max-row-selection="1"
                         onrowselection={updateCarousel}
                         enable-infinite-loading

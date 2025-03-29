@@ -11,7 +11,8 @@ export default class DisplayAssetsOnAccount extends LightningElement {
     @api recordId
     scrollingAssets = [];
     assetsForDatatable = [];
-    preselectedRows = [];
+    selectedAsset;
+    selectedRows = [];
     _wiredAssets;
     offset = 0;
     limit = 5;
@@ -38,10 +39,8 @@ export default class DisplayAssetsOnAccount extends LightningElement {
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
 
-            let firstRecord = this.assetsForDatatable[0];
-            
-            this.preselectedRows = [firstRecord.Id];
-            this.scrollingAssets = new Set([firstRecord, ...this.scrollingAssets]);
+            this.selectedAsset = this.assetsForDatatable[0];
+            this.selectedRows = [this.selectedAsset.Id]
 
             this.error = undefined;
 
@@ -70,10 +69,9 @@ export default class DisplayAssetsOnAccount extends LightningElement {
     }
 
     updateCarousel(event) {
-        let selectedRows = event.detail.selectedRows;
-        this.preselectedRows = [selectedRows[0].Id];
-
-        this.scrollingAssets = new Set([...selectedRows, ...this.scrollingAssets]);
+        let selectedAssetRows = event.detail.selectedRows;
+        this.selectedAsset = selectedAssetRows[0];
+        this.selectedRows = [this.selectedAsset.Id];
     }
 
     async loadMoreAssets() {
@@ -92,6 +90,10 @@ export default class DisplayAssetsOnAccount extends LightningElement {
                 utility.showNotif('There has been an error loading more assets!', this.error.message, 'error');
             }    
         }
+    }
+
+    handleOpenAssetPage() {
+        window.open(this.selectedAsset.Asset_URL__c, '_blank').focus();
     }
 
     resizeFunction = () => {
