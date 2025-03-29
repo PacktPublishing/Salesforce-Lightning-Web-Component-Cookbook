@@ -17,7 +17,7 @@ export default class DisplayAssetsOnAccount extends LightningElement {
     limit = 5;
     screenWidth;
     componentWidth;
-    error
+    error;
 
     get assetColumns() {
         if(FORM_FACTOR == 'Large' && this.screenWidth == 'Large') {
