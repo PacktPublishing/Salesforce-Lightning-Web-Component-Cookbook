@@ -34,7 +34,7 @@ export default class DisplayAssetsOnAccount extends LightningElement {
         window.addEventListener('resize', this.resizeFunction);
 
         try {
-            const returnedAssets = await returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
+            const returnedAssets = await this.getAssets();
             let tempAssets = JSON.parse(JSON.stringify(returnedAssets));
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
@@ -53,6 +53,10 @@ export default class DisplayAssetsOnAccount extends LightningElement {
 
     @wire(returnAssetCount, { accountIdString : '$recordId'})
     totalAssets;
+
+    async getAssets() {
+        return await returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
+    }
 
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
@@ -79,7 +83,7 @@ export default class DisplayAssetsOnAccount extends LightningElement {
             try {
                 this.offset += this.limit;
         
-                const returnedAssets = await returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
+                const returnedAssets = await this.getAssets();
                 let tempAssets = JSON.parse(JSON.stringify(returnedAssets));
 
                 this.assetsForDatatable = [...this.assetsForDatatable, ...this.formatAssets(tempAssets)];
