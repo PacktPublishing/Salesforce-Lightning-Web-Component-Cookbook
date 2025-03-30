@@ -72,12 +72,6 @@ export default class DisplayAssetsOnAccount extends LightningElement {
         return tempAssets;
     }
 
-    updateCarousel(event) {
-        let selectedAssetRows = event.detail.selectedRows;
-        this.selectedAsset = selectedAssetRows[0];
-        this.selectedRows = [this.selectedAsset.Id];
-    }
-
     async loadMoreAssets() {
         if(this.offset < this.totalAssets.data) {
             try {
@@ -94,6 +88,12 @@ export default class DisplayAssetsOnAccount extends LightningElement {
                 utility.showNotif('There has been an error loading more assets!', this.error.message, 'error');
             }    
         }
+    }
+
+    updateCarousel(event) {
+        let selectedAssetRows = event.detail.selectedRows;
+        this.selectedAsset = selectedAssetRows[0];
+        this.selectedRows = [this.selectedAsset.Id];
     }
 
     handleOpenAssetPage() {
