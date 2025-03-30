@@ -13,7 +13,6 @@ export default class DisplayAssetsOnAccount extends LightningElement {
     assetsForDatatable = [];
     selectedAsset;
     selectedRows = [];
-    _wiredAssets;
     offset = 0;
     limit = 5;
     screenWidth;
