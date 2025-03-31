@@ -21,7 +21,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     error;
 
     get assetColumns() {
-        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Large') {
+        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
         } else {
             return NARROW_COLUMNS_DEFINITION;
@@ -112,10 +112,10 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 		let component = this.template.querySelector('.displayAssetComp');
 		this.componentWidthPixels = component.getBoundingClientRect().width;
 		if(this.componentWidthPixels < 600) {
-			this.componentWidth = 'Small';
+			this.componentWidth = 'Narrow';
 		}
 		else {
-			this.componentWidth = 'Large';
+			this.componentWidth = 'Wide';
 		}
 	}
 
