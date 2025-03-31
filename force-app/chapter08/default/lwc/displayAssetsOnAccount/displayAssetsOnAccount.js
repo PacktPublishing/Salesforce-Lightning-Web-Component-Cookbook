@@ -16,12 +16,12 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     selectedRows = [];
     offset = 0;
     limit = 5;
-    screenWidth;
     componentWidth;
+    componentWidthPixels;
     error;
 
     get assetColumns() {
-        if(FORM_FACTOR == 'Large' && this.screenWidth == 'Large') {
+        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Large') {
             return WIDE_COLUMNS_DEFINITION;
         } else {
             return NARROW_COLUMNS_DEFINITION;
@@ -110,12 +110,12 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
     resizeFunction = () => {
 		let component = this.template.querySelector('.displayAssetComp');
-		this.componentWidth = component.getBoundingClientRect().width;
-		if(this.componentWidth < 600) {
-			this.screenWidth = 'Small';
+		this.componentWidthPixels = component.getBoundingClientRect().width;
+		if(this.componentWidthPixels < 600) {
+			this.componentWidth = 'Small';
 		}
 		else {
-			this.screenWidth = 'Large';
+			this.componentWidth = 'Large';
 		}
 	}
 
