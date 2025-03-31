@@ -4,10 +4,11 @@ import returnAssetCount from '@salesforce/apex/DisplayAssetsController.returnAss
 import NO_IMAGE_FOUND from '@salesforce/resourceUrl/NoImageFound';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 import { WIDE_COLUMNS_DEFINITION, NARROW_COLUMNS_DEFINITION } from './assetsColumns';
+import { NavigationMixin } from 'lightning/navigation';
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class DisplayAssetsOnAccount extends LightningElement {
+export default class DisplayAssetsOnAccount extends NavigationMixin(LightningElement) {
     @api recordId
     scrollingAssets = [];
     assetsForDatatable = [];
@@ -96,7 +97,15 @@ export default class DisplayAssetsOnAccount extends LightningElement {
     }
 
     handleOpenAssetPage() {
-        window.open(this.selectedAsset.Asset_URL__c, '_blank').focus();
+        // window.open(this.selectedAsset.Asset_URL__c, '_blank').focus();
+
+        this[NavigationMixin.Navigate]({ 
+           type: 'standard__recordPage', 
+           attributes: { 
+              recordId: this.selectedAsset.Id ,
+              actionName: 'view'
+           },
+        });
     }
 
     resizeFunction = () => {
