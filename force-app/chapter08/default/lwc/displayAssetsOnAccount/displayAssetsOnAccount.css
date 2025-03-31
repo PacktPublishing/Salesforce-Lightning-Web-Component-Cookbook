@@ -14,3 +14,15 @@
 {
     height: 10rem;
 }
+
+@media screen and (max-width: 30em) and (orientation: portrait) {
+    :host {
+        --slds-c-card-color-background: rebeccapurple;
+    }
+} 
+
+@media screen and (max-width: 60em) and (orientation: landscape) {
+    :host {
+        --slds-c-card-color-background: lightblue;
+    }
+} 
