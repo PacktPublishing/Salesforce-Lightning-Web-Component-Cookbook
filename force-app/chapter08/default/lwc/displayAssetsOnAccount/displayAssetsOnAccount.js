@@ -108,7 +108,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         });
     }
 
-    resizeFunction() {
+    resizeFunction = () => {
 		let component = this.template.querySelector('.displayAssetComp');
 		this.componentWidth = component.getBoundingClientRect().width;
 		if(this.componentWidth < 600) {
