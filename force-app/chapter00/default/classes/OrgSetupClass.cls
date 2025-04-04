@@ -3,26 +3,22 @@ public with sharing class OrgSetupClass {
 
     public OrgSetupClass() {
         artToImportById = new List<Integer>{436528, 253348, 436535, 37297, 437449, 438817, 3497, 170430, 47958, 227934};
+    }
 
+    public void getPerms() {
         Id permSetId = [SELECT Id FROM PermissionSet WHERE Name= 'Named_Credential_Access'].Id;
         Id userId = UserInfo.getUserId();
 
-        PermissionSetAssignment psa = new PermissionSetAssignment(AssigneeId = userId, PermissionSetId = permSetId);
+        List<PermissionSetAssignment> assignedPerms = [SELECT Id FROM PermissionSetAssignment WHERE AssigneeId = :userId AND PermissionSet.Name = 'Named_Credential_Access'];
 
-        insert psa;
-    }
+        if(assignedPerms.size() == 0) {
+            PermissionSetAssignment psa = new PermissionSetAssignment(AssigneeId = userId, PermissionSetId = permSetId);
 
-    public OrgSetupClass(List<Integer> idsToImport) {
-        if(idsToImport.size() > 99) {
-            throw new SetupException('Please place less than 99 IDs in artToImportById.');
-        } else if(idsToImport.size() == 0) {
-            throw new SetupException('Please place at least 1 ID in artToImportById.');
-        } else {
-            artToImportById = idsToImport;
+            insert psa;
         }
     }
 
-    public void initialSetup() {
+    public void dataSetup() {
         CsvReader.getAccounts();
         CsvReader.getCustomers();
 

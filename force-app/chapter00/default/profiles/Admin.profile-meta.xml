@@ -873,10 +873,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>DecisionTableExecUserAccess</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>DelegatedTwoFactor</name>
     </userPermissions>
     <userPermissions>
