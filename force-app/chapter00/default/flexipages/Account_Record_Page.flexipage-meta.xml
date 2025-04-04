@@ -121,6 +121,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>displayAssetsOnAccount</componentName>
+                <identifier>c_displayAssetsOnAccount</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
                     <value>maintabs</value>
