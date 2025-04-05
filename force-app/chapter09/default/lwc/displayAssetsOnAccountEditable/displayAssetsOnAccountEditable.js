@@ -1,4 +1,4 @@
-import { LightningElement, api, track, wire } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import {  getPicklistValues } from 'lightning/uiObjectInfoApi';
 import STATUS_FIELD from "@salesforce/schema/Asset.Status";
 import returnAssetsByAccount from '@salesforce/apex/DisplayAssetsController.returnAssetsByAccount';
@@ -11,14 +11,14 @@ let utility;
 export default class DisplayAssetsOnAccount extends NavigationMixin(LightningElement) {
     @api recordId
     scrollingAssets = [];
-    @track assetsForDatatable = [];
+    assetsForDatatable = [];
     selectedAsset;
     selectedRows = [];
     offset = 0;
     limit = 5;
     error;
 
-    @track statusPickvals = [];
+    statusPickvals = [];
 
     assetColumns = [
         {
