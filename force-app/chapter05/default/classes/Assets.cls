@@ -1,4 +1,5 @@
 public with sharing class Assets extends Util_DML {
+    /** Chapter 5 Method */
     public Map<Integer, String> upsertAssetsAndReturnInfoMap(List<Asset> assetsToUpsert) {
         Map<Integer, String> assetInfoMap = new Map<Integer, String>();
 
@@ -25,5 +26,14 @@ public with sharing class Assets extends Util_DML {
         }
 
         return assetInfoMap;
+    }
+
+    /** Chapter 8 Method */
+    public void updateAssets(List<Asset> assetsToUpdate) {
+        try{
+            updateRecords(assetsToUpdate);
+        } catch (Exception e) {
+            //error processing
+        }
     }
 }
