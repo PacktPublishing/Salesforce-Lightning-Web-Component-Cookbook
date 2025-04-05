@@ -19,6 +19,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     error;
 
     statusPickvals = [];
+    draftValues = [];
 
     assetColumns = [
         {
@@ -73,8 +74,6 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
 
-            console.log(this.assetsForDatatable);
-
             this.selectedAsset = this.assetsForDatatable[0];
             this.selectedRows = [this.selectedAsset.Id]
 
@@ -106,8 +105,6 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
             asset['statusValue'] = asset.Status;
             asset['statusPlaceholder'] = asset.Status;
             asset['statusOptions'] = this.statusPickvals.filter(val => val.value != asset.statusValue);
-
-            console.log(JSON.stringify(asset))
         });
 
         return tempAssets;
@@ -138,8 +135,6 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     }
 
     handleOpenAssetPage() {
-        // window.open(this.selectedAsset.Asset_URL__c, '_blank').focus();
-
         this[NavigationMixin.Navigate]({ 
            type: 'standard__recordPage', 
            attributes: { 
@@ -149,7 +144,15 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         });
     }
 
-    handleInlineEdit() {
-        console.log('editing...');
+    handleInlineEdit(event) {
+        
+    }
+
+    handleInlineEditSave() {
+
+    }
+
+    handleInlineEditCancel() {
+
     }
 }
