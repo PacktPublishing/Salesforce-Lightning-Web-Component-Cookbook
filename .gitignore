@@ -43,6 +43,3 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
-
-# Ignore Dataloader Files
-force-app/chapter00/z_DataLoaderFiles
