@@ -10,6 +10,6 @@ public with sharing class Util_MockIDGenerator {
         String keyPrefix = sObjType.getDescribe().getKeyPrefix();
         String idsGenStr = String.valueOf(idsGenerated);
 
-        return Id.valueOf(keyPrefix + idsGenStr.leftPad(13-idsGenStr.length(), '0'));
+        return Id.valueOf(keyPrefix + idsGenStr.leftPad(12, '0'));
     }
 }
