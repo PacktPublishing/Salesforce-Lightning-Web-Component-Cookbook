@@ -8,7 +8,7 @@ export default class PicklistDatatable extends LightningDatatable {
             template : picklistPlaceholder,
             editTemplate: picklistSelector,
             standardCellLayout: true,
-            typeAttributes: ['label', 'placeholder', 'options', 'value', 'context', 'variant', 'name']
+            typeAttributes: ['label', 'placeholder', 'options', 'value']
         }
     };
 }

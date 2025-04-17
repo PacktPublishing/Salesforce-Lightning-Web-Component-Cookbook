@@ -6,6 +6,8 @@ import returnAssetsByAccount from '@salesforce/apex/DisplayAssetsController.retu
 import returnAssetCount from '@salesforce/apex/DisplayAssetsController.returnAssetCount';
 import updateAssetWrappers from '@salesforce/apex/DisplayAssetsController.updateAssetWrappers';
 import NO_IMAGE_FOUND from '@salesforce/resourceUrl/NoImageFound';
+import FORM_FACTOR from '@salesforce/client/formFactor';
+import { WIDE_COLUMNS_DEFINITION, NARROW_COLUMNS_DEFINITION } from './assetsColumns';
 import { NavigationMixin } from 'lightning/navigation';
 import Utilities from 'c/notifUtils';
 let utility;
@@ -18,58 +20,26 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     selectedRows = [];
     offset = 0;
     limit = 5;
+    componentWidth;
+    componentWidthPixels;
     error;
 
     statusPickvals = [];
     draftValues = [];
 
-    assetColumns = [
-        {
-            type: 'text',
-            fieldName: 'Name',
-            label: 'Name'
-        },
-        {
-            type: 'text',
-            fieldName: 'Department__c',
-            label: 'Department'
-        },
-        {
-            type: 'text',
-            fieldName: 'Object_ID__c',
-            label: 'Asset Id'
-        },
-        {
-            type: 'picklistColumn',
-            fieldName: 'Status',
-            label: 'Display Status',
-            editable: true,
-            typeAttributes : {
-                label: {fieldName: 'statusLabel'},
-                value: {fieldName: 'statusValue'},
-                placeholder: {fieldName: 'statusPlaceholder'},
-                options: {fieldName: 'statusOptions'}
-            }
-        }
-    ];
-
-
-    @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: STATUS_FIELD })
-    pickvals(result) {
-        if(result.data) {
-            let pickvals = result.data['values'];
-
-            pickvals.forEach(val => this.statusPickvals.push({label: val['label'], value: val['value']}));
-
-            console.log(JSON.stringify(this.statusPickvals));
-        } else if (result.error) {
-            this.error = result.error;
-            utility.showNotif('There has been an error loading pickvals!', this.error.message, 'error');
+    get assetColumns() {
+        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
+            return WIDE_COLUMNS_DEFINITION;
+        } else {
+            return NARROW_COLUMNS_DEFINITION;
         }
     }
 
     async connectedCallback() {
         utility = new Utilities(this);
+
+        window.addEventListener('resize', this.resizeFunction);
+
         try {
 
             const returnedAssets = await this.getAssets();
@@ -84,6 +54,18 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         } catch (error) {
             this.error = error;
             utility.showNotif('There has been an error loading assets!', this.error.message, 'error');
+        }
+    }
+
+    @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: STATUS_FIELD })
+    pickvals(result) {
+        if(result.data) {
+            let tempPickvals = result.data.values;
+
+            tempPickvals.forEach(val => this.statusPickvals.push({label: val['label'], value: val['value']}));
+        } else if (result.error) {
+            this.error = result.error;
+            utility.showNotif('There has been an error loading pickvals!', this.error.message, 'error');
         }
     }
 
@@ -212,4 +194,15 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
         this.draftValues = [];
     }
+
+    resizeFunction = () => {
+		let component = this.template.querySelector('.displayAssetComp');
+		this.componentWidthPixels = component.getBoundingClientRect().width;
+		if(this.componentWidthPixels < 600) {
+			this.componentWidth = 'Narrow';
+		}
+		else {
+			this.componentWidth = 'Wide';
+		}
+	}
 }
