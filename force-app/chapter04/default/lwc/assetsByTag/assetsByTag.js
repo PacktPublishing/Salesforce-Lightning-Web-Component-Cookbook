@@ -16,9 +16,9 @@ export default class AssetsByTag extends LightningElement {
     gridData;
 
     get isLoaded() {
-        return JSON.stringify(this._tagsWithAssetsResult) == JSON.stringify(this._tagsWithAssetsPromiseResult)
+        return JSON.stringify(this._tagsWithAssetsResult) === JSON.stringify(this._tagsWithAssetsPromiseResult)
             &&
-            JSON.stringify(this._tagsWithAssetsResult) == JSON.stringify(this._tagsWithAssetsWrappersResult);
+            JSON.stringify(this._tagsWithAssetsResult) === JSON.stringify(this._tagsWithAssetsWrappersResult);
     }
     
     connectedCallback() {
@@ -113,7 +113,7 @@ export default class AssetsByTag extends LightningElement {
                 "_children" : []
             }
 
-            if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) == undefined) {
+            if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) === undefined) {
                 tagArray.push(tagObject)
             }
             

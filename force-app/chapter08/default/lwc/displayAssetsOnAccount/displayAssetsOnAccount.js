@@ -21,7 +21,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     error;
 
     get assetColumns() {
-        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
+        if(FORM_FACTOR === 'Large' && this.componentWidth === 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
         } 
         return NARROW_COLUMNS_DEFINITION;
@@ -54,12 +54,12 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     totalAssets;
 
     async getAssets() {
-        return await returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
+        return returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
     }
 
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
-            if(!asset.hasOwnProperty('Primary_Image_Small__c')) {
+            if(!Object.prototype.hasOwnProperty.call(asset, 'Primary_Image_Small__c')) {
                 asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {

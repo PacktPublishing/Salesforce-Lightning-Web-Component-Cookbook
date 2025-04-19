@@ -28,7 +28,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     draftValues = [];
 
     get assetColumns() {
-        if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
+        if(FORM_FACTOR === 'Large' && this.componentWidth === 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
         } 
         return NARROW_COLUMNS_DEFINITION;
@@ -87,7 +87,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
-            if(!asset.hasOwnProperty('Primary_Image_Small__c')) {
+            if(!Object.prototype.hasOwnProperty.call(asset, 'Primary_Image_Small__c')) {
                 asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {
@@ -98,7 +98,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
             asset.statusLabel = asset.Status;
             asset.statusValue = asset.Status;
             asset.statusPlaceholder = asset.Status;
-            asset.statusOptions = this.statusPickvals.filter(val => val.value != asset.statusValue);
+            asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue);
         });
 
         return tempAssets;
@@ -141,7 +141,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     handleInlineEdit(event) {
         let draftValue = event.detail.draftValues[0];
 
-        let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id == draftValue.Id);
+        let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
 
         let tempAsset = this.assetsForDatatable[draftValueIndex];
 
@@ -153,11 +153,11 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         tempAsset.statusLabel = draftValue.Status;
         tempAsset.statusValue = draftValue.Status;
         tempAsset.statusPlaceholder = draftValue.Status;
-        tempAsset.statusOptions = this.statusPickvals.filter(val => val.value != tempAsset.statusValue);
+        tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
 
         this.assetsForDatatable[draftValueIndex] = tempAsset;
 
-        let draftIndex = this.draftValues.findIndex(draft => draft.Id == draftValue.Id);
+        let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
 
         if(draftIndex < 0) {
             this.draftValues.push(draftValue);
@@ -180,7 +180,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
     handleInlineEditCancel() {
         this.draftValues.forEach(draft => {
-            let draftValueIndex = this.assetsForDatatable.findIndex(draftValue => draft.Id == draftValue.Id);
+            let draftValueIndex = this.assetsForDatatable.findIndex(draftValue => draft.Id === draftValue.Id);
 
             let tempAsset = this.assetsForDatatable[draftValueIndex];
             tempAsset.statusLabel = tempAsset.oldLabel;
