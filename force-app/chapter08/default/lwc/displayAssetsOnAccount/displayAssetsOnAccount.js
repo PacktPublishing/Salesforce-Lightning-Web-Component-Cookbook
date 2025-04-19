@@ -23,9 +23,8 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     get assetColumns() {
         if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
-        } else {
-            return NARROW_COLUMNS_DEFINITION;
-        }
+        } 
+        return NARROW_COLUMNS_DEFINITION;
     }
 
     async connectedCallback() {
@@ -61,10 +60,10 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
             if(!asset.hasOwnProperty('Primary_Image_Small__c')) {
-                asset['Primary_Image_Small__c'] = NO_IMAGE_FOUND;
+                asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {
-                    asset['Description'] = 'This image is not in the public domain, so it cannot be displayed here.';
+                    asset.Description = 'This image is not in the public domain, so it cannot be displayed here.';
                 }
             }
         });
@@ -118,5 +117,4 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 			this.componentWidth = 'Wide';
 		}
 	}
-
 }

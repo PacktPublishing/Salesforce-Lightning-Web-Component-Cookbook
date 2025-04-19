@@ -30,9 +30,8 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     get assetColumns() {
         if(FORM_FACTOR == 'Large' && this.componentWidth == 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
-        } else {
-            return NARROW_COLUMNS_DEFINITION;
-        }
+        } 
+        return NARROW_COLUMNS_DEFINITION;
     }
 
     async connectedCallback() {
@@ -62,7 +61,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         if(result.data) {
             let tempPickvals = result.data.values;
 
-            tempPickvals.forEach(val => this.statusPickvals.push({label: val['label'], value: val['value']}));
+            tempPickvals.forEach(val => this.statusPickvals.push({label: val.label, value: val.value}));
         } else if (result.error) {
             this.error = result.error;
             utility.showNotif('There has been an error loading pickvals!', this.error.message, 'error');
@@ -73,7 +72,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     totalAssets;
 
     async getAssets() {
-        return await returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
+        return returnAssetsByAccount({ accountIdString : this.recordId, lim : this.limit, offset : this.offset });
     }
 
     async refreshAssets() {
@@ -89,17 +88,17 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
             if(!asset.hasOwnProperty('Primary_Image_Small__c')) {
-                asset['Primary_Image_Small__c'] = NO_IMAGE_FOUND;
+                asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {
-                    asset['Description'] = 'This image is not in the public domain, so it cannot be displayed here.';
+                    asset.Description = 'This image is not in the public domain, so it cannot be displayed here.';
                 }
             }
 
-            asset['statusLabel'] = asset.Status;
-            asset['statusValue'] = asset.Status;
-            asset['statusPlaceholder'] = asset.Status;
-            asset['statusOptions'] = this.statusPickvals.filter(val => val.value != asset.statusValue);
+            asset.statusLabel = asset.Status;
+            asset.statusValue = asset.Status;
+            asset.statusPlaceholder = asset.Status;
+            asset.statusOptions = this.statusPickvals.filter(val => val.value != asset.statusValue);
         });
 
         return tempAssets;
@@ -146,15 +145,15 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
         let tempAsset = this.assetsForDatatable[draftValueIndex];
 
-        tempAsset['oldLabel'] = tempAsset.statusLabel;
-        tempAsset['oldValue'] = tempAsset.statusValue;
-        tempAsset['oldPlaceholder'] = tempAsset.statusPlaceholder;
-        tempAsset['oldOptions'] = tempAsset.statusOptions;
+        tempAsset.oldLabel = tempAsset.statusLabel;
+        tempAsset.oldValue = tempAsset.statusValue;
+        tempAsset.oldPlaceholder = tempAsset.statusPlaceholder;
+        tempAsset.oldOptions = tempAsset.statusOptions;
 
-        tempAsset['statusLabel'] = draftValue.Status;
-        tempAsset['statusValue'] = draftValue.Status;
-        tempAsset['statusPlaceholder'] = draftValue.Status;
-        tempAsset['statusOptions'] = this.statusPickvals.filter(val => val.value != tempAsset.statusValue);
+        tempAsset.statusLabel = draftValue.Status;
+        tempAsset.statusValue = draftValue.Status;
+        tempAsset.statusPlaceholder = draftValue.Status;
+        tempAsset.statusOptions = this.statusPickvals.filter(val => val.value != tempAsset.statusValue);
 
         this.assetsForDatatable[draftValueIndex] = tempAsset;
 
@@ -184,10 +183,10 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
             let draftValueIndex = this.assetsForDatatable.findIndex(draftValue => draft.Id == draftValue.Id);
 
             let tempAsset = this.assetsForDatatable[draftValueIndex];
-            tempAsset['statusLabel'] = tempAsset['oldLabel'];
-            tempAsset['statusValue'] = tempAsset['oldValue'];
-            tempAsset['statusPlaceholder'] = tempAsset['oldPlaceholder'];
-            tempAsset['statusOptions'] = tempAsset['oldOptions'];
+            tempAsset.statusLabel = tempAsset.oldLabel;
+            tempAsset.statusValue = tempAsset.oldValue;
+            tempAsset.statusPlaceholder = tempAsset.oldPlaceholder;
+            tempAsset.statusOptions = tempAsset.oldOptions;
 
             this.assetsForDatatable[draftValueIndex] = tempAsset;
         });
