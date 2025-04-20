@@ -42,8 +42,6 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
             this.selectedRows = [this.selectedAsset.Id]
 
             this.error = undefined;
-
-            this.resizeFunction();
         } catch (error) {
             this.error = error;
             utility.showNotif('There has been an error loading assets!', this.error.message, 'error');
@@ -101,7 +99,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
         this[NavigationMixin.Navigate]({ 
            type: 'standard__recordPage', 
            attributes: { 
-              recordId: this.selectedAsset.Id ,
+              recordId: this.selectedAsset.Id,
               actionName: 'view'
            },
         });
