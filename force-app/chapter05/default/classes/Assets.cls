@@ -28,7 +28,7 @@ public with sharing class Assets extends Util_DML {
         return assetInfoMap;
     }
 
-    /** Chapter 8 Method */
+    /** Chapter 9 Method */
     public void updateAssets(List<Asset> assetsToUpdate) {
         try{
             updateRecords(assetsToUpdate);
