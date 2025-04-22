@@ -12,6 +12,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
     @api recordId
     scrollingAssets = [];
     assetsForDatatable;
+    notLoaded = true;
     selectedAsset;
     selectedRows = [];
     offset = 0;
@@ -42,10 +43,18 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
             this.selectedRows = [this.selectedAsset.Id]
 
             this.error = undefined;
+
+            this.resizeFunction();
+
+            this.notLoaded = false;
         } catch (error) {
             this.error = error;
             utility.showNotif('There has been an error loading assets!', this.error.message, 'error');
         }
+    }
+
+    disconnectedCallback() {
+        window.removeEventListener('resize', this.resizeFunction);
     }
 
     @wire(returnAssetCount, { accountIdString : '$recordId'})

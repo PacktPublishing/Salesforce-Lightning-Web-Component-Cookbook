@@ -2,14 +2,13 @@ public with sharing class DisplayAssetsService {
     @TestVisible private AssetSelector selector = new AssetSelector();
     @TestVisible private Assets assets = new Assets();
 
-
     /** Chapter 8 Methods */
     public List<Asset> getAssetsByAccount(Id accountId, Integer lim, Integer offset){
-        return selector.retrieveAssetsByAccount(accountId, lim, offset);
+        return this.selector.retrieveAssetsByAccount(accountId, lim, offset);
     }
 
     public Integer getAssetCount(Id accountId) {
-        return selector.countAssets(accountId);
+        return this.selector.countAssets(accountId);
     }
 
     /** Chapter 9 & 10 Methods & Wrappers */
@@ -29,7 +28,7 @@ public with sharing class DisplayAssetsService {
             assetsToUpdate.add(assetToUpdate);
         }
 
-        assets.updateAssets(assetsToUpdate);
+        this.assets.updateAssets(assetsToUpdate);
     }
 
     public class DisplayAssetWrapper {
