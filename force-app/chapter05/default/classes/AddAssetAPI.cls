@@ -1,5 +1,4 @@
 public with sharing class AddAssetAPI {
-
     public static String getDepartments() {
         Http http = new Http();
         HttpRequest request = new HttpRequest();

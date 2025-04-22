@@ -1,5 +1,5 @@
 public with sharing class DisplayAssetsController {
-    public static DisplayAssetsService service = new DisplayAssetsService();
+    @TestVisible private static DisplayAssetsService service = new DisplayAssetsService();
 
     /** Chapter 8 Methods */
     @AuraEnabled(cacheable=true)

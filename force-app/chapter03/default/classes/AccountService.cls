@@ -1,6 +1,5 @@
 public with sharing class AccountService {
-
-    private AccountSelector accountSelect = new AccountSelector();
+    @TestVisible private AccountSelector accountSelect = new AccountSelector();
 
     public List<AccountWrapper> getTopAccountWrappers() {
         List<Account> queryResult = accountSelect.topTenAccountsByRevenue();

@@ -1,6 +1,5 @@
 @IsTest
 public class Util_DMLTest {
-
     @IsTest
     static void insertRecords() {
         Util_DML dml = new Util_DML();

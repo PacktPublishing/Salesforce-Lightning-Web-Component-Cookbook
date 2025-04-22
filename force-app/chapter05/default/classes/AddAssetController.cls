@@ -1,6 +1,6 @@
 public with sharing class AddAssetController {
-    public static final String REGEXP = '[^a-zA-Z]';
-    public static final String REPLACE = '';
+    @TestVisible private static final String REGEXP = '[^a-zA-Z]';
+    @TestVisible private static final String REPLACE = '';
 
     @AuraEnabled(cacheable=true)
     public static String returnDepartmentsWrapper(){

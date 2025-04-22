@@ -1,9 +1,8 @@
 public with sharing class AddAssetService {
-    
-    private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
-    private Assets assets = new Assets();
-    private Constituents constituents = new Constituents();
-    private Tags tags = new Tags();
+    @TestVisible private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
+    @TestVisible private Assets assets = new Assets();
+    @TestVisible private Constituents constituents = new Constituents();
+    @TestVisible private Tags tags = new Tags();
 
     public DepartmentsWrapper getDepartmentWrappers() {
         return (DepartmentsWrapper) JSON.deserialize(AddAssetAPI.getDepartments(), DepartmentsWrapper.Class);

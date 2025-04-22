@@ -1,7 +1,7 @@
 public with sharing class OrgSetupREST {
 
-    private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
-    public static Util_DML dmlUtil = new Util_DML();
+    @TestVisible private static final String AAT_URL_STRING = 'http://vocab.getty.edu/page/aat/';
+    @TestVisible private static Util_DML dmlUtil = new Util_DML();
 
     @future(callout=true)
     public static void getAssets(Integer objectId, Id accountId) {

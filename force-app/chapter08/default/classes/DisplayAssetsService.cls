@@ -1,7 +1,6 @@
 public with sharing class DisplayAssetsService {
-
-    private AssetSelector selector = new AssetSelector();
-    private Assets assets = new Assets();
+    @TestVisible private AssetSelector selector = new AssetSelector();
+    @TestVisible private Assets assets = new Assets();
 
 
     /** Chapter 8 Methods */

@@ -1,5 +1,5 @@
 public with sharing class AssetSelector extends Util_Query {
-    private static final String ASSETS_BY_ACCOUNT = 'SELECT Id, Name, Department__c, Description, Is_Public_Domain__c, Object_Id__c, Asset_URL__c, Primary_Image_Small__c, Status FROM Asset WHERE AccountId = :accountId ORDER BY Name ASC LIMIT :lim OFFSET :offset';
+    @TestVisible private static final String ASSETS_BY_ACCOUNT = 'SELECT Id, Name, Department__c, Description, Is_Public_Domain__c, Object_Id__c, Asset_URL__c, Primary_Image_Small__c, Status FROM Asset WHERE AccountId = :accountId ORDER BY Name ASC LIMIT :lim OFFSET :offset';
 
     public List<Asset> retrieveAssetsByAccount(Id accountId, Integer lim, Integer offset) {
         Map<String, Object> bindMap = new Map<String, Object>{
