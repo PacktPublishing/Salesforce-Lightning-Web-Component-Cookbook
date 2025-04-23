@@ -1,5 +1,7 @@
 import { LightningElement } from 'lwc';
 import returnSearchedConsumerWrappers from '@salesforce/apex/RecentConsumerController.returnSearchedConsumerWrappers';
+import Utilities from 'c/notifUtils';
+let utility;
 
 export default class ConsumerSearchWithDropdown extends LightningElement {
     searchResults;
@@ -7,6 +9,10 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
 
     selectedOption;
     displayedOption;
+
+    connectedCallback() {
+        utility = new Utilities(this);
+    }
 
     sendSearch(event) {
         let searchTerm = event.detail.value;
@@ -20,37 +26,41 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
                 try {
                     this.search(searchTerm);
                 } catch(error) {
-                    console.log(error);
+                    utility.showNotif('There has been an error returning consumers!', result.error, 'error');
                 }
-            }, 1000);
+            }, 300);
         } else {
             this.searchResults = null;
         }
     }
 
     async search(searchTerm) {
-        const searchedConsumers = await returnSearchedConsumerWrappers({searchTerm : searchTerm});
+        try{
+            const searchedConsumers = await returnSearchedConsumerWrappers({searchTerm : searchTerm});
 
-        let tempConsumers = JSON.parse(JSON.stringify(searchedConsumers));
-        let results = [];
+            let tempConsumers = JSON.parse(JSON.stringify(searchedConsumers));
+            let results = [];
 
-        tempConsumers.forEach(consumer => {
-            if(consumer.type === 'Contact') {
-                consumer.icon = 'utility:contact';
-                consumer.altText = 'Contact';
-            } else if (consumer.type === 'Customer') {
-                consumer.icon = 'utility:customer';
-                consumer.altText = 'Customer';
-                consumer.fact = new Intl.NumberFormat("en-US", {style: "currency", currency: 'USD'}).format(consumer.fact);
+            tempConsumers.forEach(consumer => {
+                if(consumer.type === 'Contact') {
+                    consumer.icon = 'utility:contact';
+                    consumer.altText = 'Contact';
+                } else if (consumer.type === 'Customer') {
+                    consumer.icon = 'utility:customer';
+                    consumer.altText = 'Customer';
+                    consumer.fact = new Intl.NumberFormat("en-US", {style: "currency", currency: 'USD'}).format(consumer.fact);
+                }
+
+                results.push(consumer);    
+            })
+
+            if(results.length > 0) {
+                this.searchResults = results.sort((a, b) => {
+                    return (a.label > b.label) ? 1 : -1;
+                });    
             }
-
-            results.push(consumer);    
-        })
-
-        if(results.length > 0) {
-            this.searchResults = results.sort((a, b) => {
-                return (a.label > b.label) ? 1 : -1;
-            });    
+        } catch(error) {
+            utility.showNotif('There has been an error loading consumers!', result.error, 'error');
         }
     }
 

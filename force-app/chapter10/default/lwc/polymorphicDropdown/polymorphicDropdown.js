@@ -10,9 +10,6 @@ export default class SearchableDropdown extends LightningElement {
     selectOption(event) {
         this.selectedOption = event.currentTarget.dataset.id;
 
-        console.log(JSON.stringify(this.selectedOption));
-        console.log(JSON.stringify(this.dropdownOptions));
-
         let selectedElement = this.dropdownOptions.filter(option => option.label === this.selectedOption);
 
         const setSelectionEvent = new CustomEvent('setselection', {
