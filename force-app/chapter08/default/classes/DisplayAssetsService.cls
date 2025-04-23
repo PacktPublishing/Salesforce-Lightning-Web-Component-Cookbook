@@ -11,19 +11,12 @@ public with sharing class DisplayAssetsService {
         return this.selector.countAssets(accountId);
     }
 
-    /** Chapter 9 & 10 Methods & Wrappers */
+    /** Chapter 9 Method & Wrapper */
     public void saveAssetWrappers(List<DisplayAssetWrapper> wrapperList) {
         List<Asset> assetsToUpdate = new List<Asset>();
 
         for(DisplayAssetWrapper wrapper : wrapperList) {
             Asset assetToUpdate = new Asset(Id = wrapper.Id, Status = wrapper.Status);
-            // Id idToUse = Id.valueOf(wrapper.contactOrCustomerId);
-
-            // if(idToUse.getSObjectType().getDescribe().getName() == 'Contact') {
-            //     assetToUpdate.ContactId = idToUse;
-            // } else if(idToUse.getSObjectType().getDescribe().getName() == 'Customer') {
-            //     assetToUpdate.Customer__c = idToUse;
-            // }
 
             assetsToUpdate.add(assetToUpdate);
         }
@@ -34,6 +27,5 @@ public with sharing class DisplayAssetsService {
     public class DisplayAssetWrapper {
         String Id;
         String Status;
-        String contactOrCustomerId;
     }
 }

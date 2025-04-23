@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-form-element">
+        <div class="slds-form-element__control">
+            <lightning-input
+                label={dropdownLabel}
+                onchange={sendSearch}
+                value={displayedOption}
+                type="search"
+            ></lightning-input>
+            <template lwc:if={searchResults}>
+                <c-polymorphic-dropdown
+                    dropdown-label={dropdownLabel}
+                    dropdown-placeholder={dropdownPlaceholder}
+                    dropdown-options={searchResults}
+                    onsetselection={handleSelection}
+                ></c-polymorphic-dropdown>
+            </template>
+        </div>
+    </div>
+</template>
