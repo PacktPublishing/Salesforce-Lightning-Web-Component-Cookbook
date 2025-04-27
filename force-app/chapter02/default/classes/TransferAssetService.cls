@@ -60,11 +60,11 @@ public with sharing class TransferAssetService {
         }
     }
 
-    public class assetWrapper {
+    public class AssetWrapper {
         public String assetId;
         public String accountId;
 
-        public assetWrapper(String assetId, String accountId) {
+        public AssetWrapper(String assetId, String accountId) {
             this.assetId = assetId;
             this.accountId = accountId;
         }
