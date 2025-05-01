@@ -1,7 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
 export default class SearchableDropdown extends LightningElement {
-    @api dropdownLabel;
     @api dropdownPlaceholder;
     @api dropdownOptions;
 
@@ -9,8 +8,9 @@ export default class SearchableDropdown extends LightningElement {
 
     selectOption(event) {
         this.selectedOption = event.currentTarget.dataset.id;
+        let tempOptions = this.dropdownOptions;
 
-        let selectedElement = this.dropdownOptions.filter(option => option.label === this.selectedOption);
+        let selectedElement = tempOptions.filter(option => option.label === this.selectedOption);
 
         const setSelectionEvent = new CustomEvent('setselection', {
             bubbles : false,

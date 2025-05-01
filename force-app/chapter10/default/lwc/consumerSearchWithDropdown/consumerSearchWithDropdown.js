@@ -1,10 +1,11 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import returnSearchedConsumerWrappers from '@salesforce/apex/RecentConsumerController.returnSearchedConsumerWrappers';
 import Utilities from 'c/notifUtils';
 let utility;
 
 export default class ConsumerSearchWithDropdown extends LightningElement {
     searchResults;
+
     debounceTimeout;
 
     selectedOption;
@@ -14,23 +15,41 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
         utility = new Utilities(this);
     }
 
-    sendSearch(event) {
-        let searchTerm = event.detail.value;
+    @api
+    showHelpMessageIfInvalid() {
+        let component = this.template.querySelector('[data-inputable="true"]');
+        component.showHelpMessageIfInvalid();
+    }
 
-        if(searchTerm.length > 2) {
-            if(this.debounceTimeout) {
-                clearTimeout(this.debounceTimeout);
-            }
-            // eslint-disable-next-line @lwc/lwc/no-async-operation
-            this.debounceTimeout = setTimeout(() => {
-                try {
-                    this.search(searchTerm);
-                } catch(error) {
-                    utility.showNotif('There has been an error returning consumers!', result.error, 'error');
+    @api
+    get validity() {
+        let component = this.template.querySelector('[data-inputable="true"]');
+        return component.validity;
+    }
+
+    async sendSearch(event) {
+        try {
+            console.log('sending search...');
+
+            let searchTerm = event.detail.value;
+
+            if(searchTerm.length > 2) {
+                if(this.debounceTimeout) {
+                    clearTimeout(this.debounceTimeout);
                 }
-            }, 300);
-        } else {
-            this.searchResults = null;
+                // eslint-disable-next-line @lwc/lwc/no-async-operation
+                this.debounceTimeout = setTimeout(() => {
+                    try {
+                        this.search(searchTerm);
+                    } catch(error) {
+                        utility.showNotif('There has been an error returning consumers!', result.error, 'error');
+                    }
+                }, 300);
+            } else {
+                this.searchResults = undefined;
+            }
+        } catch(error) {
+            utility.showNotif('There has been an error searching!', error.message, 'error');
         }
     }
 
@@ -66,7 +85,8 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
 
     handleSelection(event) {
         this.selectedOption = event.detail.selectedElement[0];
+        console.log(JSON.stringify(this.selectedOption));
         this.displayedOption = this.selectedOption.label;
-        this.searchResults = null;
+        this.searchResults = undefined;
     }
 }

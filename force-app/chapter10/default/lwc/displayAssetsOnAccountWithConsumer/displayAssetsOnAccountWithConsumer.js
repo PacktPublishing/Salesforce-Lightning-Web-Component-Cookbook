@@ -7,12 +7,12 @@ import returnAssetCount from '@salesforce/apex/DisplayAssetsController.returnAss
 import updateAssetWrappers from '@salesforce/apex/DisplayAssetsController.updateAssetWrappers';
 import NO_IMAGE_FOUND from '@salesforce/resourceUrl/NoImageFound';
 import FORM_FACTOR from '@salesforce/client/formFactor';
-import { WIDE_COLUMNS_DEFINITION, NARROW_COLUMNS_DEFINITION } from './assetsColumns';
+import { WIDE_COLUMNS_DEFINITION, NARROW_COLUMNS_DEFINITION } from './assetsColumns.js';
 import { NavigationMixin } from 'lightning/navigation';
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class DisplayAssetsOnAccountEditable extends NavigationMixin(LightningElement) {
+export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(LightningElement) {
     @api recordId
     scrollingAssets = [];
     assetsForDatatable;
@@ -107,7 +107,32 @@ export default class DisplayAssetsOnAccountEditable extends NavigationMixin(Ligh
             asset.statusLabel = asset.Status;
             asset.statusValue = asset.Status;
             asset.statusPlaceholder = asset.Status;
-            asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue);
+            asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue)
+
+            let hasInquiries = Object.prototype.hasOwnProperty.call(asset, 'Consumer_Inquiries__r');
+
+            if(hasInquiries === false) {
+                asset.consumerLabel = undefined;
+                asset.consumerValue = undefined;
+                asset.consumerPlaceholder = undefined;
+                return;
+            }
+
+            asset.mostRecentInquiry = asset.Consumer_Inquiries__r[0];
+
+            console.log(JSON.stringify(asset.mostRecentInquiry));
+
+            if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Contact__c')) {
+                console.log('contact');
+                asset.consumerName = asset.mostRecentInquiry.Contact__r.Name;
+                asset.consumerId = asset.mostRecentInquiry.Contact__c;
+            }
+
+            if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Customer__c')) {
+                console.log('customer');
+                asset.consumerName = asset.mostRecentInquiry.Customer__r.Name;
+                asset.consumerId = asset.mostRecentInquiry.Customer__c;
+            }
         });
 
         return tempAssets;
@@ -148,30 +173,38 @@ export default class DisplayAssetsOnAccountEditable extends NavigationMixin(Ligh
     }
 
     handleInlineEdit(event) {
-        let draftValue = event.detail.draftValues[0];
+        try{ 
+            console.log('editing...');
+            let draftValue = event.detail.draftValues[0];
 
-        let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
+            console.log(draftValue);
 
-        let tempAsset = this.assetsForDatatable[draftValueIndex];
+            let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
 
-        tempAsset.oldLabel = tempAsset.statusLabel;
-        tempAsset.oldValue = tempAsset.statusValue;
-        tempAsset.oldPlaceholder = tempAsset.statusPlaceholder;
-        tempAsset.oldOptions = tempAsset.statusOptions;
+            let tempAsset = this.assetsForDatatable[draftValueIndex];
 
-        tempAsset.statusLabel = draftValue.Status;
-        tempAsset.statusValue = draftValue.Status;
-        tempAsset.statusPlaceholder = draftValue.Status;
-        tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
+            tempAsset.oldLabel = tempAsset.statusLabel;
+            tempAsset.oldValue = tempAsset.statusValue;
+            tempAsset.oldPlaceholder = tempAsset.statusPlaceholder;
+            tempAsset.oldOptions = tempAsset.statusOptions;
 
-        this.assetsForDatatable[draftValueIndex] = tempAsset;
+            tempAsset.statusLabel = draftValue.Status;
+            tempAsset.statusValue = draftValue.Status;
+            tempAsset.statusPlaceholder = draftValue.Status;
+            tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
 
-        let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
+            this.assetsForDatatable[draftValueIndex] = tempAsset;
 
-        if(draftIndex < 0) {
-            this.draftValues.push(draftValue);
-        } else {
-            this.draftValues[draftIndex] = draftValue;
+            let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
+
+            if(draftIndex < 0) {
+                this.draftValues.push(draftValue);
+            } else {
+                this.draftValues[draftIndex] = draftValue;
+            }
+        } catch(error) {
+            utility.showNotif('There has been an error editing assets!', this.error.message, 'error');
+
         }
     }
 

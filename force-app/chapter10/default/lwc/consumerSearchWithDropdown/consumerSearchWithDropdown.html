@@ -2,15 +2,14 @@
     <div class="slds-form-element">
         <div class="slds-form-element__control">
             <lightning-input
-                label={dropdownLabel}
+                data-inputable="true"
                 onchange={sendSearch}
                 value={displayedOption}
-                type="search"
+                type="text"
+                variant="label-hidden"
             ></lightning-input>
             <template lwc:if={searchResults}>
                 <c-polymorphic-dropdown
-                    dropdown-label={dropdownLabel}
-                    dropdown-placeholder={dropdownPlaceholder}
                     dropdown-options={searchResults}
                     onsetselection={handleSelection}
                 ></c-polymorphic-dropdown>
