@@ -16,7 +16,7 @@ export default class PicklistDatatable extends LightningDatatable {
             template : consumerInquiry,
             editTemplate: consumerEdit,
             standardCellLayout: true,
-            typeAttributes: ['consumerName', 'consumerId']
+            typeAttributes: ['label', 'placeholder', 'value']
         }
     };
 }

@@ -88,5 +88,17 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
         console.log(JSON.stringify(this.selectedOption));
         this.displayedOption = this.selectedOption.label;
         this.searchResults = undefined;
+
+        console.log('selected element consumersearch.js: ' + JSON.stringify(this.selectedOption));
+
+        const setSearchSelectionEvent = new CustomEvent('setsearchvalue', {
+            bubbles : true,
+            composed : true,
+            detail: {
+                selectedElement : this.selectedOption
+            }
+        });
+
+        this.dispatchEvent(setSearchSelectionEvent);
     }
 }

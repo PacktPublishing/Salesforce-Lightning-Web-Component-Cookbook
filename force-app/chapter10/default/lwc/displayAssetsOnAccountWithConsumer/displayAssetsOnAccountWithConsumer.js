@@ -124,14 +124,14 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Contact__c')) {
                 console.log('contact');
-                asset.consumerName = asset.mostRecentInquiry.Contact__r.Name;
-                asset.consumerId = asset.mostRecentInquiry.Contact__c;
+                asset.consumerLabel = asset.mostRecentInquiry.Contact__r.Name;
+                asset.consumerValue = asset.mostRecentInquiry.Contact__c;
             }
 
             if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Customer__c')) {
                 console.log('customer');
-                asset.consumerName = asset.mostRecentInquiry.Customer__r.Name;
-                asset.consumerId = asset.mostRecentInquiry.Customer__c;
+                asset.consumerLabel = asset.mostRecentInquiry.Customer__r.Name;
+                asset.consumerValue = asset.mostRecentInquiry.Customer__c;
             }
         });
 
@@ -218,6 +218,17 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             this.error = error;
             utility.showNotif('There has been an error saving assets!', this.error.message, 'error');
         }
+    }
+
+    handleSearchSelection(event) {
+        console.log('handling search seleciton...');
+
+        let searchSelection = event.detail.selectedElement;
+
+        let rowIndex = this.assetsForDatatable.findIndex(row => row.Id === event.detail.selectedElement.Id);
+
+        console.log(JSON.stringify(searchSelection));
+        console.log(rowIndex);
     }
 
     handleInlineEditCancel() {

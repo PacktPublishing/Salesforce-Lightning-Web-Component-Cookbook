@@ -12,6 +12,8 @@ export default class SearchableDropdown extends LightningElement {
 
         let selectedElement = tempOptions.filter(option => option.label === this.selectedOption);
 
+        console.log('selected element polymorphic.js: ' + JSON.stringify(selectedElement));
+
         const setSelectionEvent = new CustomEvent('setselection', {
             bubbles : false,
             composed : false,

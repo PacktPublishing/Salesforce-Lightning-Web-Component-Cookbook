@@ -23,12 +23,13 @@ export const WIDE_COLUMNS_DEFINITION = [
     },
     {
         type: 'searchColumn',
-        fieldName: 'consumerName',
+        fieldName: 'Consumer',
         label: 'Most Recent Consumer Inquiry',
         editable: true,
         typeAttributes : {
-            consumerName: {fieldName: 'consumerName'},
-            consumerId: {fieldName: 'consumerId'},
+            label: {fieldName: 'consumerLabel'},
+            value: {fieldName: 'consumerValue'},
+            placeholder: {fieldname: 'consumerPlaceholder'}
         }
     }
 ];
