@@ -169,9 +169,9 @@ export default class DisplayAssetsOnAccountEditable extends NavigationMixin(Ligh
         let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
 
         if(draftIndex < 0) {
-            this.draftValues.push(draftValue);
+            this.draftValues.push(tempAsset);
         } else {
-            this.draftValues[draftIndex] = draftValue;
+            this.draftValues[draftIndex] = tempAsset;
         }
     }
 

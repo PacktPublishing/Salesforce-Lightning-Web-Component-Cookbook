@@ -29,6 +29,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     draftValues = [];
 
     searchedLabel;
+    searchedValue;
 
     get assetColumns() {
         if(FORM_FACTOR === 'Large' && this.componentWidth === 'Wide') {
@@ -49,10 +50,12 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
 
-            this.assetsForDatatable[0].consumerEditable = true;
+            if(this.assetsForDatatable.length > 0) {
+                this.selectedAsset = this.assetsForDatatable[0];
+                this.selectedRows = [this.selectedAsset?.Id];
 
-            this.selectedAsset = this.assetsForDatatable[0];
-            this.selectedRows = [this.selectedAsset?.Id]
+                this.assetsForDatatable[0].consumerEditable = true;
+            }
 
             this.error = undefined;
 
@@ -126,16 +129,12 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             asset.mostRecentInquiry = asset.Consumer_Inquiries__r[0];
 
-            console.log(JSON.stringify(asset.mostRecentInquiry));
-
             if(Object.hasOwn(asset.mostRecentInquiry, 'Contact__c')) {
-                console.log('contact');
                 asset.consumerLabel = asset.mostRecentInquiry.Contact__r.Name;
                 asset.consumerValue = asset.mostRecentInquiry.Contact__c;
             }
 
             if(Object.hasOwn(asset.mostRecentInquiry, 'Customer__c')) {
-                console.log('customer');
                 asset.consumerLabel = asset.mostRecentInquiry.Customer__r.Name;
                 asset.consumerValue = asset.mostRecentInquiry.Customer__c;
             }
@@ -193,18 +192,14 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
         try{ 
             let draftValue = event.detail.draftValues[0];
             let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
-            let tempAsset = this.assetsForDatatable[draftValueIndex];
-
-            console.log('draft value ' + JSON.stringify(draftValue));
-            console.log('temp asset ' + JSON.stringify(tempAsset));
-            
+            let tempAsset = this.assetsForDatatable[draftValueIndex];            
 
             if(Object.hasOwn(draftValue, 'Consumer')) {
                 tempAsset.oldConsumerValue = tempAsset.consumerValue;
                 tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
 
                 tempAsset.consumerLabel = this.searchedLabel;
-                tempAsset.consumerValue = draftValue.Consumer;
+                tempAsset.consumerValue = this.searchedValue;
             }
             
             if (Object.hasOwn(draftValue, 'Status')) {
@@ -224,9 +219,9 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
 
             if(draftIndex < 0) {
-                this.draftValues.push(draftValue);
+                this.draftValues.push(tempAsset);
             } else {
-                this.draftValues[draftIndex] = draftValue;
+                this.draftValues[draftIndex] = tempAsset;
             }
         } catch(error) {
             utility.showNotif('There has been an error editing assets!', this.error.message, 'error');
@@ -247,11 +242,10 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     }
 
     handleSearchSelection(event) {
-        console.log('handling search seleciton...');
-
         let searchSelection = event.detail.selectedElement;
 
         this.searchedLabel = searchSelection.label;
+        this.searchedValue = searchSelection.value;
     }
 
     handleInlineEditCancel() {
@@ -259,8 +253,6 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             let draftValueIndex = this.assetsForDatatable.findIndex(draftValue => draft.Id === draftValue.Id);
 
             let tempAsset = this.assetsForDatatable[draftValueIndex];
-
-            console.log(JSON.stringify(tempAsset));
 
             if(Object.hasOwn(tempAsset, 'oldStatusLabel')) {
                 tempAsset.statusLabel = tempAsset.oldStatusLabel;

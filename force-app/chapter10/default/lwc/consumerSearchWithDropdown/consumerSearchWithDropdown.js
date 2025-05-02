@@ -38,8 +38,6 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
 
     async sendSearch(event) {
         try {
-            console.log('sending search...');
-
             let searchTerm = event.detail.value;
 
             if(searchTerm.length > 2) {
@@ -94,11 +92,8 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
 
     handleSelection(event) {
         this.selectedOption = event.detail.selectedElement[0];
-        console.log(JSON.stringify(this.selectedOption));
         this.displayedOption = this.selectedOption.label;
         this.searchResults = undefined;
-
-        console.log('selected element consumersearch.js: ' + JSON.stringify(this.selectedOption));
 
         const setSearchSelectionEvent = new CustomEvent('setsearchvalue', {
             bubbles : true,
