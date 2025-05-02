@@ -3,7 +3,7 @@
         <select class="slds-select" id="selector" multiple="">
             <template for:each={dropdownOptions} for:item="option">
                 <div
-                    data-id={option.label}
+                    data-id={option.value}
                     key={option.value}
                     class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
                     role="option"
