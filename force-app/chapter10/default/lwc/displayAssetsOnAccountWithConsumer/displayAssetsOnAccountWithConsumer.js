@@ -47,6 +47,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
 
+            this.assetsForDatatable[0].consumerEditable = true;
+
             this.selectedAsset = this.assetsForDatatable[0];
             this.selectedRows = [this.selectedAsset?.Id]
 
@@ -111,6 +113,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             let hasInquiries = Object.prototype.hasOwnProperty.call(asset, 'Consumer_Inquiries__r');
 
+            asset.consumerEditable = false;
+
             if(hasInquiries === false) {
                 asset.consumerLabel = undefined;
                 asset.consumerValue = undefined;
@@ -159,6 +163,17 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     updateCarousel(event) {
         let selectedAssetRows = event.detail.selectedRows;
         this.selectedAsset = selectedAssetRows[0];
+
+        this.assetsForDatatable.forEach(asset => {
+            if(asset.Id === this.selectedAsset.Id) {
+                asset.consumerEditable = true;
+            } else {
+                asset.consumerEditable = false;
+            }
+        });
+
+        this.assetsForDatatable = [...this.assetsForDatatable];
+
         this.selectedRows = [this.selectedAsset.Id];
     }
 

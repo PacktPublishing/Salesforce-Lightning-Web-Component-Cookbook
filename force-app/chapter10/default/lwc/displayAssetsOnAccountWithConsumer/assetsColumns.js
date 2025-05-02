@@ -25,7 +25,7 @@ export const WIDE_COLUMNS_DEFINITION = [
         type: 'searchColumn',
         fieldName: 'Consumer',
         label: 'Most Recent Consumer Inquiry',
-        editable: true,
+        editable: {fieldName : 'consumerEditable'},
         typeAttributes : {
             label: {fieldName: 'consumerLabel'},
             value: {fieldName: 'consumerValue'},
