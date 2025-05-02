@@ -4,6 +4,15 @@ import Utilities from 'c/notifUtils';
 let utility;
 
 export default class ConsumerSearchWithDropdown extends LightningElement {
+    _value;
+    
+    @api
+    get value() {
+        return this._value;
+    } set value(val) {
+        this._value = val;
+    }
+
     searchResults;
 
     debounceTimeout;

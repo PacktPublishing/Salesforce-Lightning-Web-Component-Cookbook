@@ -66,7 +66,7 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
-            if(!Object.prototype.hasOwnProperty.call(asset, 'Primary_Image_Small__c')) {
+            if(!Object.hasOwn(asset, 'Primary_Image_Small__c')) {
                 asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {

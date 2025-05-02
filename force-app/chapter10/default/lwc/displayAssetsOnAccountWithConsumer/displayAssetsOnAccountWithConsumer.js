@@ -28,6 +28,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     statusPickvals = [];
     draftValues = [];
 
+    searchedLabel;
+
     get assetColumns() {
         if(FORM_FACTOR === 'Large' && this.componentWidth === 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
@@ -98,7 +100,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
     formatAssets(tempAssets) {
         tempAssets.forEach(asset => {
-            if(!Object.prototype.hasOwnProperty.call(asset, 'Primary_Image_Small__c')) {
+            if(!Object.hasOwn(asset, 'Primary_Image_Small__c')) {
                 asset.Primary_Image_Small__c = NO_IMAGE_FOUND;
 
                 if(!asset.Is_Public_Domain__c) {
@@ -111,7 +113,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             asset.statusPlaceholder = asset.Status;
             asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue)
 
-            let hasInquiries = Object.prototype.hasOwnProperty.call(asset, 'Consumer_Inquiries__r');
+            let hasInquiries = Object.hasOwn(asset, 'Consumer_Inquiries__r');
 
             asset.consumerEditable = false;
 
@@ -126,13 +128,13 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
             console.log(JSON.stringify(asset.mostRecentInquiry));
 
-            if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Contact__c')) {
+            if(Object.hasOwn(asset.mostRecentInquiry, 'Contact__c')) {
                 console.log('contact');
                 asset.consumerLabel = asset.mostRecentInquiry.Contact__r.Name;
                 asset.consumerValue = asset.mostRecentInquiry.Contact__c;
             }
 
-            if(Object.prototype.hasOwnProperty.call(asset.mostRecentInquiry, 'Customer__c')) {
+            if(Object.hasOwn(asset.mostRecentInquiry, 'Customer__c')) {
                 console.log('customer');
                 asset.consumerLabel = asset.mostRecentInquiry.Customer__r.Name;
                 asset.consumerValue = asset.mostRecentInquiry.Customer__c;
@@ -189,24 +191,33 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
     handleInlineEdit(event) {
         try{ 
-            console.log('editing...');
             let draftValue = event.detail.draftValues[0];
-
-            console.log(draftValue);
-
             let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
-
             let tempAsset = this.assetsForDatatable[draftValueIndex];
 
-            tempAsset.oldLabel = tempAsset.statusLabel;
-            tempAsset.oldValue = tempAsset.statusValue;
-            tempAsset.oldPlaceholder = tempAsset.statusPlaceholder;
-            tempAsset.oldOptions = tempAsset.statusOptions;
+            console.log('draft value ' + JSON.stringify(draftValue));
+            console.log('temp asset ' + JSON.stringify(tempAsset));
+            
 
-            tempAsset.statusLabel = draftValue.Status;
-            tempAsset.statusValue = draftValue.Status;
-            tempAsset.statusPlaceholder = draftValue.Status;
-            tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
+            if(Object.hasOwn(draftValue, 'Consumer')) {
+                tempAsset.oldConsumerValue = tempAsset.consumerValue;
+                tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
+
+                tempAsset.consumerLabel = this.searchedLabel;
+                tempAsset.consumerValue = draftValue.Consumer;
+            }
+            
+            if (Object.hasOwn(draftValue, 'Status')) {
+                tempAsset.oldStatusLabel = tempAsset.statusLabel;
+                tempAsset.oldStatusValue = tempAsset.statusValue;
+                tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
+                tempAsset.oldStatusOptions = tempAsset.statusOptions;
+    
+                tempAsset.statusLabel = draftValue.Status;
+                tempAsset.statusValue = draftValue.Status;
+                tempAsset.statusPlaceholder = draftValue.Status;
+                tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
+            }
 
             this.assetsForDatatable[draftValueIndex] = tempAsset;
 
@@ -240,10 +251,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
         let searchSelection = event.detail.selectedElement;
 
-        let rowIndex = this.assetsForDatatable.findIndex(row => row.Id === event.detail.selectedElement.Id);
-
-        console.log(JSON.stringify(searchSelection));
-        console.log(rowIndex);
+        this.searchedLabel = searchSelection.label;
     }
 
     handleInlineEditCancel() {
@@ -251,10 +259,20 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             let draftValueIndex = this.assetsForDatatable.findIndex(draftValue => draft.Id === draftValue.Id);
 
             let tempAsset = this.assetsForDatatable[draftValueIndex];
-            tempAsset.statusLabel = tempAsset.oldLabel;
-            tempAsset.statusValue = tempAsset.oldValue;
-            tempAsset.statusPlaceholder = tempAsset.oldPlaceholder;
-            tempAsset.statusOptions = tempAsset.oldOptions;
+
+            console.log(JSON.stringify(tempAsset));
+
+            if(Object.hasOwn(tempAsset, 'oldStatusLabel')) {
+                tempAsset.statusLabel = tempAsset.oldStatusLabel;
+                tempAsset.statusValue = tempAsset.oldStatusValue;
+                tempAsset.statusPlaceholder = tempAsset.oldStatusPlaceholder;
+                tempAsset.statusOptions = tempAsset.oldStatusOptions;    
+            }
+
+            if(Object.hasOwn(tempAsset, 'oldConsumerLabel')) {
+                tempAsset.consumerLabel = tempAsset.oldConsumerLabel;
+                tempAsset.consumerValue = tempAsset.oldConsumerValue;
+            }
 
             this.assetsForDatatable[draftValueIndex] = tempAsset;
         });
