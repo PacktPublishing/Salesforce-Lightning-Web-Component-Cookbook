@@ -116,11 +116,9 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             asset.statusPlaceholder = asset.Status;
             asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue)
 
-            let hasInquiries = Object.hasOwn(asset, 'Consumer_Inquiries__r');
-
             asset.consumerEditable = false;
 
-            if(hasInquiries === false) {
+            if(Object.hasOwn(asset, 'Consumer_Inquiries__r') === false) {
                 asset.consumerLabel = undefined;
                 asset.consumerValue = undefined;
                 asset.consumerPlaceholder = undefined;
@@ -190,6 +188,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
 
     handleInlineEdit(event) {
         try{ 
+            console.log('editingg...');
+            console.log(JSON.stringify(event.detail.draftValues));
             let draftValue = event.detail.draftValues[0];
             let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
             let tempAsset = this.assetsForDatatable[draftValueIndex];            
@@ -242,6 +242,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     }
 
     handleSearchSelection(event) {
+        console.log('handling searched selection...');
         let searchSelection = event.detail.selectedElement;
 
         this.searchedLabel = searchSelection.label;
