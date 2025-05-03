@@ -49,7 +49,7 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
                     try {
                         this.search(searchTerm);
                     } catch(error) {
-                        utility.showNotif('There has been an error returning consumers!', result.error, 'error');
+                        utility.showNotif('There has been an error returning consumers!', error, 'error');
                     }
                 }, 300);
             } else {
@@ -86,7 +86,7 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
                 });    
             }
         } catch(error) {
-            utility.showNotif('There has been an error loading consumers!', result.error, 'error');
+            utility.showNotif('There has been an error loading consumers!', error, 'error');
         }
     }
 
