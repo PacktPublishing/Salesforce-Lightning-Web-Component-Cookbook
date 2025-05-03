@@ -31,6 +31,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     searchedLabel;
     searchedValue;
 
+    checkboxColumnHidden = false;
+
     get assetColumns() {
         if(FORM_FACTOR === 'Large' && this.componentWidth === 'Wide') {
             return WIDE_COLUMNS_DEFINITION;
@@ -55,6 +57,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
                 this.selectedRows = [this.selectedAsset?.Id];
 
                 this.assetsForDatatable[0].consumerEditable = true;
+                this.assetsForDatatable[0].statusEditable = true;
             }
 
             this.error = undefined;
@@ -115,12 +118,13 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             asset.statusValue = asset.Status;
             asset.statusPlaceholder = asset.Status;
             asset.statusOptions = this.statusPickvals.filter(val => val.value !== asset.statusValue)
+            asset.statusEditable = false;
 
             asset.consumerEditable = false;
 
             if(Object.hasOwn(asset, 'Consumer_Inquiries__r') === false) {
                 asset.consumerLabel = undefined;
-                asset.consumerValue = undefined;
+                asset.consumerValue = asset.Id;
                 asset.consumerPlaceholder = undefined;
                 return;
             }
@@ -166,8 +170,10 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
         this.assetsForDatatable.forEach(asset => {
             if(asset.Id === this.selectedAsset.Id) {
                 asset.consumerEditable = true;
+                asset.statusEditable = true;
             } else {
                 asset.consumerEditable = false;
+                asset.statusEditable = false;
             }
         });
 
@@ -187,6 +193,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     }
 
     handleInlineEdit(event) {
+        this.checkboxColumnHidden = true;
+
         try{ 
             console.log('editingg...');
             console.log(JSON.stringify(event.detail.draftValues));
@@ -239,6 +247,8 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             this.error = error;
             utility.showNotif('There has been an error saving assets!', this.error.message, 'error');
         }
+
+        this.checkboxColumnHidden = false;
     }
 
     handleSearchSelection(event) {
