@@ -28,8 +28,7 @@ export const WIDE_COLUMNS_DEFINITION = [
         editable: {fieldName : 'consumerEditable'},
         typeAttributes : {
             label: {fieldName: 'consumerLabel'},
-            value: {fieldName: 'consumerValue'},
-            placeholder: {fieldname: 'consumerPlaceholder'}
+            value: {fieldName: 'consumerValue'}
         }
     }
 ];
