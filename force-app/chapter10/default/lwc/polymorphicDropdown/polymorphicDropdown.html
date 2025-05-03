@@ -1,33 +1,25 @@
 <template>
-    <div if:true={dropdownOptions} role="listbox">
-        <select class="slds-select" id="selector" multiple="">
-            <template for:each={dropdownOptions} for:item="option">
-                <div
-                    data-id={option.value}
-                    key={option.value}
-                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
-                    role="option"
-                    onclick={selectOption}
-                >
-                    <span class="slds-media__figure slds-listbox__option-icon slds-p-horizontal_medium slds-align_absolute-center">
-                        <span class="slds-icon_container">
-                            <lightning-icon 
-                                icon-name={option.icon} 
-                                alternative-text={option.altText}
-                                size="small"
-                            ></lightning-icon>
-                        </span>
-                    </span>
-                    <span class="slds-media__body">
-                        <span class="slds-media__figure slds-listbox__option-icon">
-                            <span class="slds-media__body">
-                                <span title={option.label}>{option.label}</span>
-                                <span class="slds-listbox__option-meta">{option.fact}</span>
-                            </span>
-                        </span>
-                    </span>
-                </div>
-            </template>
-        </select>
-    </div>
+    <template for:each={dropdownOptions} for:item="option">
+        <div
+            data-id={option.value}
+            key={option.value}
+            class="slds-media slds-listbox__option slds-media_small"
+            role="option"
+            onclick={selectOption}
+        >
+            <div class="slds-media__figure slds-listbox__option-icon slds-p-horizontal_medium slds-align_absolute-center">
+                <span class="slds-icon_container">
+                    <lightning-icon 
+                        icon-name={option.icon} 
+                        alternative-text={option.altText}
+                        size="small"
+                    ></lightning-icon>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <span title={option.label}>{option.label}</span>
+                <span class="slds-listbox__option-meta">{option.fact}</span>
+            </div>
+        </div>
+    </template>
 </template>
