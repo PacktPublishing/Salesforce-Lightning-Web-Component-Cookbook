@@ -200,33 +200,33 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             let tempAsset = this.assetsForDatatable[draftValueIndex];            
 
             if(Object.hasOwn(draftValue, 'Consumer')) {
-                tempAsset.oldConsumerValue = tempAsset.consumerValue;
-                tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
+                    tempAsset.oldConsumerValue = tempAsset.consumerValue;
+                    tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
 
-                tempAsset.consumerLabel = this.searchedLabel;
-                tempAsset.consumerValue = this.searchedValue;
+                    tempAsset.consumerLabel = this.searchedLabel;
+                    tempAsset.consumerValue = this.searchedValue;
             }
             
             if (Object.hasOwn(draftValue, 'Status')) {
-                tempAsset.oldStatusLabel = tempAsset.statusLabel;
-                tempAsset.oldStatusValue = tempAsset.statusValue;
-                tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
-                tempAsset.oldStatusOptions = tempAsset.statusOptions;
-    
-                tempAsset.statusLabel = draftValue.Status;
-                tempAsset.statusValue = draftValue.Status;
-                tempAsset.statusPlaceholder = draftValue.Status;
-                tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
+                    tempAsset.oldStatusLabel = tempAsset.statusLabel;
+                    tempAsset.oldStatusValue = tempAsset.statusValue;
+                    tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
+                    tempAsset.oldStatusOptions = tempAsset.statusOptions;
+        
+                    tempAsset.statusLabel = draftValue.Status;
+                    tempAsset.statusValue = draftValue.Status;
+                    tempAsset.statusPlaceholder = draftValue.Status;
+                    tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
             }
 
-            this.assetsForDatatable[draftValueIndex] = tempAsset;
+                this.assetsForDatatable[draftValueIndex] = tempAsset;
 
-            let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
+                let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
 
-            if(draftIndex < 0) {
-                this.draftValues.push(tempAsset);
-            } else {
-                this.draftValues[draftIndex] = tempAsset;
+                if(draftIndex < 0) {
+                    this.draftValues.push(tempAsset);
+                } else {
+                    this.draftValues[draftIndex] = tempAsset;
             }
         } catch(error) {
             utility.showNotif('There has been an error editing assets!', this.error.message, 'error');
@@ -277,6 +277,7 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
         });
 
         this.draftValues = [];
+        this.checkboxColumnHidden = false;
     }
 
     resizeFunction = () => {
