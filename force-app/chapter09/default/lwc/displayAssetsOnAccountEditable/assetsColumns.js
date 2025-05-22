@@ -16,7 +16,7 @@ export const WIDE_COLUMNS_DEFINITION = [
     },
     {
         type: 'picklistColumn',
-        fieldName: 'Status',
+        fieldName: 'DisplayStatus',
         label: 'Display Status',
         editable: true,
         typeAttributes : {

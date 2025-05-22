@@ -197,36 +197,38 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
         try{ 
             let draftValue = event.detail.draftValues[0];
             let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
-            let tempAsset = this.assetsForDatatable[draftValueIndex];            
+            let tempAsset = this.assetsForDatatable[draftValueIndex];
 
             if(Object.hasOwn(draftValue, 'Consumer')) {
-                    tempAsset.oldConsumerValue = tempAsset.consumerValue;
-                    tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
+                tempAsset.oldConsumerValue = tempAsset.consumerValue;
+                tempAsset.oldConsumerLabel = tempAsset.consumerLabel;
 
-                    tempAsset.consumerLabel = this.searchedLabel;
-                    tempAsset.consumerValue = this.searchedValue;
-            }
-            
-            if (Object.hasOwn(draftValue, 'Status')) {
+                tempAsset.consumerLabel = this.searchedLabel;
+                tempAsset.consumerValue = this.searchedValue;
+            } else if (Object.hasOwn(draftValue, 'DisplayStatus')) {
+                if(draftValue.DisplayStatus) {
                     tempAsset.oldStatusLabel = tempAsset.statusLabel;
                     tempAsset.oldStatusValue = tempAsset.statusValue;
                     tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
                     tempAsset.oldStatusOptions = tempAsset.statusOptions;
         
-                    tempAsset.statusLabel = draftValue.Status;
-                    tempAsset.statusValue = draftValue.Status;
-                    tempAsset.statusPlaceholder = draftValue.Status;
+                    tempAsset.statusLabel = draftValue.DisplayStatus;
+                    tempAsset.statusValue = draftValue.DisplayStatus;
+                    tempAsset.statusPlaceholder = draftValue.DisplayStatus;
                     tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
+                }
+            } else {
+                return;
             }
 
-                this.assetsForDatatable[draftValueIndex] = tempAsset;
+            this.assetsForDatatable[draftValueIndex] = tempAsset;
 
-                let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
+            let draftIndex = this.draftValues.findIndex(draft => draft.Id === draftValue.Id);
 
-                if(draftIndex < 0) {
-                    this.draftValues.push(tempAsset);
-                } else {
-                    this.draftValues[draftIndex] = tempAsset;
+            if(draftIndex < 0) {
+                this.draftValues.push(tempAsset);
+            } else {
+                this.draftValues[draftIndex] = tempAsset;
             }
         } catch(error) {
             utility.showNotif('There has been an error editing assets!', this.error.message, 'error');

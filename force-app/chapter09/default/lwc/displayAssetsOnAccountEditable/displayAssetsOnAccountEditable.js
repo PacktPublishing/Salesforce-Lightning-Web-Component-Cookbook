@@ -159,9 +159,9 @@ export default class DisplayAssetsOnAccountEditable extends NavigationMixin(Ligh
         tempAsset.oldPlaceholder = tempAsset.statusPlaceholder;
         tempAsset.oldOptions = tempAsset.statusOptions;
 
-        tempAsset.statusLabel = draftValue.Status;
-        tempAsset.statusValue = draftValue.Status;
-        tempAsset.statusPlaceholder = draftValue.Status;
+        tempAsset.statusLabel = draftValue.DisplayStatus;
+        tempAsset.statusValue = draftValue.DisplayStatus;
+        tempAsset.statusPlaceholder = draftValue.DisplayStatus;
         tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
 
         this.assetsForDatatable[draftValueIndex] = tempAsset;

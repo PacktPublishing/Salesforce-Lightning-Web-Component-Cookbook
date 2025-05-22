@@ -18,13 +18,13 @@ public with sharing class DisplayAssetsService {
         List<Consumer_Inquiry__c> inquiriesToInsert = new List<Consumer_Inquiry__c>();
 
         for(DisplayAssetWrapper wrapper : wrapperList) {
-            if(wrapper.statusValue != null) {
+            if(wrapper.statusValue != null && wrapper.statusValue != '') {
                 Asset assetToUpdate = new Asset(Id = wrapper.Id, Status = wrapper.statusValue);
 
                 assetsToUpdate.add(assetToUpdate);
             }
 
-            if(wrapper.consumerValue != null) {
+            if(wrapper.consumerValue != null && wrapper.consumerValue != '') {
                 Id idToUse = Id.valueOf(wrapper.consumerValue);
 
                 Consumer_Inquiry__c newInquiry = new Consumer_Inquiry__c(Asset__c = wrapper.Id);
