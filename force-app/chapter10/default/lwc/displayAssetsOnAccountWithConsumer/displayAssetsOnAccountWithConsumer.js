@@ -196,8 +196,6 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
         this.checkboxColumnHidden = true;
 
         try{ 
-            console.log('editingg...');
-            console.log(JSON.stringify(event.detail.draftValues));
             let draftValue = event.detail.draftValues[0];
             let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
             let tempAsset = this.assetsForDatatable[draftValueIndex];            
@@ -252,7 +250,6 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
     }
 
     handleSearchSelection(event) {
-        console.log('handling searched selection...');
         let searchSelection = event.detail.selectedElement;
 
         this.searchedLabel = searchSelection.label;
