@@ -125,7 +125,6 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             if(Object.hasOwn(asset, 'Consumer_Inquiries__r') === false) {
                 asset.consumerLabel = undefined;
                 asset.consumerValue = asset.Id;
-                asset.consumerPlaceholder = undefined;
                 return;
             }
 
