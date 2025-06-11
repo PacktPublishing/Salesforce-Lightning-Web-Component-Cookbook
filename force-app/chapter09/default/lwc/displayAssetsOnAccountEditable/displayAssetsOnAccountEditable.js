@@ -151,9 +151,7 @@ export default class DisplayAssetsOnAccountEditable extends NavigationMixin(Ligh
 
     handleInlineEdit(event) {
         let draftValue = event.detail.draftValues[0];
-
         let draftValueIndex = this.assetsForDatatable.findIndex(draft => draft.Id === draftValue.Id);
-
         let tempAsset = this.assetsForDatatable[draftValueIndex];
 
         tempAsset.oldLabel = tempAsset.statusLabel;
