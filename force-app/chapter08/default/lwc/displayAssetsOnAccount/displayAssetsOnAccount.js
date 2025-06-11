@@ -39,8 +39,10 @@ export default class DisplayAssetsOnAccount extends NavigationMixin(LightningEle
 
             this.assetsForDatatable = this.formatAssets(tempAssets);
 
-            this.selectedAsset = this.assetsForDatatable[0];
-            this.selectedRows = [this.selectedAsset?.Id]
+            if(this.assetsForDatatable.length > 0) {
+                this.selectedAsset = this.assetsForDatatable[0];
+                this.selectedRows = [this.selectedAsset?.Id]
+            }
 
             this.error = undefined;
 
