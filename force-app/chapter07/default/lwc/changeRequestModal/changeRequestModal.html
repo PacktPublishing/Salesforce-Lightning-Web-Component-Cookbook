@@ -1,0 +1,6 @@
+<template>
+    <lightning-modal-header label="New Change Request"></lightning-modal-header>
+    <lightning-modal-body>
+        <c-change-request-form record-id={content.recordId} onsavesuccess={closeModal}></c-change-request-form>
+    </lightning-modal-body>
+</template>
