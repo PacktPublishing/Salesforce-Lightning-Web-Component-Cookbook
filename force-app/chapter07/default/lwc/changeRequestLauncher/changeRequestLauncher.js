@@ -11,7 +11,9 @@ export default class ChangeRequestLauncher extends NavigationMixin(LightningElem
             description: 'A modal to insert a new Change Request for the specified Asset.',
             content: {recordId : this.recordId}
         }).then((result) => {
-            this.handleSaveSuccess(result.navId);
+            if(result) {
+                this.handleSaveSuccess(result.navId);
+            }
         })
     }
 
