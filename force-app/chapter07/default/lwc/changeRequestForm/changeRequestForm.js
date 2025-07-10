@@ -37,7 +37,7 @@ export default class ChangeRequestForm extends LightningElement {
 
         const recordInput = { apiName: CHANGE_REQUEST_ITEM.objectApiName, fields };
 
-        const item = await createRecord(recordInput)
+        await createRecord(recordInput)
 
         const successEvent = new CustomEvent('savesuccess', {
             bubbles: false,
