@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <environments>Default</environments>
     <interviewLabel>RTF_Asset_AfterUpdate {!$Flow.CurrentDateTime}</interviewLabel>
     <label>RTF_Asset_AfterUpdate</label>
