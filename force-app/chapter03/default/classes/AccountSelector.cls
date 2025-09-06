@@ -3,10 +3,6 @@ public inherited sharing class AccountSelector extends Util_Query {
 
     public List<Account> topTenAccountsByRevenue() {
         List<Account> queryResult = (List<Account>) query(TOP_TEN_ACCOUNTS_QUERY, AccessLevel.SYSTEM_MODE);
-
-        if(queryResult.size() == 0) {
-            return null;
-        }
         
         return queryResult;
     }
