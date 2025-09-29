@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Degradation</fullName>
+        <default>false</default>
+        <label>Degradation</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Wear and Tear</fullName>
+        <default>false</default>
+        <label>Wear and Tear</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sun Damage</fullName>
+        <default>false</default>
+        <label>Sun Damage</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Water Damage</fullName>
+        <default>false</default>
+        <label>Water Damage</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Smoke Damage</fullName>
+        <default>false</default>
+        <label>Smoke Damage</label>
+    </standardValue>
+</StandardValueSet>

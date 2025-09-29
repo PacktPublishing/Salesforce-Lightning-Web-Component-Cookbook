@@ -2,18 +2,18 @@
 <StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <sorted>false</sorted>
     <standardValue>
-        <fullName>On Display</fullName>
-        <default>true</default>
-        <label>On Display</label>
+        <fullName>Repair</fullName>
+        <default>false</default>
+        <label>Repair</label>
     </standardValue>
     <standardValue>
-        <fullName>Off Display</fullName>
+        <fullName>Restoration</fullName>
         <default>false</default>
-        <label>Off Display</label>
+        <label>Restoration</label>
     </standardValue>
     <standardValue>
-        <fullName>On Loan</fullName>
+        <fullName>Retirement</fullName>
         <default>false</default>
-        <label>On Loan</label>
+        <label>Retirement</label>
     </standardValue>
 </StandardValueSet>
