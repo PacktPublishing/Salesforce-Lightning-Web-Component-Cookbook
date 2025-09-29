@@ -1,13 +1,13 @@
 import { LightningElement, api } from 'lwc';
 import changeRequestModal from 'c/changeRequestModal';
-//import changeRequestModalLws from 'c/changeRequestModalLws';
+// import changeRequestModalLws from 'c/changeRequestModalLws';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class ChangeRequestLauncher extends NavigationMixin(LightningElement) {
     @api recordId;
 
     @api invoke() {
-        changeRequestModal.open({ //changeRequestModalLws.open({
+        changeRequestModal.open({
             size: 'large',
             description: 'A modal to insert a new Change Request for the specified Asset.',
             content: {recordId : this.recordId}
@@ -17,6 +17,19 @@ export default class ChangeRequestLauncher extends NavigationMixin(LightningElem
             }
         })
     }
+
+    // @api invoke() {
+    //     const result = await changeRequestModalLws.open({
+    //         size: 'large',
+    //         description: 'A modal to insert a new Change Request for the specified Asset.',
+    //         content: {recordId : this.recordId},
+    //         onrecordcreated: (event) => {
+    //             event.stopPropagation();
+    //             console.log(event.detail);
+    //             this.handleSaveSuccess(event.detail);
+    //         }
+    //     })
+    // }
 
     handleSaveSuccess(id) {
         this[NavigationMixin.Navigate]({

@@ -18,7 +18,6 @@ import COMMENT from '@salesforce/schema/ChangeRequestRelatedItem.Comment'
 
 export default class ChangeRequestModal extends LightningModal {
     @api content;
-    @api recordId;
     changeRequestApiName = CHANGE_REQUEST;
 
     fields = [
@@ -34,23 +33,19 @@ export default class ChangeRequestModal extends LightningModal {
     async handleSuccess(event) {
         const fields = {};
         fields[CHANGE_REQUEST_ID.fieldApiName] = event.detail.id;
-        fields[ASSET_ID.fieldApiName] = this.recordId;
-        fields[COMMENT.fieldApiName] = event.detail.fields.BUSINESS_JUSTIFICATION;
+        fields[ASSET_ID.fieldApiName] = this.content.recordId;
+        fields[COMMENT.fieldApiName] = event.detail.fields.BUSINESS_JUSTIFICATION.value;
 
         const recordInput = { apiName: CHANGE_REQUEST_ITEM.objectApiName, fields };
 
-        await createRecord(recordInput)
+        await createRecord(recordInput);
 
-        const successEvent = new CustomEvent('savesuccess', {
-            bubbles: false,
-            composed: false,
+        
+        const recordCreatedEvent = new CustomEvent("recordcreated", {
             detail: event.detail.id
         });
-
-        this.dispatchEvent(successEvent);
-    }
-
-    closeModal(event) {
-        this.close({navId : event.detail})
+        this.dispatchEvent(recordCreatedEvent);
+        
+        this.close();
     }
 }

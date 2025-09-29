@@ -5,6 +5,6 @@ export default class ChangeRequestModal extends LightningModal {
     @api content;
 
     closeModal(event) {
-        this.close({navId : event.detail})
+        this.close({navId : event.detail});
     }
 }
