@@ -1,12 +1,13 @@
 import { LightningElement, api } from 'lwc';
 import changeRequestModal from 'c/changeRequestModal';
+//import changeRequestModalLws from 'c/changeRequestModalLws';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class ChangeRequestLauncher extends NavigationMixin(LightningElement) {
     @api recordId;
 
     @api invoke() {
-        changeRequestModal.open({
+        changeRequestModal.open({ //changeRequestModalLws.open({
             size: 'large',
             description: 'A modal to insert a new Change Request for the specified Asset.',
             content: {recordId : this.recordId}
