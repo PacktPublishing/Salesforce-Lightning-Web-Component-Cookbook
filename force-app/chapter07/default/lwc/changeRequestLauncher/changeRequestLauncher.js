@@ -19,7 +19,7 @@ export default class ChangeRequestLauncher extends NavigationMixin(LightningElem
     }
 
     // @api invoke() {
-    //     const result = await changeRequestModalLws.open({
+    //     const result = changeRequestModalLws.open({
     //         size: 'large',
     //         description: 'A modal to insert a new Change Request for the specified Asset.',
     //         content: {recordId : this.recordId},
