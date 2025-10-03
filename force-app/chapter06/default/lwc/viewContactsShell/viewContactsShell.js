@@ -4,7 +4,7 @@ import Utilities from 'c/notifUtils';
 let utility;
 
 export default class ViewEditContactsFlattened extends LightningElement {
-    @api accountId;
+    @api recordId;
     contactsToView;
     _wiredContacts;
     selectedContact = '';
@@ -14,7 +14,7 @@ export default class ViewEditContactsFlattened extends LightningElement {
         utility = new Utilities(this);
     }
 
-    @wire(returnContactsPerAccount, {accountIdString : '$accountId'})
+    @wire(returnContactsPerAccount, {accountIdString : '$recordId'})
     wiredContacts(result) {
         this._wiredContacts = result;
         if (result.data) {
