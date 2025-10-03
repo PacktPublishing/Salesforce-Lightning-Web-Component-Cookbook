@@ -1,26 +1,27 @@
 <template>
+    <!-- shadow root -->
     <template lwc:if={addEventInactive}>
         <!-- c-view-contacts-lightning-card -->
-        <!-- shadow root -->
         <lightning-card icon-name="standard:contact" variant="base">
             <div slot="title">
                 View Contacts
             </div>
             <template lwc:if={selectedContact}>
+                <!-- shadow root -->
                 <div slot="actions">
                     <!-- c-view-contacts-add-event-button -->
-                    <!-- shadow root -->
                     <lightning-button 
                         class="slds-var-p-horizontal_medium"
                         variant="brand"
                         label="Add Event"
                         onclick={handleAddEvent}
                     ></lightning-button>
+                    <!-- /c-view-contacts-add-event-button -->
                 </div>
             </template>
+            <!-- shadow root -->
             <div class="slds-var-p-horizontal_medium">
                 <!-- c-view-contacts-contact-datatable -->
-                <!-- shadow root -->
                 <lightning-datatable
                     key-field="Id"
                     data={contactsToView}
@@ -28,17 +29,22 @@
                     onrowselection={handleContactSelect}
                     max-row-selection="1"
                 ></lightning-datatable>
+                <!-- /c-view-contacts-contact-datatable -->
             </div>
+            <!-- /shadow root -->
         </lightning-card>
+        <!-- /c-view-contacts-lightning-card -->
     </template>
+    <!-- shadow root -->
     <template lwc:else>
         <!-- c-view-contacts-lightning-flow -->
-        <!-- shadow root -->
         <lightning-flow
             flow-api-name='Create_Event_For_Contact_From_LWC'
             flow-input-variables={flowInputVariables}
             flow-finish-behavior="NONE"
             onstatuschange={handleFlowStatusChange}
         ></lightning-flow>
+        <!-- /c-view-contacts-lightning-flow -->
     </template>
+    <!-- /shadow root -->
 </template>
