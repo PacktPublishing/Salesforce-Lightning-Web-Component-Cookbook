@@ -25,7 +25,6 @@ export default class ChangeRequestLauncher extends NavigationMixin(LightningElem
     //         content: {recordId : this.recordId},
     //         onrecordcreated: (event) => {
     //             event.stopPropagation();
-    //             console.log(event.detail);
     //             this.handleSaveSuccess(event.detail);
     //         }
     //     })
