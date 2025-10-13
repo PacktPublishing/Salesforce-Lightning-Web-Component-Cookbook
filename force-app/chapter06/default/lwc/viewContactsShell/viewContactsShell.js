@@ -3,7 +3,7 @@ import { NavigationMixin } from 'lightning/navigation';
 import returnContactsPerAccount from '@salesforce/apex/ViewContactController.returnContactsPerAccount';
 import Utilities from 'c/notifUtils';
 let utility;
-9
+
 export default class ViewContactsShell extends NavigationMixin(LightningElement) {
     @api recordId;
     contactsToView;
