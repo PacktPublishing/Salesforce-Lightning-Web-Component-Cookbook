@@ -34,12 +34,11 @@ export default class ChangeRequestModal extends LightningModal {
         const fields = {};
         fields[CHANGE_REQUEST_ID.fieldApiName] = event.detail.id;
         fields[ASSET_ID.fieldApiName] = this.content.recordId;
-        fields[COMMENT.fieldApiName] = event.detail.fields.BUSINESS_JUSTIFICATION.value;
+        fields[COMMENT.fieldApiName] = event.detail.fields.BUSINESS_JUSTIFICATION;
 
         const recordInput = { apiName: CHANGE_REQUEST_ITEM.objectApiName, fields };
 
         await createRecord(recordInput);
-
         
         const recordCreatedEvent = new CustomEvent("recordcreated", {
             detail: event.detail.id
