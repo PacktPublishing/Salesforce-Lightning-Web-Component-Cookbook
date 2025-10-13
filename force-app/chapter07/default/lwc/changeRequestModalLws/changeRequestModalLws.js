@@ -43,6 +43,7 @@ export default class ChangeRequestModal extends LightningModal {
         const recordCreatedEvent = new CustomEvent("recordcreated", {
             detail: event.detail.id
         });
+        
         this.dispatchEvent(recordCreatedEvent);
         
         this.close();
