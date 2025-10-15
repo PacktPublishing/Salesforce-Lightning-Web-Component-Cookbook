@@ -85,9 +85,9 @@ export default class AssetsByTag extends LightningElement {
 
     async getTagsWithAssetsWrappers() {
         try{
-            const tagsWithAssetWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId });
+            const tagsWithAssetsWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId });
 
-            let wrappersToSort = [...tagsWithAssetWrappers];
+            let wrappersToSort = [...tagsWithAssetsWrappers];
 
             let sortedWrappers = wrappersToSort.sort((a, b) => {
                     return (a.assetName > b.assetName) ? 1 : -1;
