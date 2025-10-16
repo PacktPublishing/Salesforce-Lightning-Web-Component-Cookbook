@@ -31,7 +31,7 @@
                     onchange={handleChange}
                 ></lightning-dual-listbox>
             </template>
-            <template lwc:elseif={isNull}>
+            <template lwc:elseif={searchIsNull}>
                 Please enter another search term! The term "{searchTerm}" yielded no results.
             </template>
             <template lwc:else>

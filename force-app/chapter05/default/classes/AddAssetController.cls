@@ -26,7 +26,7 @@ public with sharing class AddAssetController {
         }
     }
 
-    @auraEnabled
+    @AuraEnabled
     public static Map<Integer, String> saveAssetWrappers(String jsonToParse, Id accountId) {
         try {
             List<ObjectWrappers.AssetWrapper> assetWrappers = (List<ObjectWrappers.AssetWrapper>) JSON.deserialize(jsonToParse, List<ObjectWrappers.AssetWrapper>.Class);
