@@ -114,7 +114,7 @@ export default class AssetsByTag extends LightningElement {
             }
 
             if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) === undefined) {
-                tagArray.push(tagObject)
+                tagArray.push(tagObject);
             }
             
             tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName))._children.push(asset);
