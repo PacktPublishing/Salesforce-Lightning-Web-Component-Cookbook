@@ -1,0 +1,28 @@
+<template>
+    <template for:each={dropdownOptions} for:item="option">
+        <div data-id={option.value}
+            key={option.value}
+            class="slds-media slds-listbox__option"
+            onclick={selectOption}
+            aria-label={option.ariaLabel}
+            aria-selected={option.ariaIsSelected}
+            role="option"
+        >
+            <div class="slds-media__figure slds-listbox__option-icon slds-p-horizontal_medium slds-align_absolute-center">
+                <span class="slds-icon_container" aria-label={option.altText}>
+                    <lightning-icon 
+                        icon-name={option.icon} 
+                        alternative-text={option.altText}
+                        size="small"
+                        role="img"
+                    >
+                    </lightning-icon>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <span title={option.label} aria-label={option.label}>{option.label}</span>
+                <span class="slds-listbox__option-meta" aria-label={option.fact}>{option.fact}</span>
+            </div>
+        </div>
+    </template>
+</template>

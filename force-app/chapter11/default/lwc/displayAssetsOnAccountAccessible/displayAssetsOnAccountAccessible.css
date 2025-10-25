@@ -1,0 +1,16 @@
+.carousel
+{
+    width: 40%;
+    margin-inline: auto;
+}
+
+.carouselImage
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.datatable
+{
+    height: 10rem;
+}
