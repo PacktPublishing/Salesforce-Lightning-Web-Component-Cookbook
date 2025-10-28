@@ -8,15 +8,13 @@
                 type="search"
                 variant="label-hidden"
                 role="search"
-            >
-            </lightning-input>
+            ></lightning-input>
             <template lwc:if={searchResults}>
                 <c-polymorphic-dropdown-accessible
                     dropdown-options={searchResults}
                     onsetselection={handleSelection}
                     role="combobox"
-                >
-                </c-polymorphic-dropdown-accessible>
+                ></c-polymorphic-dropdown-accessible>
             </template>
         </div>
     </div>
