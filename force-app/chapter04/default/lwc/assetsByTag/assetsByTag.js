@@ -103,7 +103,7 @@ export default class AssetsByTag extends LightningElement {
     }
 
     treeGridFormatter(dataToFormat) {
-        let tagArray = []
+        let tagArray = [];
         for(let asset of dataToFormat) {
             let tagObject = {
                 "tagName" : asset.tagName,
