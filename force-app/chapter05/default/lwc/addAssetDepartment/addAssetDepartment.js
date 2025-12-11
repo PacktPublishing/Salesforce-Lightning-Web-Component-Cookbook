@@ -29,7 +29,7 @@ export default class AddAssetDepartment extends LightningElement {
                 let temp = JSON.parse(data);
                 let departments = [];
     
-                temp.departments.map((tmp) => {
+                temp.departments.each((tmp) => {
                     let tmpClone = {...tmp, label:tmp.displayName, value:tmp.departmentId};
                     departments.push(tmpClone);
                 });

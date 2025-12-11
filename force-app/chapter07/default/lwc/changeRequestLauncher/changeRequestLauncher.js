@@ -11,7 +11,7 @@ export default class ChangeRequestLauncher extends NavigationMixin(LightningElem
         if(lwsEnabled) {
             console.log('LWS Permission Set Assigned');
 
-            const result = changeRequestModalLws.open({
+            changeRequestModalLws.open({
                 size: 'large',
                 description: 'An LWS only modal to insert a new Change Request for the specified Asset.',
                 content: {recordId : this.recordId},

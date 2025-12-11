@@ -43,7 +43,7 @@ export default class AddAssetPicker extends LightningElement {
             } else {
                 let searchResults = JSON.parse(searchResultsJSON);
                 
-                searchResults.map((sr) => {
+                searchResults.each((sr) => {
                     let srClone = {...sr, label:sr.title, value:sr.objectId};
                     this.searchResults.push(srClone);
                 });
