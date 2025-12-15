@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>65.0</apiVersion>
     <description>A flow to create an Event for a given Contact from the viewContacts component on the Account record and the Top Accounts page.</description>
     <dynamicChoiceSets>
         <name>SubtypeValuesForEvent</name>
