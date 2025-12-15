@@ -1,0 +1,26 @@
+<template>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    Name
+                </th>
+                <th class="" scope="col">
+                    Phone
+                </th>
+                <th class="" scope="col">
+                    Annual Revenue
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={accounts} for:item="account">
+                <tr key={account.Id}>
+                    <td>{account.Name}</td>
+                    <td>{account.Phone}</td>
+                    <td>{account.AnnualRevenue}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
