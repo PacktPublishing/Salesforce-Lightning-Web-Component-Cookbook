@@ -1,5 +1,5 @@
 <template>
-    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_fixed-layout">
         <thead>
             <tr class="slds-line-height_reset">
                 <th class="" scope="col">
@@ -15,10 +15,10 @@
         </thead>
         <tbody>
             <template for:each={accounts} for:item="account">
-                <tr key={account.Id}>
-                    <td>{account.Name}</td>
-                    <td>{account.Phone}</td>
-                    <td>{account.AnnualRevenue}</td>
+                <tr class="slds-hint-parent" key={account.Id}>
+                    <td class="slds-truncate">{account.Name}</td>
+                    <td class="slds-truncate">{account.Phone}</td>
+                    <td class="slds-truncate">{account.AnnualRevenue}</td>
                 </tr>
             </template>
         </tbody>
