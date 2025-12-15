@@ -1,7 +1,7 @@
 <template>
     <lightning-card class="displayAssetComp" icon-name="utility:brush" variant="base">
         <div slot="title">
-            Assets
+            Assets - INACCESSIBLE
         </div>
         <div class="slds-p-bottom_medium">
             <!-- Card Body  -->
@@ -20,7 +20,7 @@
                 </div>
             </template>
             <div class="datatable">
-                <c-picklist-datatable-accessible
+                <c-picklist-datatable-inaccessible
                     class="slds-p-horizontal_medium"
                     id="picklist-datatable"
                     key-field="Id"
@@ -37,7 +37,7 @@
                     onrowselection={updateCarousel}
                     enable-infinite-loading
                     onloadmore={loadMoreAssets}
-                ></c-picklist-datatable-accessible> 
+                ></c-picklist-datatable-inaccessible> 
             </div>
         </div>
     </lightning-card>

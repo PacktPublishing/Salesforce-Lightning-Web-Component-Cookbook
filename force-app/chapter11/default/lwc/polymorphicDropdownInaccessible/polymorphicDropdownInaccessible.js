@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class SearchableDropdownAccessible extends LightningElement {
+export default class SearchableDropdowninaccessible extends LightningElement {
     @api dropdownOptions;
 
     selectedOption;

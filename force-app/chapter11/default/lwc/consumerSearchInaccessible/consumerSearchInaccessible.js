@@ -3,7 +3,7 @@ import returnSearchedConsumerWrappers from '@salesforce/apex/RecentConsumerContr
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class ConsumerSearchAccessible extends LightningElement {
+export default class ConsumerSearchinaccessible extends LightningElement {
     _value;
     
     @api

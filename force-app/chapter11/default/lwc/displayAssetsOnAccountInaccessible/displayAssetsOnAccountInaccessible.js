@@ -12,7 +12,7 @@ import { NavigationMixin } from 'lightning/navigation';
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class DisplayAssetsOnAccountAccessible extends NavigationMixin(LightningElement) {
+export default class DisplayAssetsOnAccountInaccessible extends NavigationMixin(LightningElement) {
     @api recordId
     
     scrollingAssets = [];

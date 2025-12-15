@@ -10,11 +10,11 @@
                 role="search"
             ></lightning-input>
             <template lwc:if={searchResults}>
-                <c-polymorphic-dropdown-accessible
+                <c-polymorphic-dropdown-inaccessible
                     dropdown-options={searchResults}
                     onsetselection={handleSelection}
                     role="combobox"
-                ></c-polymorphic-dropdown-accessible>
+                ></c-polymorphic-dropdown-inaccessible>
             </template>
         </div>
     </div>
