@@ -57,6 +57,7 @@ public with sharing class OrgSetupREST {
         assetToUpsert.Is_Public_Domain__c = assetWrapper.isPublicDomain;
         assetToUpsert.AccountId = accountId;
         assetToUpsert.Name = assetWrapper.title;
+        assetToUpsert.Description = assetWrapper.creditLine;
         assetToUpsert.Asset_URL__c = assetWrapper.objectURL;
         assetToUpsert.Asset_Wikidata_URL__c = assetWrapper.objectWikidata_URL;
         assetToUpsert.Classification__c = assetWrapper.classification;

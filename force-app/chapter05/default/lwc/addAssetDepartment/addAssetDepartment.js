@@ -29,10 +29,10 @@ export default class AddAssetDepartment extends LightningElement {
                 let temp = JSON.parse(data);
                 let departments = [];
     
-                for(let tmp of temp.departments) {
+                temp.departments.each((tmp) => {
                     let tmpClone = {...tmp, label:tmp.displayName, value:tmp.departmentId};
                     departments.push(tmpClone);
-                }
+                });
     
                 departments.sort((a, b) => {
                         return (a.label > b.label) ? 1 : -1;

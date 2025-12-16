@@ -1,10 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import returnContactsPerAccount from '@salesforce/apex/ViewContactController.returnContactsPerAccount';
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class ViewEditContactsFlattened extends LightningElement {
-    @api accountId;
+export default class ViewContactsShell extends NavigationMixin(LightningElement) {
+    @api recordId;
     contactsToView;
     _wiredContacts;
     selectedContact = '';
@@ -14,7 +15,7 @@ export default class ViewEditContactsFlattened extends LightningElement {
         utility = new Utilities(this);
     }
 
-    @wire(returnContactsPerAccount, {accountIdString : '$accountId'})
+    @wire(returnContactsPerAccount, {accountIdString : '$recordId'})
     wiredContacts(result) {
         this._wiredContacts = result;
         if (result.data) {
@@ -35,6 +36,20 @@ export default class ViewEditContactsFlattened extends LightningElement {
 
     resetShell(event) {
         this.addEventInactive = event.detail.addEventInactive;
+
+        this.refreshPage();
+
         utility.showNotif('Your event has been inserted successfully!', event.detail.outputVariables, 'success');
+    }
+
+    refreshPage() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: 'Account',
+                actionName: 'view'
+            }
+        });
     }
 }

@@ -23,10 +23,11 @@
     "@babel/core": "^7.24.4",
     "@babel/eslint-parser": "^7.24.1",
     "@babel/preset-typescript": "^7.24.6",
+    "@locker/eslint-config-locker": "^0.25.7",
     "@lwc/eslint-plugin-lwc": "^1.9.0",
     "@salesforce/eslint-config-lwc": "^3.7.2",
     "@salesforce/eslint-plugin-lightning": "^1.0.1",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",
     "husky": "^9.0.11",
@@ -37,6 +38,7 @@
     "semver": "^7.6.0"
   },
   "dependencies": {
+    "@locker/eslint-plugin-locker": "^0.25.7",
     "globals": "^13.24.0",
     "minimatch": "^9.0.4"
   },

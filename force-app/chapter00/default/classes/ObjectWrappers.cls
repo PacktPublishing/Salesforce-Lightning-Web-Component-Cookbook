@@ -4,6 +4,7 @@ public with sharing class ObjectWrappers {
         public String label;
         public String accessionNumber;
         public String accessionYear;
+        public String creditLine;
         public Boolean isPublicDomain;
         public Id accountId;
         public String title;

@@ -3,15 +3,15 @@ input records application/csv
 output application/apex
 ---
 records map(record) -> {
- FirstName: record.firstname,
- LastName: record.lastname,
- Email: record.email,
- Phone: record.phone,
- MailingStreet: record.mailingStreet,
- MailingCity: record.mailingCity,
- MailingState: record.mailingState,
- MailingPostalCode: record.mailingPostalCode,
- MailingCountry: record.mailingCountry,
- Title: record.title,
- Description: record.description
+ firstname: record.firstname,
+ lastname: record.lastname,
+ email: record.email,
+ phone: record.phone,
+ mailingStreet: record.mailingStreet,
+ mailingCity: record.mailingCity,
+ mailingState: record.mailingState,
+ mailingPostalCode: record.mailingPostalCode,
+ mailingCountry: record.mailingCountry,
+ title: record.title,
+ description: record.description
 } as Object {class: "Contact"}

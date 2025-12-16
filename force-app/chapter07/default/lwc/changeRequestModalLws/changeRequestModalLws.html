@@ -1,0 +1,11 @@
+<template>
+    <lightning-modal-header label="New Change Request"></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-record-form
+            object-api-name={changeRequestApiName}
+            fields={fields}
+            onsuccess={handleSuccess}
+        >
+        </lightning-record-form>
+    </lightning-modal-body>
+</template>

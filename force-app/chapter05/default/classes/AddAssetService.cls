@@ -84,8 +84,8 @@ public with sharing class AddAssetService {
             assetToUpsert.Primary_Image__c = assetWrapper.primaryImage;
             assetToUpsert.Primary_Image_Small__c = assetWrapper.primaryImageSmall;
 
-            assetIdToConstituentIdMap.put(assetToUpsert.Object_ID__c, constituentToUpsert.Constituent_Id__c);
-            assetIdToTagIdMap.put(assetToUpsert.Object_ID__c, tagToUpsert.AAT__c);
+            assetIdToConstituentIdMap.put(assetToUpsert.Object_ID__c, constituentToUpsert?.Constituent_Id__c);
+            assetIdToTagIdMap.put(assetToUpsert.Object_ID__c, tagToUpsert?.AAT__c);
 
             assetsToUpsert.add(assetToUpsert);
         }

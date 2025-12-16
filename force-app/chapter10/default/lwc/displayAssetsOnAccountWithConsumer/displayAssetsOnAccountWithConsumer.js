@@ -205,17 +205,15 @@ export default class DisplayAssetsOnAccountWithConsumer extends NavigationMixin(
             tempAsset.consumerLabel = this.searchedLabel;
             tempAsset.consumerValue = this.searchedValue;
         } else if (Object.hasOwn(draftValue, 'DisplayStatus')) {
-            if(draftValue.DisplayStatus) {
-                tempAsset.oldStatusLabel = tempAsset.statusLabel;
-                tempAsset.oldStatusValue = tempAsset.statusValue;
-                tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
-                tempAsset.oldStatusOptions = tempAsset.statusOptions;
-    
-                tempAsset.statusLabel = draftValue.DisplayStatus;
-                tempAsset.statusValue = draftValue.DisplayStatus;
-                tempAsset.statusPlaceholder = draftValue.DisplayStatus;
-                tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
-            }
+            tempAsset.oldStatusLabel = tempAsset.statusLabel;
+            tempAsset.oldStatusValue = tempAsset.statusValue;
+            tempAsset.oldStatusPlaceholder = tempAsset.statusPlaceholder;
+            tempAsset.oldStatusOptions = tempAsset.statusOptions;
+
+            tempAsset.statusLabel = draftValue.DisplayStatus;
+            tempAsset.statusValue = draftValue.DisplayStatus;
+            tempAsset.statusPlaceholder = draftValue.DisplayStatus;
+            tempAsset.statusOptions = this.statusPickvals.filter(val => val.value !== tempAsset.statusValue);
         } else {
             return;
         }

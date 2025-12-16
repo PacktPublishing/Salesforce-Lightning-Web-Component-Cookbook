@@ -4,7 +4,7 @@ import returnContactsPerAccount from '@salesforce/apex/ViewContactController.ret
 import Utilities from 'c/notifUtils';
 let utility;
 
-export default class ViewEditContactsFlattened extends NavigationMixin(LightningElement) {
+export default class FlattenedViewContacts extends NavigationMixin(LightningElement) {
     contactColumnsDatatable = [
         { label: 'First Name', fieldName: 'FirstName' },
         { label: 'Last Name', fieldName: 'LastName' },

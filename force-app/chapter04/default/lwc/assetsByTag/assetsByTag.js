@@ -85,9 +85,9 @@ export default class AssetsByTag extends LightningElement {
 
     async getTagsWithAssetsWrappers() {
         try{
-            const tagsWithAssetWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId });
+            const tagsWithAssetsWrappers = await returnTagsWithAssetsWrappersByAccount({ accountIdString : this.accountId });
 
-            let wrappersToSort = [...tagsWithAssetWrappers];
+            let wrappersToSort = [...tagsWithAssetsWrappers];
 
             let sortedWrappers = wrappersToSort.sort((a, b) => {
                     return (a.assetName > b.assetName) ? 1 : -1;
@@ -103,7 +103,7 @@ export default class AssetsByTag extends LightningElement {
     }
 
     treeGridFormatter(dataToFormat) {
-        let tagArray = []
+        let tagArray = [];
         for(let asset of dataToFormat) {
             let tagObject = {
                 "tagName" : asset.tagName,
@@ -114,7 +114,7 @@ export default class AssetsByTag extends LightningElement {
             }
 
             if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) === undefined) {
-                tagArray.push(tagObject)
+                tagArray.push(tagObject);
             }
             
             tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName))._children.push(asset);

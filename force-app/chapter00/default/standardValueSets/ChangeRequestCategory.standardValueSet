@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Repair</fullName>
+        <default>false</default>
+        <label>Repair</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Restoration</fullName>
+        <default>false</default>
+        <label>Restoration</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Retirement</fullName>
+        <default>false</default>
+        <label>Retirement</label>
+    </standardValue>
+</StandardValueSet>

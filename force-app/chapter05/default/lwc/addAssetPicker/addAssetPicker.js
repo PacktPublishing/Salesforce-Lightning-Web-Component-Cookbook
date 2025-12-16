@@ -12,7 +12,7 @@ export default class AddAssetPicker extends LightningElement {
     searchResults = [];
     options;
     isLoaded = false;
-    isNull = false;
+    searchIsNull = false;
     savePressed = false;
     buttonsDisabled = true;
 
@@ -27,7 +27,7 @@ export default class AddAssetPicker extends LightningElement {
     }
 
     get assetsLoaded() {
-        return this.isLoaded && this.isNull !== true;
+        return this.isLoaded && this.searchIsNull !== true;
     }
 
     get listDisabled() {
@@ -39,14 +39,14 @@ export default class AddAssetPicker extends LightningElement {
             const searchResultsJSON = await searchAssetWrappers( {search : this.searchTerm, departmentId : this.departmentId} );
 
             if(searchResultsJSON == null) {
-                this.isNull = true;
+                this.searchIsNull = true;
             } else {
                 let searchResults = JSON.parse(searchResultsJSON);
                 
-                for(let sr of searchResults) {
+                searchResults.each((sr) => {
                     let srClone = {...sr, label:sr.title, value:sr.objectId};
                     this.searchResults.push(srClone);
-                }
+                });
 
                 this.searchResults.sort((a, b) => {
                         return (a.label > b.label) ? 1 : -1;
@@ -54,12 +54,12 @@ export default class AddAssetPicker extends LightningElement {
                 );
 
                 this.options = this.searchResults;
+                this.isLoaded = true;
             }
         } catch(error) {
             this.options = undefined;
             utility.showNotif('There has been an error in sendSearchApex!', error, 'error');
         }
-        this.isLoaded = true;
     }
 
     sendSearchFetchAPI() {
@@ -69,7 +69,7 @@ export default class AddAssetPicker extends LightningElement {
             })
             .then(sendSearchResponse => {
                 if(sendSearchResponse.objectIDs == null) {
-                    Promise.resolve(this.isNull = true);
+                    Promise.resolve(this.searchIsNull = true);
                 }
                 return this.searchObjects(sendSearchResponse.objectIDs);
             })
@@ -157,7 +157,7 @@ export default class AddAssetPicker extends LightningElement {
 
     handleChange(event) {
         this.assetsToReturn = event.detail.value;
-        if(this.assetsToReturn === false || this.assetsToReturn === []) {
+        if(this.assetsToReturn === false || this.assetsToReturn.length === 0) {
             this.buttonsDisabled = true;
         } else {
             this.buttonsDisabled = false;

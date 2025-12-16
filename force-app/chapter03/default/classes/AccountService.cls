@@ -4,7 +4,7 @@ public with sharing class AccountService {
     public List<AccountWrapper> getTopAccountWrappers() {
         List<Account> queryResult = accountSelect.topTenAccountsByRevenue();
 
-        if(queryResult == null) {
+        if(queryResult.isEmpty()) {
             return null;
         }
 

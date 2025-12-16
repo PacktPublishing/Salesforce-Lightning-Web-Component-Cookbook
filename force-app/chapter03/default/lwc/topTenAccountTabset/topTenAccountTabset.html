@@ -6,7 +6,7 @@
                     <lightning-tab label={account.Name} value={account.Id} key={account.Id}>
                         <div class="slds-grid slds-gutters">
                             <div class="slds-col slds-size_1-of-6">
-                                <lightning-record-view-form record-id={account.Id} object-api-name="Account" key={account.Id}>
+                                <lightning-record-view-form record-id={account.Id} object-api-name="Account">
                                     <lightning-output-field field-name="Name"></lightning-output-field>
                                     <lightning-output-field field-name="Phone"></lightning-output-field>
                                     <lightning-output-field field-name="BillingAddress"></lightning-output-field>
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                             <!-- Chapter 6 Code Here -->
-                                <c-view-contacts-shell account-id={account.Id}></c-view-contacts-shell>
+                                <c-view-contacts-shell record-id={account.Id}></c-view-contacts-shell>
                             <!-- Chapter 6 Code Here -->                        
                     </lightning-tab>
                 </template>
