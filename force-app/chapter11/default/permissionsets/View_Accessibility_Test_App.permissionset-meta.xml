@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Accessible_vs_Inaccessible_Test</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <description>A permission set to allow the user to view the Accessible vs. Inaccessible Testing App.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>View Accessibility Test App</label>
+</PermissionSet>
