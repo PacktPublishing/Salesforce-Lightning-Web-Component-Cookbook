@@ -14,11 +14,11 @@
             </tr>
         </thead>
         <tbody>
-            <template for:each={accounts} for:item="account">
-                <tr class="slds-hint-parent" key={account.Id}>
-                    <td class="slds-truncate">{account.Name}</td>
-                    <td class="slds-truncate">{account.Phone}</td>
-                    <td class="slds-truncate">{account.AnnualRevenue}</td>
+            <template iterator:it={accounts}>
+                <tr class="slds-hint-parent" key={it.value.Id}>
+                    <td class="slds-truncate">{it.value.Name}</td>
+                    <td class="slds-truncate">{it.value.Phone}</td>
+                    <td class="slds-truncate">{it.value.AnnualRevenue}</td>
                 </tr>
             </template>
         </tbody>
