@@ -1,0 +1,26 @@
+<template>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_fixed-layout">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Annual Revenue
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template iterator:it={accounts}>
+                <tr class="slds-hint-parent" key={it.value.Id}>
+                    <td class="slds-truncate">{it.value.Name}</td>
+                    <td class="slds-truncate">{it.value.Phone}</td>
+                    <td class="slds-truncate">{it.value.AnnualRevenue}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
