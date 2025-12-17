@@ -1,0 +1,31 @@
+<template>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_fixed-layout" tabindex="-1">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th scope="col">
+                    Name
+                </th>
+                <th scope="col">
+                    Phone
+                </th>
+                <th scope="col">
+                    Annual Revenue
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template iterator:it={accounts}>
+                <tr lwc:if={it.first} class="slds-hint-parent" key={it.Id}>
+                    <td class="slds-truncate" tabindex="0">{it.value.Name}</td>
+                    <td class="slds-truncate">{it.value.Phone}</td>
+                    <td class="slds-truncate">{it.value.AnnualRevenue}</td>
+                </tr>
+                <tr lwc:else class="slds-hint-parent" key={it.Id}>
+                    <td class="slds-truncate">{it.value.Name}</td>
+                    <td class="slds-truncate">{it.value.Phone}</td>
+                    <td class="slds-truncate">{it.value.AnnualRevenue}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
