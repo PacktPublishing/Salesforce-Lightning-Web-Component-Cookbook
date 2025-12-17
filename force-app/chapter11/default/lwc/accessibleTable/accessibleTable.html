@@ -16,12 +16,12 @@
         <tbody>
             <template iterator:it={accounts}>
                 <tr lwc:if={it.first} class="slds-hint-parent" key={it.value.Id}>
-                    <td class="slds-truncate" tabindex="0">{it.value.Name}</td>
+                    <td class="slds-truncate" tabindex="0" scope="row">{it.value.Name}</td>
                     <td class="slds-truncate">{it.value.Phone}</td>
                     <td class="slds-truncate">{it.value.AnnualRevenue}</td>
                 </tr>
                 <tr lwc:else class="slds-hint-parent" key={it.value.Id}>
-                    <td class="slds-truncate">{it.value.Name}</td>
+                    <td class="slds-truncate" scope="row">{it.value.Name}</td>
                     <td class="slds-truncate">{it.value.Phone}</td>
                     <td class="slds-truncate">{it.value.AnnualRevenue}</td>
                 </tr>
