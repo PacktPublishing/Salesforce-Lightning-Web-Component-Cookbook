@@ -1,0 +1,7 @@
+<template>
+    <lightning-modal-header label="Capture Account Geolocation"></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-input-location label="Disabled" latitude={lat} longitude={lng} disabled ></lightning-input-location>
+        <lightning-button variant="brand" label="Capture Geolocation" title="Capture Geolocation" onclick={captureGeolocation} class="slds-m-left_x-small"></lightning-button>
+    </lightning-modal-body>
+</template>
