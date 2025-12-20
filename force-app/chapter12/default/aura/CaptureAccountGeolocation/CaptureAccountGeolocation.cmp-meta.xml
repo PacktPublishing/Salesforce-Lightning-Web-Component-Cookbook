@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <description>A Lightning Component (Aura) to grab a geolocation for a given account using the location feature on a mobile device.</description>
+</AuraDefinitionBundle>

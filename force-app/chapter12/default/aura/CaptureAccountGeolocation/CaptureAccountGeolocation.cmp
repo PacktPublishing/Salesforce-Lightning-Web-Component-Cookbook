@@ -1,0 +1,21 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="CaptureAccountGeolocationController" >
+    
+    <!--define attributes-->
+    <aura:attribute name="latitude" type="Decimal" />
+    <aura:attribute name="longitude" type="Decimal" />
+    <aura:attribute name="recordId" type="String" />
+    
+    <!--call doInit-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!--display device latitude and longitude-->
+    <div class="slds-align_absolute-center" style="height:5rem">
+        Latitude: {!v.latitude} <br/>
+        Longitude: {!v.longitude}<br/>
+        <p/>
+    </div>
+    <div class="slds-align_absolute-center" style="height:5rem">
+        <!--button to call captureGeolocation in controller-->
+        <lightning:button variant="brand" label="Capture Geolocation" onclick="{!c.captureGeolocation}" />
+    </div>
+</aura:component>
