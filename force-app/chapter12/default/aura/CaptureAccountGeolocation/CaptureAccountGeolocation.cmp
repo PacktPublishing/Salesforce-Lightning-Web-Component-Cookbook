@@ -9,13 +9,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     
     <!--display device latitude and longitude-->
-    <div class="slds-align_absolute-center" style="height:5rem">
-        Latitude: {!v.latitude} <br/>
-        Longitude: {!v.longitude}<br/>
-        <p/>
-    </div>
-    <div class="slds-align_absolute-center" style="height:5rem">
-        <!--button to call captureGeolocation in controller-->
-        <lightning:button variant="brand" label="Capture Geolocation" onclick="{!c.captureGeolocation}" />
-    </div>
+    <lightning:inputLocation label="Account Location" latitude="{!v.latitude}" longitude="{!v.longitude}" disabled="true"/>
+    
+    <!--button to call captureGeolocation in controller-->
+    <lightning:button variant="brand" label="Capture Geolocation" onclick="{!c.captureGeolocation}" />
 </aura:component>
