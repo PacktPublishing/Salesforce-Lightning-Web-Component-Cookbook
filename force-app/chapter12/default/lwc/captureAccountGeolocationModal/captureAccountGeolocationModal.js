@@ -7,8 +7,8 @@ let utility;
 export default class CaptureAccountGeolocationLWC extends LightningModal {
     @api content;
     @api recordId;
-    lat;
-    lng;
+    latitude;
+    longitude;
 
     connectedCallback() {
         utility = new Utilities(this);
@@ -19,8 +19,8 @@ export default class CaptureAccountGeolocationLWC extends LightningModal {
             // Get the current position
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    this.lat = position.coords.latitude;
-                    this.lng = position.coords.longitude;
+                    this.latitude = position.coords.latitude;
+                    this.longitude = position.coords.longitude;
                 },
                 (error) => {
                     utility.showNotif('There has been an error capturing geolocation!', error.message, 'error');
