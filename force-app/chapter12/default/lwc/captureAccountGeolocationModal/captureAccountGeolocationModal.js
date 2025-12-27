@@ -22,16 +22,20 @@ export default class CaptureAccountGeolocationLWC extends LightningModal {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    this.latitude = position.coords.latitude;
-                    this.longitude = position.coords.longitude;
+                    this.latitude = parseFloat(position.coords.latitude);
+                    this.longitude = parseFloat(position.coords.longitude);
                 },
                 (error) => {
                     utility.showNotif('There has been an error capturing geolocation!', error.message, 'error');
+
+                    this.close();
                 }
             );
         }
         else {
             utility.showNotif('There has been an error loading geolocation!', 'Ensure that you have enabled location.', 'error');
+
+            this.close();
         }
     }
 
@@ -39,6 +43,8 @@ export default class CaptureAccountGeolocationLWC extends LightningModal {
         try{
             await updateGeolocation({accountId: this.recordId, lat: this.lat, lng: this.lng});
             
+            utility.showNotif('Geolocation has been saved!', 'Success!', 'success');
+
             const successEvent = new CustomEvent('savesuccess', {
                 bubbles: false,
                 composed: false,
