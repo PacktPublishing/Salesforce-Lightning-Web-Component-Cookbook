@@ -51,20 +51,12 @@
 
         //set callback method
         action.setCallback(this, function(response) {
-            var state = response.getState(); //fetch the response state
+            var state = response.getState();
             if (state === 'SUCCESS') {
-				this.LightningAlert.open({
-                    message: 'Geolocation saved.',
-                    theme: 'success',
-                    label: 'Success!'
-                });
+				alert('Geolocation Saved!');
             }
             else {
-                this.LightningAlert.open({
-                    message: 'Geolocation not saved.',
-                    theme: 'error',
-                    label: 'Error!'
-                });
+                alert('Error saving geolocation!');
             }
         });
 

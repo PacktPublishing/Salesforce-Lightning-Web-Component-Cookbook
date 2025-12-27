@@ -1,5 +1,4 @@
 <aura:component implements='force:lightningQuickAction,force:hasRecordId' controller='CaptureAccountGeolocationController' >
-    
     <!--define attributes-->
     <aura:attribute name='latitude' type='Decimal' />
     <aura:attribute name='longitude' type='Decimal' />
