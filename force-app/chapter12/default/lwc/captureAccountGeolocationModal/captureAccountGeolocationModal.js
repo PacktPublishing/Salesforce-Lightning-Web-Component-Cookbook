@@ -6,7 +6,7 @@ let utility;
 
 export default class CaptureAccountGeolocationLWC extends LightningModal {
     @api content;
-    @api recordId;
+    recordId;
     latitude;
     longitude;
 
