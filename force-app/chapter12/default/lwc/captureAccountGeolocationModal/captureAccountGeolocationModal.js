@@ -24,11 +24,6 @@ export default class CaptureAccountGeolocationLWC extends LightningModal {
                 },
                 (error) => {
                     utility.showNotif('There has been an error capturing geolocation!', error.message, 'error');
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
                 }
             );
         }
