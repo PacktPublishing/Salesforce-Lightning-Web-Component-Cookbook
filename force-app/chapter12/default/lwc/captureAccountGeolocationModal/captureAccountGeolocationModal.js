@@ -15,8 +15,11 @@ export default class CaptureAccountGeolocationLWC extends LightningModal {
 
         this.recordId = this.content.recordId;
 
-        if (navigator.geolocation) {    
-            // Get the current position
+        this.findGeolocation();
+    }
+
+    findGeolocation() {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     this.latitude = position.coords.latitude;
