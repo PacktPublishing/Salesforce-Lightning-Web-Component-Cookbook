@@ -69,7 +69,6 @@
             });
             navigationEvent.fire();
 
-
             //close quickaction window
             var dismiss = $A.get('e.force:closeQuickAction');
             dismiss.fire();
