@@ -37,7 +37,7 @@
     
     captureHelper : function(component, event) {
         try {
-            //pointer to Apex method in CaptureAccountGeolocationController
+            //reference to Apex method in CaptureAccountGeolocationController
             var action = component.get('c.updateGeolocation');
 
             //set parameters for Apex method updateGeolocation
