@@ -17,8 +17,7 @@
                     });
                     toastEvent.fire();
 
-                    var dismiss = $A.get('e.force:closeQuickAction');
-                    dismiss.fire();
+                    $A.get('e.force:closeQuickAction').fire();
                 }
             );
         } else {
@@ -30,8 +29,7 @@
             });
             toastEvent.fire();
 
-            var dismiss = $A.get('e.force:closeQuickAction');
-            dismiss.fire();
+            $A.get('e.force:closeQuickAction').fire();   
         }
 	},
     
@@ -70,8 +68,7 @@
             navigationEvent.fire();
 
             //close quickaction window
-            var dismiss = $A.get('e.force:closeQuickAction');
-            dismiss.fire();
+            $A.get('e.force:closeQuickAction').fire();
         } catch(error) {
             var toastEvent = $A.get('e.force:showToast');
             toastEvent.setParams({
