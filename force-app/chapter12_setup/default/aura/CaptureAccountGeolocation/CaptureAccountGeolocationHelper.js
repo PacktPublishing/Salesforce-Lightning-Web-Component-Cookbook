@@ -35,16 +35,13 @@
         }
 	},
     
-    captureHelper : function(component, event) {
-        //obtain recordId
-        var accountId = component.get('v.recordId');
-        
+    captureHelper : function(component, event) {        
         //pointer to Apex method in GeolocationController
         var action = component.get('c.updateGeolocation');
 
         //set parameters for Apex method updateGeolocation
         action.setParams({
-            'accountId' : accountId,
+            'accountId' : component.get('v.recordId'),
             'lat' : component.get('v.latitude'),
             'lng' : component.get('v.longitude')
         });
