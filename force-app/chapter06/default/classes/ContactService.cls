@@ -1,7 +1,7 @@
 public with sharing class ContactService {
-    @TestVisible private ContactSelector selector = new ContactSelector();
+    @TestVisible private ContactSelector contactSelect = new ContactSelector();
 
     public List<Contact> getContactsPerAccount(Id accountId) {
-        return this.selector.contactsPerAccount(accountId);
+        return this.contactSelect.contactsPerAccount(accountId);
     }
 }
