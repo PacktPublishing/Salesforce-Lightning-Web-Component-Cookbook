@@ -1,7 +1,7 @@
 @IsTest
 public with sharing class Chapter3Tests_Mockery {
     @IsTest
-    static void it_should_return_accounts() {
+    static void it_should_return_account_wrappers() {
         //prepare
         List<Account> accountsToReturn = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
@@ -21,8 +21,6 @@ public with sharing class Chapter3Tests_Mockery {
 
         //act
         List<AccountService.AccountWrapper> myWrappers = myAccountService.getTopAccountWrappers();
-
-        System.debug(myWrappers);
 
         //assert
         for(Integer jj; jj < 10; jj++) {

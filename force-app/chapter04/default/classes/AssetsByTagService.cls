@@ -1,10 +1,12 @@
 public with sharing class AssetsByTagService {
+    @TestVisible private TagSelector tagSelect = new TagSelector();
+
     public List<Tag__c> getTagsWithAssetsByAccount(Id accountId){
-        return new TagSelector().tagsWithAssetsByAccount(accountId);
+        return tagSelect.tagsWithAssetsByAccount(accountId);
     }
 
     public List<AssetWrapperCh04> getTagsWithAssetsWrappersByAccount(Id accountId){
-        List<Tag__c> tagList = new TagSelector().tagsWithAssetsByAccount(accountId);
+        List<Tag__c> tagList = tagSelect.tagsWithAssetsByAccount(accountId);
         List<AssetWrapperCh04> assetWrapperList = new List<AssetWrapperCh04>();
 
         for(Tag__c tag : tagList) {
