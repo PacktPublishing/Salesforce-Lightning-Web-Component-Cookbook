@@ -17,7 +17,7 @@ public with sharing class Chapter3Tests_Mockery {
         MethodSpy topTenAccountsByRevenueSpy = accountSelectorMock.spyOn('topTenAccountsByRevenue');
         AccountService myAccountService = new AccountService();
         myAccountService.accountSelect = (AccountSelector) accountSelectorMock.stub;
-        topTenAccountsByRevenueSpy.returns(accountsToReturn);
+        topTenAccountsByRevenueSpy.returnsOnce(accountsToReturn);
 
         //act
         List<AccountService.AccountWrapper> myWrappers = myAccountService.getTopAccountWrappers();

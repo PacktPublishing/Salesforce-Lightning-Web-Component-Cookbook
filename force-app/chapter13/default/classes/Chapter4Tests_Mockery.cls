@@ -17,7 +17,7 @@ public with sharing class Chapter4Tests_Mockery {
         MethodSpy tagsWithAssetsByAccountSpy = tagSelectorMock.spyOn('tagsWithAssetsByAccount');
         AssetsByTagService myAssetsByTagService = new AssetsByTagService();
         myAssetsByTagService.tagSelect = (TagSelector) TagSelectorMock.stub;
-        tagsWithAssetsByAccountSpy.returns(tagsToReturn);
+        tagsWithAssetsByAccountSpy.returnsOnce(tagsToReturn);
 
         //act
         List<Tag__c> myTags = myAssetsByTagService.getTagsWithAssetsByAccount(testAccount.Id);
@@ -46,7 +46,7 @@ public with sharing class Chapter4Tests_Mockery {
         MethodSpy tagsWithAssetsByAccountSpy = tagSelectorMock.spyOn('tagsWithAssetsByAccount');
         AssetsByTagService myAssetsByTagService = new AssetsByTagService();
         myAssetsByTagService.tagSelect = (TagSelector) TagSelectorMock.stub;
-        tagsWithAssetsByAccountSpy.returns(tagsToReturn);
+        tagsWithAssetsByAccountSpy.returnsOnce(tagsToReturn);
 
         //act
         List<AssetsByTagService.AssetWrapperCh04> myTagWrappers = myAssetsByTagService.getTagsWithAssetsWrappersByAccount(testAccount.Id);

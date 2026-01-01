@@ -19,7 +19,7 @@ public with sharing class Chapter6Tests_Mockery {
         MethodSpy contactsPerAccountSpy = contactSelectorMock.spyOn('contactsPerAccount');
         ContactService myContactService = new ContactService();
         myContactService.contactSelect = (ContactSelector) contactSelectorMock.stub;
-        contactsPerAccountSpy.returns(contactsToReturn);
+        contactsPerAccountSpy.returnsOnce(contactsToReturn);
 
         //act
         List<Contact> myContacts = myContactService.getContactsPerAccount(testAccount.Id);
