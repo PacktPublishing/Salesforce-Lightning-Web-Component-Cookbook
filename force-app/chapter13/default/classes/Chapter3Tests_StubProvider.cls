@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class Chapter3Tests {
+public with sharing class Chapter3Tests_StubProvider {
     @IsTest
     static void testServiceWrapperReturn() {
         List<Account> acctsToInsert = new List<Account>();
