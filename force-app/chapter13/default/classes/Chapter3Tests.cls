@@ -45,7 +45,7 @@ public with sharing class Chapter3Tests {
     }
 
     @IsTest
-    static void testMockedSelectortopTenAccounts() {
+    static void testMockedServicetopTenAccounts() {
         AccountService mockService = (AccountService)Util_Mocker.createMock(AccountService.class);
 
         Test.startTest();
