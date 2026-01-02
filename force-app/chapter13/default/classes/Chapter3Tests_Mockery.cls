@@ -53,11 +53,6 @@ public with sharing class Chapter3Tests_Mockery {
         myAccountService.accountSelect = (AccountSelector) accountSelectorMock.stub;
         topTenAccountsByRevenueSpy.returnsOnce(accountsToReturn);
 
-        Mock utilQueryMock = Mock.forType(Util_Query.class);
-        MethodSpy querySpy = utilQueryMock.spyOn('query');
-        AccountSelector myAccountSelector = new AccountSelector();
-        querySpy.returnsOnce(accountsToReturn);
-
         //act
         String myWrapperJson = TopAccountsController.returnAccountWrapperList();
 
