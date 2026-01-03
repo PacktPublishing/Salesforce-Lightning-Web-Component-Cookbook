@@ -1,7 +1,7 @@
 @IsTest
 public with sharing class Chapter3Tests_StubProvider {
     @IsTest
-    static void testServiceWrapperReturn() {
+    static void service_it_should_return_wrappers() {
         List<Account> acctsToInsert = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
@@ -23,7 +23,7 @@ public with sharing class Chapter3Tests_StubProvider {
     }
 
     @IsTest
-    static void testSelectortopTenAccounts() {
+    static void selector_it_should_return_top_ten_accounts() {
         List<Account> acctsToReturn = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
@@ -45,7 +45,7 @@ public with sharing class Chapter3Tests_StubProvider {
     }
 
     @IsTest
-    static void testMockedServicetopTenAccounts() {
+    static void service_mocked_it_should_return_top_ten_accounts() {
         AccountService mockService = (AccountService)Util_Mocker.createMock(AccountService.class);
 
         Test.startTest();
