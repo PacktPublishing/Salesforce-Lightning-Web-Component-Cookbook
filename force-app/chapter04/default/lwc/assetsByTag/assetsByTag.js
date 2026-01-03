@@ -30,7 +30,7 @@ export default class AssetsByTag extends LightningElement {
 
             this._tagsWithAssetsResult = this.dataFlattener(tagsWithAssets);
 
-            this.treeGridFormatter(this._tagsWithAssetsResult);
+            return this.treeGridFormatter(this._tagsWithAssetsResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssets!', error.message, 'error');
         }
@@ -41,8 +41,7 @@ export default class AssetsByTag extends LightningElement {
             .then(tagsWithAssets => {
                 this._tagsWithAssetsPromiseResult = this.dataFlattener(tagsWithAssets);
 
-                this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
-
+                return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
             })
             .catch(error => {
                 utility.showNotif('There has been an error in getTagsWithAssetsPromise!', error.message, 'error');
@@ -92,7 +91,7 @@ export default class AssetsByTag extends LightningElement {
 
             this._tagsWithAssetsWrappersResult = sortedWrappers;
 
-            this.treeGridFormatter(this._tagsWithAssetsWrappersResult);
+            return this.treeGridFormatter(this._tagsWithAssetsWrappersResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssetsWrappers!', error.message, 'error');
         }
@@ -129,5 +128,7 @@ export default class AssetsByTag extends LightningElement {
         });
 
         this.gridData = [...tagArray];
+
+        return this.gridData;
     }
 }
