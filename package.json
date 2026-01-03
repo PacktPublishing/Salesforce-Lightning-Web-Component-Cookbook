@@ -17,7 +17,10 @@
     "lint": "eslint force-app/**/default/lwc/**/*.js",
     "test": "nyc mocha",
     "release:version": "npm version",
-    "release:publish": "npm publish --registry=https://registry.npmjs.org"
+    "release:publish": "npm publish --registry=https://registry.npmjs.org",
+    "test:unit": "sfdx-lwc-jest",
+    "test:unit:debug": "sfdx-lwc-jest --debug",
+    "test:unit:watch": "sfdx-lwc-jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
@@ -27,6 +30,7 @@
     "@lwc/eslint-plugin-lwc": "^1.9.0",
     "@salesforce/eslint-config-lwc": "^3.7.2",
     "@salesforce/eslint-plugin-lightning": "^1.0.1",
+    "@salesforce/sfdx-lwc-jest": "^7.1.2",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",
