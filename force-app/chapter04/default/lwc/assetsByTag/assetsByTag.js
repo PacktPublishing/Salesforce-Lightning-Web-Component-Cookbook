@@ -16,16 +16,12 @@ export default class AssetsByTag extends LightningElement {
     gridData;
 
     get isLoaded() {
-        return JSON.stringify(this._tagsWithAssetsResult) === JSON.stringify(this._tagsWithAssetsPromiseResult)
-            &&
-            JSON.stringify(this._tagsWithAssetsResult) === JSON.stringify(this._tagsWithAssetsWrappersResult);
+        return this.gridData;
     }
     
     connectedCallback() {
         utility = new Utilities(this);
         this.getTagsWithAssets();
-        this.getTagsWithAssetsPromise();
-        this.getTagsWithAssetsWrappers();
     }
 
     async getTagsWithAssets() {
@@ -125,13 +121,13 @@ export default class AssetsByTag extends LightningElement {
             }
         );
 
-        for(let tag of tagArray) {
+        tagArray.forEach((tag) => {
             tag._children.sort((a, b) => {
                     return (a.assetName > b.assetName) ? 1 : -1;
                 }
             );
-        }
+        });
 
-        this.gridData = tagArray;
+        this.gridData = [...tagArray];
     }
 }
