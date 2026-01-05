@@ -24,6 +24,7 @@ export default class AssetsByTag extends LightningElement {
         this.getTagsWithAssets();
     }
 
+    @api
     async getTagsWithAssets() {
         try{
             const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId });
@@ -48,6 +49,7 @@ export default class AssetsByTag extends LightningElement {
             })
     }
 
+    @api
     dataFlattener(dataToFlatten) {
         let flattenedData = [];
 
@@ -55,14 +57,14 @@ export default class AssetsByTag extends LightningElement {
             if(tag.Assets__r) {
                 let flattenedAssets = tag.Assets__r.map((asset) => {
                     return ({
-                        "assetDepartment" : asset.Department__c,
-                        "assetId" : asset.Id,
-                        "assetIsPublicDomain" : asset.Is_Public_Domain__c,
-                        "assetName" : asset.Name,
-                        "assetObjectId" : asset.Object_ID__c,
-                        "assetPrimaryImage" : asset.Primary_Image__c,
-                        "tagId" : tag.Id,
-                        "tagName" : tag.Name
+                        'assetDepartment' : asset.Department__c,
+                        'assetId' : asset.Id,
+                        'assetIsPublicDomain' : asset.Is_Public_Domain__c,
+                        'assetName' : asset.Name,
+                        'assetObjectId' : asset.Object_ID__c,
+                        'assetPrimaryImage' : asset.Primary_Image__c,
+                        'tagId' : tag.Id,
+                        'tagName' : tag.Name
                     })
                 });
 
@@ -97,15 +99,16 @@ export default class AssetsByTag extends LightningElement {
         }
     }
 
+    @api
     treeGridFormatter(dataToFormat) {
         let tagArray = [];
         for(let asset of dataToFormat) {
             let tagObject = {
-                "tagName" : asset.tagName,
-                "assetName" : '',
-                "assetObjectId" : '',
-                "assetIsPublicDomain" : '',
-                "_children" : []
+                'tagName' : asset.tagName,
+                'assetName' : '',
+                'assetObjectId' : '',
+                'assetIsPublicDomain' : '',
+                '_children' : []
             }
 
             if(tagArray.find((objectToFind) => (objectToFind.tagName === tagObject.tagName)) === undefined) {

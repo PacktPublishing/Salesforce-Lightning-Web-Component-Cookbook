@@ -10,4 +10,3 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
-**/__mocks__/**

@@ -1,0 +1,70 @@
+[
+  {
+    "Id": "a03g5000001EuPxAAK",
+    "Name": "No Tag Given",
+    "Assets__r": [
+      {
+        "Tag__c": "a03g5000001EuPxAAK",
+        "Id": "02ig50000000uyHAAQ",
+        "Name": "Jar",
+        "Department__c": "Asian Art",
+        "Description": "Edward C. Moore Collection, Bequest of Edward C. Moore, 1891",
+        "Is_Public_Domain__c": true,
+        "Object_ID__c": "47958",
+        "Primary_Image__c": "https://images.metmuseum.org/CRDImages/as/original/DP-29408-001.jpg"
+      },
+      {
+        "Tag__c": "a03g5000001EuPxAAK",
+        "Id": "02ig50000000uv3AAA",
+        "Name": "Sampler",
+        "Department__c": "European Sculpture and Decorative Arts",
+        "Description": "From the Collection of Mrs. Lathrop Colgate Harper, Bequest of Mabel Herbert Harper, 1957",
+        "Is_Public_Domain__c": true,
+        "Object_ID__c": "227934",
+        "Primary_Image__c": "https://images.metmuseum.org/CRDImages/es/original/164948.jpg"
+      },
+      {
+        "Tag__c": "a03g5000001EuPxAAK",
+        "Id": "02ig50000000uqDAAQ",
+        "Name": "Collar",
+        "Department__c": "Costume Institute",
+        "Description": "Brooklyn Museum Costume Collection at The Metropolitan Museum of Art, Gift of the Brooklyn Museum, 2009",
+        "Is_Public_Domain__c": true,
+        "Object_ID__c": "170430",
+        "Primary_Image__c": "https://images.metmuseum.org/CRDImages/ci/original/CP283_CP1.jpg"
+      }
+    ]
+  },
+  {
+    "Id": "a03g5000001EuTBAA0",
+    "Name": "Men",
+    "Assets__r": [
+      {
+        "Tag__c": "a03g5000001EuTBAA0",
+        "Id": "02ig50000000utRAAQ",
+        "Name": "The Honorable Henry Fane (1739–1802) with Inigo Jones and Charles Blair",
+        "Department__c": "European Paintings",
+        "Description": "Gift of Junius S. Morgan, 1887",
+        "Is_Public_Domain__c": true,
+        "Object_ID__c": "437449",
+        "Primary_Image__c": "https://images.metmuseum.org/CRDImages/ep/original/DP213052.jpg"
+      }
+    ]
+  },
+  {
+    "Id": "a03g5000001EuUnAAK",
+    "Name": "Frogs",
+    "Assets__r": [
+      {
+        "Tag__c": "a03g5000001EuUnAAK",
+        "Id": "02ig50000000uwfAAA",
+        "Name": "Frog (Kaeru); Gold Beetle (Kogane mushi), from the Picture Book of Crawling Creatures (Ehon mushi erami)",
+        "Department__c": "Asian Art",
+        "Description": "Rogers Fund, 1918",
+        "Is_Public_Domain__c": true,
+        "Object_ID__c": "37297",
+        "Primary_Image__c": "https://images.metmuseum.org/CRDImages/as/original/DP135565.jpg"
+      }
+    ]
+  }
+]
