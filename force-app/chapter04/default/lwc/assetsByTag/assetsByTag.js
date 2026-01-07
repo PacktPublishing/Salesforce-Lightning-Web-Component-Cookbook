@@ -29,28 +29,28 @@ export default class AssetsByTag extends LightningElement {
         try{
             const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId });
 
-            this._tagsWithAssetsResult = this.dataFlattener(tagsWithAssets);
-
-            return this.treeGridFormatter(this._tagsWithAssetsResult);
+            this._tagsWithAssetsResult = this.assetDataFlattener(tagsWithAssets);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssets!', error.message, 'error');
         }
+
+        return this.treeGridFormatter(this._tagsWithAssetsResult);
     }
 
     getTagsWithAssetsPromise() {
         returnTagsWithAssetsByAccount({ accountIdString : this.accountId })
             .then(tagsWithAssets => {
-                this._tagsWithAssetsPromiseResult = this.dataFlattener(tagsWithAssets);
-
-                return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
+                this._tagsWithAssetsPromiseResult = this.assetDataFlattener(tagsWithAssets);
             })
             .catch(error => {
                 utility.showNotif('There has been an error in getTagsWithAssetsPromise!', error.message, 'error');
             })
+
+        return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
     }
 
     @api
-    dataFlattener(dataToFlatten) {
+    assetDataFlattener(dataToFlatten) {
         let flattenedData = [];
 
         for(let tag of dataToFlatten) {
@@ -92,11 +92,11 @@ export default class AssetsByTag extends LightningElement {
             );
 
             this._tagsWithAssetsWrappersResult = sortedWrappers;
-
-            return this.treeGridFormatter(this._tagsWithAssetsWrappersResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssetsWrappers!', error.message, 'error');
         }
+
+        return this.treeGridFormatter(this._tagsWithAssetsWrappersResult);
     }
 
     @api

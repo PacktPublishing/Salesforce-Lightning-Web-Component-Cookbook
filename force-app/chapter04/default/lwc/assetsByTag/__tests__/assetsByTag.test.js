@@ -28,7 +28,7 @@ describe('c-assets-by-tag', () => {
         const element = createElement('c-assets-by-tag', { is: AssetsByTag });
         document.body.appendChild(element);
 
-        const result = element.dataFlattener(RETURNED_TAGS_WITH_ASSETS);
+        const result = element.assetDataFlattener(RETURNED_TAGS_WITH_ASSETS);
 
         expect(result).toStrictEqual(FLATTENED_ASSETS);
     });
@@ -49,7 +49,7 @@ describe('c-assets-by-tag', () => {
         returnTagsWithAssetsByAccount.mockResolvedValue(RETURNED_TAGS_WITH_ASSETS);
 
         const result = await element.getTagsWithAssets();
-        
+
         expect(result).toStrictEqual(TREE_GRID_ASSETS);
     })
 });
