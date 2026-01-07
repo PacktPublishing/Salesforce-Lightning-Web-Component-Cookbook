@@ -29,18 +29,20 @@ export default class AssetsByTag extends LightningElement {
         try{
             const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId });
 
-            this._tagsWithAssetsResult = this.dataFlattener(tagsWithAssets);
+            this._tagsWithAssetsResult = this.assetFlattener(tagsWithAssets);
 
             return this.treeGridFormatter(this._tagsWithAssetsResult);
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssets!', error.message, 'error');
         }
+
+        return this._tagsWithAssetsResult
     }
 
     getTagsWithAssetsPromise() {
         returnTagsWithAssetsByAccount({ accountIdString : this.accountId })
             .then(tagsWithAssets => {
-                this._tagsWithAssetsPromiseResult = this.dataFlattener(tagsWithAssets);
+                this._tagsWithAssetsPromiseResult = this.assetFlattener(tagsWithAssets);
 
                 return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
             })
@@ -50,7 +52,7 @@ export default class AssetsByTag extends LightningElement {
     }
 
     @api
-    dataFlattener(dataToFlatten) {
+    assetFlattener(dataToFlatten) {
         let flattenedData = [];
 
         for(let tag of dataToFlatten) {
@@ -97,6 +99,8 @@ export default class AssetsByTag extends LightningElement {
         } catch(error) {
             utility.showNotif('There has been an error in getTagsWithAssetsWrappers!', error.message, 'error');
         }
+
+        return this._tagsWithAssetsWrappersResult;
     }
 
     @api
