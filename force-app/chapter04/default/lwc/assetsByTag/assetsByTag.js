@@ -51,6 +51,8 @@ export default class AssetsByTag extends LightningElement {
             .catch(error => {
                 utility.showNotif('There has been an error in getTagsWithAssetsPromise!', error.message, 'error');
             })
+
+        return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
     }
 
     @api

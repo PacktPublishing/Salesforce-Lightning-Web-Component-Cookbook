@@ -27,7 +27,7 @@
     "@babel/eslint-parser": "^7.24.1",
     "@babel/preset-typescript": "^7.24.6",
     "@locker/eslint-config-locker": "^0.25.7",
-    "@lwc/eslint-plugin-lwc": "^1.9.0",
+    "@lwc/eslint-plugin-lwc": "^2.2.0",
     "@salesforce/eslint-config-lwc": "^3.7.2",
     "@salesforce/eslint-plugin-lightning": "^1.0.1",
     "@salesforce/sfdx-lwc-jest": "^7.1.2",

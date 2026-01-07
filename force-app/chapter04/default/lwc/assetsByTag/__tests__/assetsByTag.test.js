@@ -49,7 +49,7 @@ describe('c-assets-by-tag', () => {
         returnTagsWithAssetsByAccount.mockResolvedValue(RETURNED_TAGS_WITH_ASSETS);
 
         const result = await element.getTagsWithAssets();
-        
+
         expect(result).toStrictEqual(TREE_GRID_ASSETS);
     })
 });
