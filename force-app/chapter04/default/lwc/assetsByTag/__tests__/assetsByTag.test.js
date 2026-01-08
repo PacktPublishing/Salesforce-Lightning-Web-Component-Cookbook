@@ -49,7 +49,10 @@ describe('c-assets-by-tag', () => {
         returnTagsWithAssetsByAccount.mockResolvedValue(RETURNED_TAGS_WITH_ASSETS);
 
         const result = await element.getTagsWithAssets();
-
         expect(result).toStrictEqual(TREE_GRID_ASSETS);
+        
+        const treeGrid = element.shadowRoot.querySelector('lightning-tree-grid');
+        expect(treeGrid.data).toStrictEqual(TREE_GRID_ASSETS);
+
     })
 });
