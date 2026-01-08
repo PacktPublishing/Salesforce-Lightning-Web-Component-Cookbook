@@ -2,7 +2,7 @@ import { createElement } from 'lwc';
 import AssetsByTag from 'c/assetsByTag';
 import returnTagsWithAssetsByAccount from '@salesforce/apex/AssetsByTagController.returnTagsWithAssetsByAccount';
 
-const RETURNED_TAGS_WITH_ASSETS = require('./data/returnedAssets.json')
+const RETURNED_TAGS_WITH_ASSETS = require('./data/returnedTagsWithAssets.json')
 const FLATTENED_ASSETS = require('./data/flattenedAssets.json');
 const TREE_GRID_ASSETS = require('./data/treeGridAssets.json');
 
