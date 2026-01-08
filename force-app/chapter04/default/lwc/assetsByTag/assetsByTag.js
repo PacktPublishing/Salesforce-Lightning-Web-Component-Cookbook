@@ -31,7 +31,7 @@ export default class AssetsByTag extends LightningElement {
         try{
             const tagsWithAssets = await returnTagsWithAssetsByAccount({ accountIdString : this.accountId });
 
-            this._tagsWithAssetsResult = this.assetFlattener(tagsWithAssets);
+            this._tagsWithAssetsResult = this.tagFlattener(tagsWithAssets);
 
             formattedResults = this.treeGridFormatter(this._tagsWithAssetsResult);
         } catch(error) {
@@ -44,7 +44,7 @@ export default class AssetsByTag extends LightningElement {
     getTagsWithAssetsPromise() {
         returnTagsWithAssetsByAccount({ accountIdString : this.accountId })
             .then(tagsWithAssets => {
-                this._tagsWithAssetsPromiseResult = this.assetFlattener(tagsWithAssets);
+                this._tagsWithAssetsPromiseResult = this.tagFlattener(tagsWithAssets);
 
                 return this.treeGridFormatter(this._tagsWithAssetsPromiseResult);
             })
@@ -56,10 +56,10 @@ export default class AssetsByTag extends LightningElement {
     }
 
     @api
-    assetFlattener(dataToFlatten) {
+    tagFlattener(tagsToFlatten) {
         let flattenedData = [];
 
-        for(let tag of dataToFlatten) {
+        for(let tag of tagsToFlatten) {
             if(tag.Assets__r) {
                 let flattenedAssets = tag.Assets__r.map((asset) => {
                     return ({

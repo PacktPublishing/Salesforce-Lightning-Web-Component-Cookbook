@@ -28,7 +28,7 @@ describe('c-assets-by-tag', () => {
         const element = createElement('c-assets-by-tag', { is: AssetsByTag });
         document.body.appendChild(element);
 
-        const result = element.assetFlattener(RETURNED_TAGS_WITH_ASSETS);
+        const result = element.tagFlattener(RETURNED_TAGS_WITH_ASSETS);
 
         expect(result).toStrictEqual(FLATTENED_ASSETS);
     });
