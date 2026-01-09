@@ -53,6 +53,5 @@ describe('c-assets-by-tag', () => {
         
         const treeGrid = element.shadowRoot.querySelector('lightning-tree-grid');
         expect(treeGrid.data).toStrictEqual(TREE_GRID_ASSETS);
-
     })
 });
