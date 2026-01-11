@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Top_Accounts</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <description>A permission set to allow the user to view the Top Accounts App.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>View Top Accounts App</label>
+    <tabSettings>
+        <tab>Top_Accounts</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>
