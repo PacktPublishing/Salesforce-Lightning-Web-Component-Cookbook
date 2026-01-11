@@ -43,7 +43,7 @@ export default class AddAssetPicker extends LightningElement {
             } else {
                 let searchResults = JSON.parse(searchResultsJSON);
                 
-                searchResults.each((sr) => {
+                searchResults.forEach((sr) => {
                     let srClone = {...sr, label:sr.title, value:sr.objectId};
                     this.searchResults.push(srClone);
                 });
@@ -58,7 +58,7 @@ export default class AddAssetPicker extends LightningElement {
             }
         } catch(error) {
             this.options = undefined;
-            utility.showNotif('There has been an error in sendSearchApex!', error, 'error');
+            utility.showNotif('There has been an error in sendSearchApex!', error.message, 'error');
         }
     }
 
