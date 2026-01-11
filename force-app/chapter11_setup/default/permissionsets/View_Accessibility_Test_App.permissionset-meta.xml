@@ -7,4 +7,8 @@
     <description>A permission set to allow the user to view the Accessible vs. Inaccessible Testing App.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>View Accessibility Test App</label>
+    <tabSettings>
+        <tab>Testing_Page</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>
