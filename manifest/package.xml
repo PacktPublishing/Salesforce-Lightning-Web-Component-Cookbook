@@ -134,9 +134,12 @@
 	<types>
 		<members>Accessible_vs_Inaccessible_Test_UtilityBar</members>
 		<members>Chapter_10_Flexipage</members>
+		<members>Chapter_2_Flexipage</members>
 		<members>Chapter_6_Flexipage</members>
 		<members>Chapter_8_Flexipage</members>
 		<members>Chapter_9_Flexipage</members>
+		<members>Testing_Page</members>
+		<members>Top_Accounts_UtilityBar</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
