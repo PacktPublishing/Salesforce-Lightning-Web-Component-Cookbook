@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>*</members>
+		<members>AccountSelector</members>
+		<members>AccountService</members>
+		<members>Accounts</members>
+		<members>AddAssetAPI</members>
+		<members>AddAssetController</members>
+		<members>AddAssetService</members>
+		<members>AssetMapPersistence</members>
+		<members>AssetMapPresentation</members>
+		<members>AssetMapService</members>
+		<members>AssetSelector</members>
+		<members>Assets</members>
+		<members>AssetsByTagController</members>
+		<members>AssetsByTagService</members>
+		<members>CaptureAccountGeolocationController</members>
+		<members>CaptureAccountGeolocationService</members>
+		<members>Constituents</members>
+		<members>ConsumerInquiries</members>
+		<members>ContactSelector</members>
+		<members>ContactService</members>
+		<members>CsvReader</members>
+		<members>CustomerSelector</members>
+		<members>DisplayAssetsController</members>
+		<members>DisplayAssetsService</members>
+		<members>ObjectWrappers</members>
+		<members>OrgSetupClass</members>
+		<members>OrgSetupREST</members>
+		<members>RecentConsumerController</members>
+		<members>RecentConsumerService</members>
+		<members>TableController</members>
+		<members>TableService</members>
+		<members>TagSelector</members>
+		<members>Tags</members>
+		<members>TopAccountsController</members>
+		<members>TransferAssetPersistence</members>
+		<members>TransferAssetPresentation</members>
+		<members>TransferAssetService</members>
+		<members>Util_DML</members>
+		<members>Util_DMLMockProvider</members>
+		<members>Util_DMLTest</members>
+		<members>Util_MockIDGenerator</members>
+		<members>Util_Mocker</members>
+		<members>Util_Query</members>
+		<members>ViewContactController</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>ApexComponent</name>
+		<name>AuraDefinitionBundle</name>
+	</types>
+	<types>
+		<members>Met_Museum_Images</members>
+		<name>CspTrustedSite</name>
+	</types>
+	<types>
+		<members>Accessible_vs_Inaccessible_Test</members>
+		<members>Top_Accounts</members>
+		<name>CustomApplication</name>
 	</types>
 	<types>
 		<members>Account.Museum_Office__c</members>
@@ -37,6 +88,9 @@
 		<members>Constituent__c.Role__c</members>
 		<members>Constituent__c.ULAN_URL__c</members>
 		<members>Constituent__c.Wikidata_URL__c</members>
+		<members>Consumer_Inquiry__c.Asset__c</members>
+		<members>Consumer_Inquiry__c.Contact__c</members>
+		<members>Consumer_Inquiry__c.Customer__c</members>
 		<members>Tag__c.AAT_URL__c</members>
 		<members>Tag__c.AAT__c</members>
 		<members>Tag__c.Wikidata_URL__c</members>
@@ -47,48 +101,117 @@
 		<members>Asset</members>
 		<members>Asset_Residency__c</members>
 		<members>Constituent__c</members>
+		<members>Consumer_Inquiry__c</members>
 		<members>Tag__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>*</members>
+		<name>CustomObjectTranslation</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>CustomPermission</name>
+	</types>
+	<types>
+		<members>Asset_Residency__c</members>
+		<members>Constituent__c</members>
+		<members>Tag__c</members>
+		<members>Testing_Page</members>
+		<members>Top_Accounts</members>
 		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>csvToAccounts</members>
+		<members>csvToContacts</members>
+		<members>csvToCustomers</members>
+		<name>DataWeaveResource</name>
 	</types>
 	<types>
 		<members>The_Met_External</members>
 		<name>ExternalCredential</name>
 	</types>
 	<types>
-		<members>Asset_Record_Page</members>
+		<members>Accessible_vs_Inaccessible_Test_UtilityBar</members>
+		<members>Chapter_10_Flexipage</members>
+		<members>Chapter_6_Flexipage</members>
+		<members>Chapter_8_Flexipage</members>
+		<members>Chapter_9_Flexipage</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
-		<members>Add_Asset_To_Account</members>
+		<members>*</members>
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>FlowDefinition</name>
+	</types>
+	<types>
 		<members>Account-Account Layout</members>
+		<members>Account-Chapter 12 Layout</members>
 		<members>Asset-Asset Layout</members>
+		<members>Asset-Chapter 7 Layout</members>
 		<members>Asset_Residency__c-Asset Residency Layout</members>
 		<members>Constituent__c-Artist Layout</members>
+		<members>Consumer_Inquiry__c-Consumer Inquiry Layout</members>
 		<members>Tag__c-Tag Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>accessibleDatatable</members>
+		<members>accessibleTable</members>
+		<members>addAssetDepartment</members>
+		<members>addAssetPicker</members>
+		<members>addAssetSearch</members>
+		<members>assetMap</members>
+		<members>assetsByTag</members>
+		<members>captureAccountGeolocationLauncher</members>
+		<members>captureAccountGeolocationModal</members>
+		<members>changeRequestForm</members>
+		<members>changeRequestLauncher</members>
+		<members>changeRequestModal</members>
+		<members>changeRequestModalLws</members>
+		<members>consumerSearchWithDropdown</members>
+		<members>displayAssetsOnAccount</members>
+		<members>displayAssetsOnAccountEditable</members>
+		<members>displayAssetsOnAccountWithConsumer</members>
+		<members>flattenedViewContacts</members>
+		<members>inaccessibleTable</members>
+		<members>myFirstLWC</members>
+		<members>notifUtils</members>
+		<members>picklistDatatable</members>
+		<members>polymorphicDropdown</members>
+		<members>topTenAccountTabset</members>
+		<members>transferAsset</members>
+		<members>viewContactsAddEventButton</members>
+		<members>viewContactsContactDatatable</members>
+		<members>viewContactsLightningCard</members>
+		<members>viewContactsLightningFlow</members>
+		<members>viewContactsShell</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>Tag__c.All</members>
+		<name>ListView</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
+		<members>Custom_Permission_LWS_Enabler</members>
 		<members>Named_Credential_Access</members>
+		<members>View_Accessibility_Test_App</members>
+		<members>View_Top_Accounts_App</members>
 		<name>PermissionSet</name>
 	</types>
 	<types>
-		<members>Admin</members>
-		<name>Profile</name>
+		<members>Account.Add_Assets</members>
+		<members>Account.Capture_Geolocation</members>
+		<members>Account.Capture_Geolocation_LWC</members>
+		<members>Asset.Change_Request</members>
+		<name>QuickAction</name>
 	</types>
 	<types>
 		<members>The_Met</members>
