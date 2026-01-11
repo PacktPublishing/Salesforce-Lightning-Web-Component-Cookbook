@@ -29,7 +29,7 @@ export default class AddAssetDepartment extends LightningElement {
                 let temp = JSON.parse(data);
                 let departments = [];
     
-                temp.departments.each((tmp) => {
+                temp.departments.forEach((tmp) => {
                     let tmpClone = {...tmp, label:tmp.displayName, value:tmp.departmentId};
                     departments.push(tmpClone);
                 });
@@ -46,7 +46,7 @@ export default class AddAssetDepartment extends LightningElement {
         }
         catch(error) {
             this.options = undefined;
-            utility.showNotif('There has been an error loading departments!', error, 'error');
+            utility.showNotif('There has been an error loading departments!', error.message, 'error');
         }
     }
 
