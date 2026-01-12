@@ -115,7 +115,7 @@ export default class AssetsByTag extends LightningElement {
             let tagObject = {
                 'tagName' : asset.tagName,
                 'assetName' : '',
-                'assetObjectId' : '',
+                'assetObjectId' : asset.tagName,
                 'assetIsPublicDomain' : '',
                 '_children' : []
             }
