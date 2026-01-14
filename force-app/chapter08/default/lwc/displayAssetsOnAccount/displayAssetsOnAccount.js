@@ -10,7 +10,6 @@ let utility;
 
 export default class DisplayAssetsOnAccount extends NavigationMixin(LightningElement) {
     @api recordId
-    scrollingAssets = [];
     assetsForDatatable;
     notLoaded = true;
     selectedAsset;

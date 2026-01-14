@@ -14,7 +14,6 @@ let utility;
 
 export default class DisplayAssetsOnAccountEditable extends NavigationMixin(LightningElement) {
     @api recordId
-    scrollingAssets = [];
     assetsForDatatable;
     notLoaded = true;
     selectedAsset;
