@@ -20,7 +20,7 @@ public with sharing class OrgSetupClass {
         //use a list which can return size == 0 so we don't throw an error accessing
         List<Account> setupAccounts = [SELECT Id FROM Account WHERE Name = 'Ultricies PC'];
 
-        if(setupAccounts.size() == 0) {
+        if(setupAccounts.size() < 1) {
             CsvReader.getAccounts();
             CsvReader.getCustomers();
         }
