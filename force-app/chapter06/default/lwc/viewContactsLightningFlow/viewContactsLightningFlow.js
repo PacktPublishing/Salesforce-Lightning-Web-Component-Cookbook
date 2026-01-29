@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 
 export default class ViewContactsLightningFlow extends LightningElement {
-    @api accountId
+    @api accountId;
     @api contactId;
 
     get flowInputVariables() {
