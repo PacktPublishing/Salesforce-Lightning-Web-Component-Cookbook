@@ -1,5 +1,8 @@
 public with sharing class DisplayAssetsService {
+    /** Chapter 8 Variable */
     @TestVisible private AssetSelector selector = new AssetSelector();
+
+    /** Chapter 9 & 10 Variables */
     @TestVisible private Assets assets = new Assets();
     @TestVisible private ConsumerInquiries inquiries = new ConsumerInquiries();
 
