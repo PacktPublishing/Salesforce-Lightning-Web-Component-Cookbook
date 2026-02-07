@@ -2,7 +2,7 @@
   {
     "tagName": "Frogs",
     "assetName" : "",
-    "assetObjectId" : "",
+    "assetObjectId" : "Frogs",
     "assetIsPublicDomain" : "",
     "_children": [
       {
@@ -20,7 +20,7 @@
   {
     "tagName": "Men",
     "assetName" : "",
-    "assetObjectId" : "",
+    "assetObjectId" : "Men",
     "assetIsPublicDomain" : "",
     "_children": [
       {
@@ -38,7 +38,7 @@
   {
     "tagName": "No Tag Given",
     "assetName" : "",
-    "assetObjectId" : "",
+    "assetObjectId" : "No Tag Given",
     "assetIsPublicDomain" : "",
     "_children": [
       {
