@@ -33,7 +33,7 @@ describe('c-top-ten-account-tabset', () => {
         }
     });
 
-    it('it should test wire function', () => {
+    it('should test wire function', () => {
         const element = createElement('c-top-ten-account-tabset', {
             is: TopTenAccountTabset
         });

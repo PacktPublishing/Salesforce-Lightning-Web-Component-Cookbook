@@ -24,7 +24,7 @@ describe('c-assets-by-tag', () => {
         }
     });
 
-    it('it should flatten asset data', () => {
+    it('should flatten asset data', () => {
         const element = createElement('c-assets-by-tag', { is: AssetsByTag });
         document.body.appendChild(element);
 
@@ -33,7 +33,7 @@ describe('c-assets-by-tag', () => {
         expect(result).toStrictEqual(FLATTENED_ASSETS);
     });
 
-    it('it should format flattened assets for a tree grid', () => {
+    it('should format flattened assets for a tree grid', () => {
         const element = createElement('c-assets-by-tag', { is: AssetsByTag });
         document.body.appendChild(element);
 
@@ -42,7 +42,7 @@ describe('c-assets-by-tag', () => {
         expect(result).toStrictEqual(TREE_GRID_ASSETS);
     });
 
-    it('it should return, flatten, and format our returned assets by account', async () => {
+    it('should return, flatten, and format our returned assets by account', async () => {
         const element = createElement('c-assets-by-tag', { is: AssetsByTag });
         document.body.appendChild(element);
 
