@@ -10,7 +10,7 @@ public with sharing class AccountServiceMockProvider implements System.StubProvi
                     for(Integer ii = 9; ii > -1; ii--) {
                         Account acct = new Account(Name = 'Account ' + ii);
 
-                        Id mockedId = Util_MockIDGenerator.getMockId(acct);
+                        Id mockedId = Util_FakeIdGenerator.getFakeId(acct);
                         Decimal annualRev = ii * 100000;
 
                         Map<String, Object> accountMap = new Map<String, Object> {

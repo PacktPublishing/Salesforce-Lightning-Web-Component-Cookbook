@@ -6,7 +6,7 @@ public with sharing class Chapter3Tests_Mockery {
         List<Account> accountsToReturn = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
-            acct.Id = Util_MockIDGenerator.getMockId(new Account());
+            acct.Id = Util_FakeIdGenerator.getFakeId(new Account());
             acct.AnnualRevenue = ii * 100000;
             acct.Museum_Office__Latitude__s = 37.790197;
             acct.Museum_Office__Longitude__s = -122.396879;
@@ -38,7 +38,7 @@ public with sharing class Chapter3Tests_Mockery {
         List<Account> accountsToReturn = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
-            acct.Id = Util_MockIDGenerator.getMockId(new Account());
+            acct.Id = Util_FakeIdGenerator.getFakeId(new Account());
             acct.AnnualRevenue = ii * 100000;
             acct.Museum_Office__Latitude__s = 37.790197;
             acct.Museum_Office__Longitude__s = -122.396879;
@@ -70,7 +70,7 @@ public with sharing class Chapter3Tests_Mockery {
         List<Account> accountsToReturn = new List<Account>();
         for(Integer ii = 0; ii < 10; ii++) {
             Account acct = new Account(Name = 'Account ' + ii);
-            acct.Id = Util_MockIDGenerator.getMockId(new Account());
+            acct.Id = Util_FakeIdGenerator.getFakeId(new Account());
             acct.AnnualRevenue = ii * 100000;
             acct.Museum_Office__Latitude__s = 37.790197;
             acct.Museum_Office__Longitude__s = -122.396879;

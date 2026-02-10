@@ -16,7 +16,7 @@ public with sharing class Util_QueryMockProvider implements System.StubProvider 
 
                     Contact contactToReturn = new Contact(LastName = 'Contact To Return');
                     Map<String, Object> contactMap = new Map<String, Object> {
-                        'id' => Util_MockIdGenerator.getMockId(contactToReturn),
+                        'id' => Util_FakeIdGenerator.getFakeId(contactToReturn),
                         'LastName' => contactToReturn.LastName
                     };
 
@@ -32,7 +32,7 @@ public with sharing class Util_QueryMockProvider implements System.StubProvider 
 
         public static Map<String, Object> mockAccountMapGenerator(Account acctToReturn) {
             return new Map<String, Object> {
-                'id' => Util_MockIdGenerator.getMockId(acctToReturn),
+                'id' => Util_FakeIdGenerator.getFakeId(acctToReturn),
                 'Name' => acctToReturn.Name
             };
         }

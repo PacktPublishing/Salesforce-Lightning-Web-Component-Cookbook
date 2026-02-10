@@ -13,7 +13,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Util_MockIDGenerator</apexClass>
+        <apexClass>Util_FakeIdGenerator</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

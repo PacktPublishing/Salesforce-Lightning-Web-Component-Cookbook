@@ -3,13 +3,13 @@ public with sharing class Chapter4Tests_Mockery {
     @IsTest
     static void controller_it_should_return_tags() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Tag__c> tagsToReturn = new List<Tag__c>();
         for(Integer ii = 0; ii < 10; ii++) {
             Tag__c tag = new Tag__c();
             tag.Name = 'Tag '+ ii;
-            tag.Id = Util_MockIdGenerator.getMockId(new Tag__c());
+            tag.Id = Util_FakeIdGenerator.getFakeId(new Tag__c());
 
             tagsToReturn.add(tag);
         }
@@ -33,13 +33,13 @@ public with sharing class Chapter4Tests_Mockery {
     @IsTest
     static void controller_it_should_return_tag_wrappers() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Tag__c> tagsToReturn = new List<Tag__c>();
         for(Integer ii = 0; ii < 10; ii++) {
             Tag__c tag = new Tag__c();
             tag.Name = 'Tag '+ ii;
-            tag.Id = Util_MockIdGenerator.getMockId(new Tag__c());
+            tag.Id = Util_FakeIdGenerator.getFakeId(new Tag__c());
             
             tagsToReturn.add(tag);
         }
@@ -63,13 +63,13 @@ public with sharing class Chapter4Tests_Mockery {
     @IsTest
     static void service_it_should_return_tags() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Tag__c> tagsToReturn = new List<Tag__c>();
         for(Integer ii = 0; ii < 10; ii++) {
             Tag__c tag = new Tag__c();
             tag.Name = 'Tag '+ ii;
-            tag.Id = Util_MockIdGenerator.getMockId(new Tag__c());
+            tag.Id = Util_FakeIdGenerator.getFakeId(new Tag__c());
 
             tagsToReturn.add(tag);
         }
@@ -94,13 +94,13 @@ public with sharing class Chapter4Tests_Mockery {
     @IsTest
     static void service_it_should_return_tag_wrappers() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Tag__c> tagsToReturn = new List<Tag__c>();
         for(Integer ii = 0; ii < 10; ii++) {
             Tag__c tag = new Tag__c();
             tag.Name = 'Tag '+ ii;
-            tag.Id = Util_MockIdGenerator.getMockId(new Tag__c());
+            tag.Id = Util_FakeIdGenerator.getFakeId(new Tag__c());
 
             tagsToReturn.add(tag);
         }
@@ -125,13 +125,13 @@ public with sharing class Chapter4Tests_Mockery {
     @IsTest
     static void selector_it_should_return_tags() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Tag__c> tagsToReturn = new List<Tag__c>();
         for(Integer ii = 0; ii < 10; ii++) {
             Tag__c tag = new Tag__c();
             tag.Name = 'Tag '+ ii;
-            tag.Id = Util_MockIdGenerator.getMockId(new Tag__c());
+            tag.Id = Util_FakeIdGenerator.getFakeId(new Tag__c());
 
             tagsToReturn.add(tag);
         }

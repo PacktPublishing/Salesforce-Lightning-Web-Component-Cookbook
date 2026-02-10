@@ -7,7 +7,7 @@ public class Util_DMLMockProvider implements System.StubProvider {
                 when 'insertRecords' {
                     Account acctForInsert = new Account(Name = 'Account For Insert');
 
-                    result acctSRone= new Result(true, Util_MockIdGenerator.getMockId(acctForInsert));
+                    result acctSRone= new Result(true, Util_FakeIdGenerator.getFakeId(acctForInsert));
                     List<Database.SaveResult> srList = new List<Database.SaveResult>{ (Database.SaveResult) JSON.deserialize(JSON.serialize(acctSRone), Database.SaveResult.class)};
                     return srList;
                 }

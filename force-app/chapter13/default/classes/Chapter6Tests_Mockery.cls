@@ -3,14 +3,14 @@ public with sharing class Chapter6Tests_Mockery {
     @IsTest
     static void controller_it_should_return_contacts() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Contact> contactsToReturn = new List<Contact>();
         for(Integer ii = 0; ii < 10; ii++) {
             Contact cont = new Contact();
             cont.FirstName = 'Test';
             cont.LastName = 'Contact '+ ii;
-            cont.Id = Util_MockIdGenerator.getMockId(new Contact());
+            cont.Id = Util_FakeIdGenerator.getFakeId(new Contact());
             cont.AccountId = testAccount.Id;
         }
 
@@ -40,14 +40,14 @@ public with sharing class Chapter6Tests_Mockery {
     @IsTest
     static void service_it_should_return_contacts() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Contact> contactsToReturn = new List<Contact>();
         for(Integer ii = 0; ii < 10; ii++) {
             Contact cont = new Contact();
             cont.FirstName = 'Test';
             cont.LastName = 'Contact '+ ii;
-            cont.Id = Util_MockIdGenerator.getMockId(new Contact());
+            cont.Id = Util_FakeIdGenerator.getFakeId(new Contact());
             cont.AccountId = testAccount.Id;
 
             contactsToReturn.add(cont);
@@ -74,14 +74,14 @@ public with sharing class Chapter6Tests_Mockery {
     @IsTest
     static void selector_it_should_return_contacts() {
         //prepare
-        Account testAccount = new Account(Name = 'Test Account', Id = Util_MockIdGenerator.getMockId(new Account()));
+        Account testAccount = new Account(Name = 'Test Account', Id = Util_FakeIdGenerator.getFakeId(new Account()));
 
         List<Contact> contactsToReturn = new List<Contact>();
         for(Integer ii = 0; ii < 10; ii++) {
             Contact cont = new Contact();
             cont.FirstName = 'Test';
             cont.LastName = 'Contact '+ ii;
-            cont.Id = Util_MockIdGenerator.getMockId(new Contact());
+            cont.Id = Util_FakeIdGenerator.getFakeId(new Contact());
             cont.AccountId = testAccount.Id;
 
             contactsToReturn.add(cont);

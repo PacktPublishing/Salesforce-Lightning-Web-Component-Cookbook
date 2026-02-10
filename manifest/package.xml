@@ -40,7 +40,7 @@
 		<members>Util_DML</members>
 		<members>Util_DMLMockProvider</members>
 		<members>Util_DMLTest</members>
-		<members>Util_MockIDGenerator</members>
+		<members>Util_FakeIdGenerator</members>
 		<members>Util_Mocker</members>
 		<members>Util_Query</members>
 		<members>ViewContactController</members>
