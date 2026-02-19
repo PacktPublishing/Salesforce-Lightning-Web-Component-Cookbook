@@ -31,12 +31,18 @@ public with sharing class DisplayAssetsService {
                 Id consumerId = Id.valueOf(wrapper.consumerValue);
 
                 Consumer_Inquiry__c newInquiry;
-                if(consumerId.getSObjectType().getDescribe().getName() == 'Contact') {
-                    newInquiry = new ContactConsumer(wrapper.Id, new Contact(Id = consumerId)).getConsumerInquiry();
-                } else if(consumerId.getSObjectType().getDescribe().getName() == 'Customer') {
-                    newInquiry = new CustomerConsumer(wrapper.Id, new Customer(Id = consumerId)).getConsumerInquiry();
+                switch on consumerId.getSObjectType().getDescribe().getName().toLowerCase() {
+                    when 'contact' {
+                        newInquiry = new ContactConsumer(wrapper.Id, new Contact(Id = consumerId)).getConsumerInquiry();
+                    }
+                    when 'customer' {
+                        newInquiry = new CustomerConsumer(wrapper.Id, new Customer(Id = consumerId)).getConsumerInquiry();
+                    }
+                    when else {
+                        continue;
+                    }
                 }
-
+    
                 inquiriesToInsert.add(newInquiry);
             }
         }
