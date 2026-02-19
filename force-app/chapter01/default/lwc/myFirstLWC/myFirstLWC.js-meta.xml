@@ -4,8 +4,12 @@
     <isExposed>true</isExposed>
     <targets>
         <target>lightning__RecordPage</target>
-        <objects>
-            <object>User</object>
-        </objects>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>User</object>
+            </objects>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
