@@ -30,7 +30,7 @@ public with sharing class RecentConsumerService {
             this.label = (String) sObj.get('Name');
             this.value = sObj.Id;
             this.type = String.valueOf(sObj.getSObjectType());
-            this.fact = (String) (this.type == 'Contact' ? sObj.getSObject('Account').get('Name') : String.valueOf(sObj.get('TotalLifeTimeValue')));
+            this.fact = this.type == 'Contact' ? new ContactConsumer(this.assetId, sObj).getFact() : new CustomerConsumer(this.assetId, sObj).getFact();
         }
     }
 }

@@ -28,14 +28,13 @@ public with sharing class DisplayAssetsService {
             }
 
             if(wrapper.consumerValue != null && wrapper.consumerValue != '') {
-                Id idToUse = Id.valueOf(wrapper.consumerValue);
+                Id consumerId = Id.valueOf(wrapper.consumerValue);
 
-                Consumer_Inquiry__c newInquiry = new Consumer_Inquiry__c(Asset__c = wrapper.Id);
-
-                if(idToUse.getSObjectType().getDescribe().getName() == 'Contact') {
-                    newInquiry.Contact__c = idToUse;
-                } else if(idToUse.getSObjectType().getDescribe().getName() == 'Customer') {
-                    newInquiry.Customer__c = idToUse;
+                Consumer_Inquiry__c newInquiry;
+                if(consumerId.getSObjectType().getDescribe().getName() == 'Contact') {
+                    newInquiry = new ContactConsumer(wrapper.Id, new Contact(Id = consumerId)).getConsumerInquiry();
+                } else if(consumerId.getSObjectType().getDescribe().getName() == 'Customer') {
+                    newInquiry = new CustomerConsumer(wrapper.Id, new Customer(Id = consumerId)).getConsumerInquiry();
                 }
 
                 inquiriesToInsert.add(newInquiry);
@@ -48,8 +47,8 @@ public with sharing class DisplayAssetsService {
     }
 
     public class DisplayAssetWrapper {
-        String Id;
-        String statusValue;
-        String consumerValue;
+        public String Id;
+        public String statusValue;
+        public String consumerValue;
     }
 }
