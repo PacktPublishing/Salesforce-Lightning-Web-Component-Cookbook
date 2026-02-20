@@ -10,7 +10,7 @@ export default class SearchableDropdown extends LightningElement {
 
         let tempOptions = this.dropdownOptions;
 
-        let selectedElement = tempOptions.filter(option => option.value === this.selectedOption);
+        let selectedElement = tempOptions.find(option => option.value === this.selectedOption);
 
         const setSelectionEvent = new CustomEvent('setselection', {
             bubbles : false,

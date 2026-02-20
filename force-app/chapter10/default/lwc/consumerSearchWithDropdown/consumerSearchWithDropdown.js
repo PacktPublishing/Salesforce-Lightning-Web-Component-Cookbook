@@ -91,7 +91,7 @@ export default class ConsumerSearchWithDropdown extends LightningElement {
     }
 
     handleSelection(event) {
-        this.selectedOption = event.detail.selectedElement[0];
+        this.selectedOption = event.detail.selectedElement;
         this.displayedOption = this.selectedOption.label;
         this.searchResults = undefined;
 
