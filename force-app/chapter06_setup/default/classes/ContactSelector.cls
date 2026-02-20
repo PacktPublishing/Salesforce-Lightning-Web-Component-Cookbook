@@ -16,7 +16,7 @@ public with sharing class ContactSelector extends Util_Query {
 
     /** Chapter 10 Method */
     public List<Contact> searchContacts(String searchTerm) {
-        String userInput = '\'%' + searchTerm + '%\'';
+        String userInput = '\'%' + String.escapeSingleQuotes(searchTerm) + '%\'';
         String contactSearchString = 'SELECT Id, Name, Title, Account.Name FROM Contact WHERE Name LIKE ' + userInput + ' ORDER BY Name ASC';
 
         List<Contact> queryResult = (List<Contact>) query(contactSearchString, AccessLevel.SYSTEM_MODE);

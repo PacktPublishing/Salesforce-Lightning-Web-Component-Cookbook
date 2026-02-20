@@ -4,7 +4,7 @@ public with sharing class RecentConsumerController {
     @AuraEnabled(cacheable=true)
     public static List<RecentConsumerService.ConsumerWrapper> returnSearchedConsumerWrappers(String searchTerm){
         try {
-            return service.wrapSearchedConsumers(String.escapeSingleQuotes(searchTerm));            
+            return service.wrapSearchedConsumers(searchTerm);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
