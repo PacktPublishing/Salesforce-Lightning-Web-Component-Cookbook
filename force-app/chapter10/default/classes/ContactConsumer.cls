@@ -10,7 +10,7 @@ public with sharing class ContactConsumer extends Consumer {
     }
 
     public override String getFact() {
-        return this.consumer.Name;
+        return this.consumer.Account.Name;
     }
 
     public override Consumer_Inquiry__c getConsumerInquiry() {
