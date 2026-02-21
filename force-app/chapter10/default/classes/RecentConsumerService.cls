@@ -29,7 +29,7 @@ public with sharing class RecentConsumerService {
         public ConsumerWrapper(sObject sObj) {
             this.label = (String) sObj.get('Name');
             this.value = sObj.Id;
-            this.type = String.valueOf(sObj.getSObjectType());
+            this.type = (String) sObj.getSObjectType();
             this.fact = this.type == 'Contact' ? new ContactConsumer(this.assetId, sObj).getFact() : new CustomerConsumer(this.assetId, sObj).getFact();
         }
     }
