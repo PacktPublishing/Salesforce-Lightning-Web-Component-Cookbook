@@ -44,7 +44,7 @@
   "dependencies": {
     "@locker/eslint-plugin-locker": "^0.25.7",
     "globals": "^13.24.0",
-    "minimatch": "^9.0.4"
+    "minimatch": "^10.2.1"
   },
   "peerDependencies": {
     "@babel/eslint-parser": "^7",
