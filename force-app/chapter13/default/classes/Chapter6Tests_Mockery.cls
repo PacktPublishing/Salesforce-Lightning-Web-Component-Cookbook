@@ -31,9 +31,9 @@ public with sharing class Chapter6Tests_Mockery {
 
         //assert
         for(Integer kk; kk < 10; kk++) {
-            Contact currentTag = myContacts[kk];
-            Assert.isTrue(currentTag.FirstName.equals('Test'), 'Contacts should have correct name.');
-            Assert.isTrue(currentTag.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
+            Contact currentContact = myContacts[kk];
+            Assert.isTrue(currentContact.FirstName.equals('Test'), 'Contacts should have correct name.');
+            Assert.isTrue(currentContact.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
         }
     }
     
@@ -65,9 +65,9 @@ public with sharing class Chapter6Tests_Mockery {
 
         //assert
         for(Integer kk; kk < 10; kk++) {
-            Contact currentTag = myContacts[kk];
-            Assert.isTrue(currentTag.FirstName.equals('Test'), 'Contacts should have correct name.');
-            Assert.isTrue(currentTag.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
+            Contact currentContact = myContacts[kk];
+            Assert.isTrue(currentContact.FirstName.equals('Test'), 'Contacts should have correct name.');
+            Assert.isTrue(currentContact.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
         }
     }
 
@@ -98,9 +98,9 @@ public with sharing class Chapter6Tests_Mockery {
 
         //assert
         for(Integer kk; kk < 10; kk++) {
-            Contact currentTag = myContacts[kk];
-            Assert.isTrue(currentTag.FirstName.equals('Test'), 'Contacts should have correct name.');
-            Assert.isTrue(currentTag.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
+            Contact currentContact = myContacts[kk];
+            Assert.isTrue(currentContact.FirstName.equals('Test'), 'Contacts should have correct name.');
+            Assert.isTrue(currentContact.LastName.contains(String.valueOf(kk)), 'Contacts should have correct name and be in order.');
         }
     }
 }
